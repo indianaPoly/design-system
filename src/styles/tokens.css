@@ -1,0 +1,19 @@
+:root {
+  --ds-font-family: "Inter", system-ui, -apple-system, sans-serif;
+
+  --ds-color-primary: #2563eb;
+  --ds-color-on-primary: #ffffff;
+  --ds-color-secondary: #111827;
+  --ds-color-on-secondary: #ffffff;
+  --ds-color-surface: #ffffff;
+  --ds-color-border: #e5e7eb;
+  --ds-color-focus: rgba(37, 99, 235, 0.35);
+
+  --ds-radius-md: 8px;
+  --ds-radius-lg: 12px;
+
+  --ds-space-xs: 6px;
+  --ds-space-sm: 8px;
+  --ds-space-md: 12px;
+  --ds-space-lg: 16px;
+}
