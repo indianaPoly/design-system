@@ -2,6 +2,7 @@
   "name": "@design-system/core",
   "version": "0.1.0",
   "description": "Framework-agnostic design system built with Web Components (Lit).",
+  "packageManager": "bun@1.2.14",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
