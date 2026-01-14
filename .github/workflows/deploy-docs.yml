@@ -23,6 +23,8 @@ jobs:
           bun-version: 1.2.14
       - run: bun install --frozen-lockfile
       - run: bun run docs:build
+      - run: ls -la  # 현재 디렉토리 확인
+      - run: ls -la dist-docs  # dist-docs 폴더 확인
       - uses: actions/configure-pages@v4  # 이 줄 추가!
       - uses: actions/upload-pages-artifact@v3
         with:
