@@ -1,5 +1,4 @@
 name: Deploy Docs to GitHub Pages
-
 on:
   push:
     branches: [main]
@@ -19,17 +18,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.2.14
-
       - run: bun install --frozen-lockfile
       - run: bun run docs:build
-
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist-docs   # 실제 산출물 경로로 맞추기
+          path: dist-docs
 
   deploy:
     needs: build
