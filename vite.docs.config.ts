@@ -5,6 +5,7 @@ const rootDir = resolve(__dirname, 'docs');
 
 export default defineConfig({
   root: rootDir,
+  base: '/design-system/',
   publicDir: false,
   server: {
     fs: {
