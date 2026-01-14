@@ -21,6 +21,16 @@
 @import "@design-system/core/styles/tokens.css";
 ```
 
+## 로컬 프리뷰 (Storybook 대체)
+토큰과 컴포넌트를 빠르게 확인할 수 있는 로컬 프리뷰 페이지를 제공합니다.
+
+```bash
+npm install
+npm run docs:dev -- --host 0.0.0.0 --port 4173
+```
+
+브라우저에서 `http://localhost:4173`로 접속하면 색상 토큰과 컴포넌트 데모를 확인할 수 있습니다.
+
 ## 파일 구조
 ```
 .
