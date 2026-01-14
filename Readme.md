@@ -1,3 +1,54 @@
+# 디자인 시스템 코어
+
+## 프로젝트 소개
+이 저장소는 Lit 기반 Web Components로 구성된 프레임워크 독립형 디자인 시스템입니다. 기본적인 UI 컴포넌트와 토큰을 제공하여 다양한 프론트엔드 환경에서 재사용할 수 있도록 설계했습니다. 각 컴포넌트는 CSS 커스텀 프로퍼티를 통해 테마를 쉽게 확장할 수 있습니다.
+
+## 포함 컴포넌트
+- `ds-button`: 주요/보조/고스트 버튼
+- `ds-card`: 섹션 구성을 위한 카드
+- `ds-input`: 라벨/헬퍼/에러를 포함한 입력 필드
+- `ds-textarea`: 다중 행 입력 필드
+- `ds-checkbox`: 체크박스
+- `ds-radio`: 라디오 버튼
+- `ds-switch`: 토글 스위치
+- `ds-badge`: 상태 표시 배지
+- `ds-alert`: 정보/성공/경고/오류 알림
+
+## 토큰 사용
+`src/styles/tokens.css`를 통해 색상, 공간, 타이포그래피 토큰을 제공합니다. 프로젝트에서 다음과 같이 가져와 테마의 기본값을 적용할 수 있습니다.
+
+```css
+@import "@design-system/core/styles/tokens.css";
+```
+
+## 파일 구조
+```
+.
+├── src
+│   ├── components
+│   │   ├── ds-alert.ts
+│   │   ├── ds-badge.ts
+│   │   ├── ds-button.ts
+│   │   ├── ds-card.ts
+│   │   ├── ds-checkbox.ts
+│   │   ├── ds-input.ts
+│   │   ├── ds-radio.ts
+│   │   ├── ds-switch.ts
+│   │   └── ds-textarea.ts
+│   ├── index.ts
+│   └── styles
+│       └── tokens.css
+└── tests
+    ├── ds-alert.test.ts
+    ├── ds-badge.test.ts
+    ├── ds-button.test.ts
+    ├── ds-checkbox.test.ts
+    ├── ds-input.test.ts
+    ├── ds-radio.test.ts
+    ├── ds-switch.test.ts
+    └── ds-textarea.test.ts
+```
+
 ## 바이브코딩으로 날먹하기
 
 slack + codex를 조합하여 말로만으로 더 좋은 코드를 만들기 위해서 시작한 template입니다.

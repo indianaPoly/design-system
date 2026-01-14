@@ -5,9 +5,21 @@
   --ds-color-on-primary: #ffffff;
   --ds-color-secondary: #111827;
   --ds-color-on-secondary: #ffffff;
+  --ds-color-text: #111827;
+  --ds-color-muted: #6b7280;
   --ds-color-surface: #ffffff;
+  --ds-color-surface-muted: #f9fafb;
   --ds-color-border: #e5e7eb;
   --ds-color-focus: rgba(37, 99, 235, 0.35);
+  --ds-color-success: #16a34a;
+  --ds-color-on-success: #ffffff;
+  --ds-color-warning: #f59e0b;
+  --ds-color-on-warning: #111827;
+  --ds-color-danger: #dc2626;
+  --ds-color-on-danger: #ffffff;
+  --ds-color-input-bg: #ffffff;
+  --ds-color-input-border: #d1d5db;
+  --ds-color-input-placeholder: #9ca3af;
 
   --ds-radius-md: 8px;
   --ds-radius-lg: 12px;
