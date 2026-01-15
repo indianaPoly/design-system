@@ -5,39 +5,54 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 @customElement('ds-textarea')
 export class DsTextarea extends LitElement {
   @property({ type: String })
-  label = '';
+  declare label: string;
 
   @property({ type: String })
-  helper = '';
+  declare helper: string;
 
   @property({ type: String })
-  error = '';
+  declare error: string;
 
   @property({ type: String })
-  value = '';
+  declare value: string;
 
   @property({ type: String })
-  placeholder = '';
+  declare placeholder: string;
 
   @property({ type: String })
-  name = '';
+  declare name: string;
 
   @property({ type: Number })
-  rows = 4;
+  declare rows: number;
 
   @property({ type: Number })
-  maxLength?: number;
+  declare maxLength: number | undefined;
 
   @property({ type: Boolean, reflect: true })
-  disabled = false;
+  declare disabled: boolean;
 
   @property({ type: Boolean, reflect: true })
-  required = false;
+  declare required: boolean;
 
   @property({ type: Boolean, reflect: true })
-  readonly = false;
+  declare readonly: boolean;
 
   private textareaId = `ds-textarea-${globalThis.crypto?.randomUUID?.() ?? Math.random().toString(16).slice(2)}`;
+
+  constructor() {
+    super();
+    this.label = '';
+    this.helper = '';
+    this.error = '';
+    this.value = '';
+    this.placeholder = '';
+    this.name = '';
+    this.rows = 4;
+    this.maxLength = undefined;
+    this.disabled = false;
+    this.required = false;
+    this.readonly = false;
+  }
 
   private get helperId() {
     return `${this.textareaId}-helper`;

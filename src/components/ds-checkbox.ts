@@ -5,18 +5,26 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 @customElement('ds-checkbox')
 export class DsCheckbox extends LitElement {
   @property({ type: Boolean, reflect: true })
-  checked = false;
+  declare checked: boolean;
 
   @property({ type: Boolean, reflect: true })
-  disabled = false;
+  declare disabled: boolean;
 
   @property({ type: String })
-  name = '';
+  declare name: string;
 
   @property({ type: String })
-  value = 'on';
+  declare value: string;
 
   private inputId = `ds-checkbox-${globalThis.crypto?.randomUUID?.() ?? Math.random().toString(16).slice(2)}`;
+
+  constructor() {
+    super();
+    this.checked = false;
+    this.disabled = false;
+    this.name = '';
+    this.value = 'on';
+  }
 
   static styles = css`
     :host {

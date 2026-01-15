@@ -6,7 +6,12 @@ export type BadgeVariant = 'neutral' | 'primary' | 'success' | 'warning' | 'dang
 @customElement('ds-badge')
 export class DsBadge extends LitElement {
   @property({ type: String, reflect: true })
-  variant: BadgeVariant = 'neutral';
+  declare variant: BadgeVariant;
+
+  constructor() {
+    super();
+    this.variant = 'neutral';
+  }
 
   static styles = css`
     :host {

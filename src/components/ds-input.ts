@@ -7,48 +7,66 @@ export type InputType = 'text' | 'email' | 'password' | 'search' | 'tel' | 'url'
 @customElement('ds-input')
 export class DsInput extends LitElement {
   @property({ type: String })
-  label = '';
+  declare label: string;
 
   @property({ type: String })
-  helper = '';
+  declare helper: string;
 
   @property({ type: String })
-  error = '';
+  declare error: string;
 
   @property({ type: String })
-  value = '';
+  declare value: string;
 
   @property({ type: String })
-  placeholder = '';
+  declare placeholder: string;
 
   @property({ type: String })
-  name = '';
+  declare name: string;
 
   @property({ type: String })
-  autocomplete = '';
+  declare autocomplete: string;
 
   @property({ type: String })
-  min = '';
+  declare min: string;
 
   @property({ type: String })
-  max = '';
+  declare max: string;
 
   @property({ type: String })
-  step = '';
+  declare step: string;
 
   @property({ type: String })
-  type: InputType = 'text';
+  declare type: InputType;
 
   @property({ type: Boolean, reflect: true })
-  disabled = false;
+  declare disabled: boolean;
 
   @property({ type: Boolean, reflect: true })
-  required = false;
+  declare required: boolean;
 
   @property({ type: Boolean, reflect: true })
-  readonly = false;
+  declare readonly: boolean;
 
   private inputId = `ds-input-${globalThis.crypto?.randomUUID?.() ?? Math.random().toString(16).slice(2)}`;
+
+  constructor() {
+    super();
+    this.label = '';
+    this.helper = '';
+    this.error = '';
+    this.value = '';
+    this.placeholder = '';
+    this.name = '';
+    this.autocomplete = '';
+    this.min = '';
+    this.max = '';
+    this.step = '';
+    this.type = 'text';
+    this.disabled = false;
+    this.required = false;
+    this.readonly = false;
+  }
 
   private get helperId() {
     return `${this.inputId}-helper`;

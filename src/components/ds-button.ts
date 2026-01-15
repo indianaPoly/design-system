@@ -7,13 +7,20 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 @customElement('ds-button')
 export class DsButton extends LitElement {
   @property({ type: String, reflect: true })
-  variant: ButtonVariant = 'primary';
+  declare variant: ButtonVariant;
 
   @property({ type: String, reflect: true })
-  size: ButtonSize = 'md';
+  declare size: ButtonSize;
 
   @property({ type: Boolean, reflect: true })
-  disabled = false;
+  declare disabled: boolean;
+
+  constructor() {
+    super();
+    this.variant = 'primary';
+    this.size = 'md';
+    this.disabled = false;
+  }
 
   static styles = css`
     :host {

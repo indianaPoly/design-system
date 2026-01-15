@@ -6,10 +6,16 @@ export type AlertVariant = 'info' | 'success' | 'warning' | 'danger';
 @customElement('ds-alert')
 export class DsAlert extends LitElement {
   @property({ type: String, reflect: true })
-  variant: AlertVariant = 'info';
+  declare variant: AlertVariant;
 
   @property({ type: String })
-  title = '';
+  declare title: string;
+
+  constructor() {
+    super();
+    this.variant = 'info';
+    this.title = '';
+  }
 
   static styles = css`
     :host {

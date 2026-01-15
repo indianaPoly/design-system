@@ -4,7 +4,12 @@ import { customElement, property } from 'lit/decorators.js';
 @customElement('ds-card')
 export class DsCard extends LitElement {
   @property({ type: Number, reflect: true })
-  elevation = 1;
+  declare elevation: number;
+
+  constructor() {
+    super();
+    this.elevation = 1;
+  }
 
   static styles = css`
     :host {
