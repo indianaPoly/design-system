@@ -88,3 +88,44 @@ When asked to implement or prepare a PR, produce:
 5) PR-ready text (title + description)
 
 ---
+
+## Project Snapshot (Repo-Specific)
+### Overview
+- Package: `@design-system/core` (ESM), built with Lit Web Components.
+- Tooling: `bun` + `vite` (library build) + `vitest` (jsdom) + `eslint` (Airbnb).
+
+### Structure
+```
+.
+├── src/
+│   ├── components/      # Lit components (ds-*)
+│   ├── styles/          # CSS tokens
+│   └── index.ts         # Public exports
+├── tests/               # Vitest unit tests
+└── docs/                # Vite preview (storybook substitute)
+```
+
+### Where To Look
+| Task | Location |
+|------|----------|
+| Add/update a component | `src/components/*.ts` |
+| Public exports / types | `src/index.ts` |
+| Theme tokens | `src/styles/tokens.css` |
+| Component tests | `tests/*.test.ts` |
+| Library build config | `vite.config.ts` |
+| Docs preview config | `vite.docs.config.ts`, `docs/*` |
+
+### Commands
+```bash
+bun run lint
+bun run typecheck
+bun run test
+bun run build
+bun run docs:dev -- --host 0.0.0.0 --port 4173
+bun run docs:build
+```
+
+### Local Conventions / Gotchas
+- Components are registered via `@customElement('ds-...')`; tests must import the module to register the tag.
+- Tests typically `document.body.innerHTML = '<ds-...>'`, then `await element.updateComplete`, then inspect `shadowRoot`.
+- Docs preview builds to `dist-docs/` and uses `base: '/design-system/'` in `vite.docs.config.ts` for build mode.
