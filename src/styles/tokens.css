@@ -21,6 +21,24 @@
   --ds-color-input-border: #d1d5db;
   --ds-color-input-placeholder: #9ca3af;
 
+  --ds-input-font-family: var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif);
+  --ds-input-font-size: 1rem;
+  --ds-input-min-height: auto;
+  --ds-input-padding-y: var(--ds-space-sm, 8px);
+  --ds-input-padding-x: var(--ds-space-md, 12px);
+  --ds-input-radius: var(--ds-radius-md, 8px);
+  --ds-input-bg: var(--ds-color-input-bg, #ffffff);
+  --ds-input-text-color: var(--ds-color-text, #111827);
+  --ds-input-placeholder-color: var(--ds-color-input-placeholder, #9ca3af);
+  --ds-input-border: 1px solid var(--ds-color-input-border, #d1d5db);
+  --ds-input-shadow: none;
+  --ds-input-focus-ring: var(--ds-color-focus, rgba(37, 99, 235, 0.35));
+  --ds-input-focus-shadow: 0 0 0 3px var(--ds-input-focus-ring);
+  --ds-input-border-focus: 1px solid var(--ds-color-primary, #2563eb);
+  --ds-input-disabled-opacity: 0.6;
+  --ds-input-disabled-bg: var(--ds-color-surface-muted, #f9fafb);
+  --ds-input-readonly-bg: var(--ds-color-surface-muted, #f9fafb);
+
   --ds-radius-md: 8px;
   --ds-radius-lg: 12px;
 
@@ -80,6 +98,22 @@
   --ds-button-focus-ring: rgba(0, 122, 255, 0.45);
   --ds-button-focus-shadow: 0 0 0 3px var(--ds-button-focus-ring), var(--ds-button-shadow);
 
+  --ds-input-font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
+  --ds-input-font-size: 1.0625rem;
+  --ds-input-min-height: 44px;
+  --ds-input-padding-y: 10px;
+  --ds-input-padding-x: 16px;
+  --ds-input-radius: 12px;
+  --ds-input-bg: #ffffff;
+  --ds-input-placeholder-color: rgba(60, 60, 67, 0.3);
+  --ds-input-border: 1px solid rgba(60, 60, 67, 0.18);
+  --ds-input-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  --ds-input-focus-ring: rgba(0, 122, 255, 0.35);
+  --ds-input-focus-shadow: 0 0 0 3px var(--ds-input-focus-ring), var(--ds-input-shadow);
+  --ds-input-border-focus: 1px solid #007aff;
+  --ds-input-disabled-bg: rgba(118, 118, 128, 0.12);
+  --ds-input-readonly-bg: rgba(118, 118, 128, 0.12);
+
   --ds-button-primary-bg: #007aff;
   --ds-button-primary-fg: #ffffff;
   --ds-button-primary-bg-hover: #006de0;
@@ -116,6 +150,17 @@
   --ds-button-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   --ds-button-focus-ring: rgba(10, 132, 255, 0.6);
   --ds-button-focus-shadow: 0 0 0 3px var(--ds-button-focus-ring), var(--ds-button-shadow);
+
+  --ds-input-bg: rgba(118, 118, 128, 0.24);
+  --ds-input-text-color: #ffffff;
+  --ds-input-placeholder-color: rgba(235, 235, 245, 0.3);
+  --ds-input-border: 1px solid rgba(84, 84, 88, 0.65);
+  --ds-input-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  --ds-input-focus-ring: rgba(10, 132, 255, 0.5);
+  --ds-input-focus-shadow: 0 0 0 3px var(--ds-input-focus-ring), var(--ds-input-shadow);
+  --ds-input-border-focus: 1px solid #0a84ff;
+  --ds-input-disabled-bg: rgba(118, 118, 128, 0.24);
+  --ds-input-readonly-bg: rgba(118, 118, 128, 0.24);
 
   --ds-button-primary-bg: #0a84ff;
   --ds-button-primary-bg-hover: #0077e6;
