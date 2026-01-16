@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import dts from 'vite-plugin-dts';
 
 export default defineConfig({
-  plugins: [dts({ entryRoot: 'src' })],
+  plugins: [dts({ entryRoot: 'src', tsconfigPath: 'tsconfig.build.json' })],
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),

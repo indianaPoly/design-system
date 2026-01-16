@@ -127,26 +127,40 @@ export class DsTextarea extends LitElement {
   `;
 
   private handleInput(event: Event) {
+    event.stopPropagation();
     const target = event.target as HTMLTextAreaElement;
     this.value = target.value;
     this.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
   }
 
-  private handleChange() {
+  private handleChange(event: Event) {
+    event.stopPropagation();
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
   }
 
   render() {
-    const describedBy = this.error ? this.errorId : this.helper ? this.helperId : undefined;
-    const hasMessage = Boolean(this.error || this.helper);
+    let describedBy: string | undefined;
+    if (this.error) {
+      describedBy = this.errorId;
+    } else if (this.helper) {
+      describedBy = this.helperId;
+    }
+
+    const requiredTemplate = this.required ? html`<span class="required">*</span>` : null;
+    const labelTemplate = this.label
+      ? html`<span class="label" part="label">${this.label}${requiredTemplate}</span>`
+      : null;
+
+    const messageText = this.error || this.helper;
+    const messageId = this.error ? this.errorId : this.helperId;
+    const messageVariant = this.error ? 'error' : 'helper';
+    const messageTemplate = messageText
+      ? html`<span id=${messageId} class="message ${messageVariant}" part="message">${messageText}</span>`
+      : null;
 
     return html`
       <label class="field" part="field">
-        ${this.label
-          ? html`<span class="label" part="label">
-              ${this.label}${this.required ? html`<span class="required">*</span>` : ''}
-            </span>`
-          : null}
+        ${labelTemplate}
         <textarea
           id=${this.textareaId}
           part="textarea"
@@ -163,15 +177,7 @@ export class DsTextarea extends LitElement {
           @input=${this.handleInput}
           @change=${this.handleChange}
         ></textarea>
-        ${hasMessage
-          ? html`<span
-              id=${this.error ? this.errorId : this.helperId}
-              class="message ${this.error ? 'error' : 'helper'}"
-              part="message"
-            >
-              ${this.error || this.helper}
-            </span>`
-          : null}
+        ${messageTemplate}
       </label>
     `;
   }

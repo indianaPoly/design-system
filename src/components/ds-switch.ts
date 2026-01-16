@@ -82,6 +82,7 @@ export class DsSwitch extends LitElement {
   `;
 
   private handleChange(event: Event) {
+    event.stopPropagation();
     const target = event.target as HTMLInputElement;
     this.checked = target.checked;
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));

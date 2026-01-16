@@ -3,8 +3,11 @@ import { DsRadio } from '../src/components/ds-radio';
 
 describe('DsRadio', () => {
   it('reflects checked state to input', async () => {
-    document.body.innerHTML = '<ds-radio checked>옵션</ds-radio>';
-    const element = document.querySelector('ds-radio') as DsRadio;
+    document.body.innerHTML = '';
+    const element = new DsRadio();
+    element.checked = true;
+    element.textContent = '옵션';
+    document.body.append(element);
     await element.updateComplete;
 
     const input = element.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -12,8 +15,10 @@ describe('DsRadio', () => {
   });
 
   it('updates checked on change', async () => {
-    document.body.innerHTML = '<ds-radio>옵션</ds-radio>';
-    const element = document.querySelector('ds-radio') as DsRadio;
+    document.body.innerHTML = '';
+    const element = new DsRadio();
+    element.textContent = '옵션';
+    document.body.append(element);
     await element.updateComplete;
 
     const input = element.shadowRoot?.querySelector('input') as HTMLInputElement;

@@ -26,7 +26,7 @@
 
 ```bash
 bun install
-bun run docs:dev -- --host 0.0.0.0 --port 4173
+bun run docs:dev
 ```
 
 브라우저에서 `http://localhost:4173`로 접속하면 색상 토큰과 컴포넌트 데모를 확인할 수 있습니다.
@@ -115,7 +115,7 @@ slack + codex를 조합하여 말로만으로 더 좋은 코드를 만들기 위
 ```txt
 [검증 요청]
 
-목표: 
+목표:
 - 특정 repo의 특정 브랜치가 PR 가능한 상태인지 검증
 - pr-preflight 기준으로 base 최신화 여부 확인
 - lint -> test -> build 순으로 검증

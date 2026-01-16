@@ -28,4 +28,107 @@
   --ds-space-sm: 8px;
   --ds-space-md: 12px;
   --ds-space-lg: 16px;
+
+  --ds-button-font-family: var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif);
+  --ds-button-font-weight: 600;
+  --ds-button-letter-spacing: normal;
+  --ds-button-radius: var(--ds-radius-md, 8px);
+  --ds-button-shadow: none;
+  --ds-button-focus-ring: var(--ds-color-focus, rgba(37, 99, 235, 0.35));
+  --ds-button-focus-shadow: 0 0 0 3px var(--ds-button-focus-ring);
+
+  --ds-button-primary-bg: var(--ds-color-primary, #2563eb);
+  --ds-button-primary-fg: var(--ds-color-on-primary, #ffffff);
+  --ds-button-primary-border: transparent;
+  --ds-button-primary-bg-hover: var(--ds-button-primary-bg);
+  --ds-button-primary-bg-active: var(--ds-button-primary-bg);
+
+  --ds-button-secondary-bg: var(--ds-color-secondary, #111827);
+  --ds-button-secondary-fg: var(--ds-color-on-secondary, #ffffff);
+  --ds-button-secondary-border: transparent;
+  --ds-button-secondary-bg-hover: var(--ds-button-secondary-bg);
+  --ds-button-secondary-bg-active: var(--ds-button-secondary-bg);
+
+  --ds-button-ghost-bg: transparent;
+  --ds-button-ghost-fg: var(--ds-color-primary, #2563eb);
+  --ds-button-ghost-border: var(--ds-color-border, #d1d5db);
+  --ds-button-ghost-bg-hover: transparent;
+  --ds-button-ghost-bg-active: transparent;
+
+  --ds-button-disabled-opacity: 0.6;
+
+  --ds-button-sm-font-size: 0.875rem;
+  --ds-button-sm-padding-y: var(--ds-space-xs, 6px);
+  --ds-button-sm-padding-x: var(--ds-space-sm, 8px);
+  --ds-button-sm-min-height: auto;
+
+  --ds-button-md-font-size: 1rem;
+  --ds-button-md-padding-y: var(--ds-space-sm, 8px);
+  --ds-button-md-padding-x: var(--ds-space-md, 12px);
+  --ds-button-md-min-height: auto;
+
+  --ds-button-lg-font-size: 1.125rem;
+  --ds-button-lg-padding-y: var(--ds-space-md, 12px);
+  --ds-button-lg-padding-x: var(--ds-space-lg, 16px);
+  --ds-button-lg-min-height: auto;
+}
+
+:root[data-ds-platform="ios"] {
+  --ds-button-font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
+  --ds-button-radius: 12px;
+  --ds-button-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  --ds-button-focus-ring: rgba(0, 122, 255, 0.45);
+  --ds-button-focus-shadow: 0 0 0 3px var(--ds-button-focus-ring), var(--ds-button-shadow);
+
+  --ds-button-primary-bg: #007aff;
+  --ds-button-primary-fg: #ffffff;
+  --ds-button-primary-bg-hover: #006de0;
+  --ds-button-primary-bg-active: #005fcc;
+
+  --ds-button-secondary-bg: rgba(120, 120, 128, 0.12);
+  --ds-button-secondary-fg: #000000;
+  --ds-button-secondary-border: rgba(60, 60, 67, 0.18);
+  --ds-button-secondary-bg-hover: rgba(120, 120, 128, 0.16);
+  --ds-button-secondary-bg-active: rgba(120, 120, 128, 0.2);
+
+  --ds-button-ghost-fg: #007aff;
+  --ds-button-ghost-border: rgba(60, 60, 67, 0.18);
+  --ds-button-ghost-bg-hover: rgba(0, 122, 255, 0.08);
+  --ds-button-ghost-bg-active: rgba(0, 122, 255, 0.16);
+
+  --ds-button-sm-font-size: 0.9375rem;
+  --ds-button-sm-padding-y: 7px;
+  --ds-button-sm-padding-x: 12px;
+  --ds-button-sm-min-height: 32px;
+
+  --ds-button-md-font-size: 1.0625rem;
+  --ds-button-md-padding-y: 10px;
+  --ds-button-md-padding-x: 16px;
+  --ds-button-md-min-height: 44px;
+
+  --ds-button-lg-font-size: 1.125rem;
+  --ds-button-lg-padding-y: 12px;
+  --ds-button-lg-padding-x: 18px;
+  --ds-button-lg-min-height: 50px;
+}
+
+:root[data-ds-platform="ios"][data-ds-theme="dark"] {
+  --ds-button-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  --ds-button-focus-ring: rgba(10, 132, 255, 0.6);
+  --ds-button-focus-shadow: 0 0 0 3px var(--ds-button-focus-ring), var(--ds-button-shadow);
+
+  --ds-button-primary-bg: #0a84ff;
+  --ds-button-primary-bg-hover: #0077e6;
+  --ds-button-primary-bg-active: #0069cf;
+
+  --ds-button-secondary-bg: rgba(118, 118, 128, 0.24);
+  --ds-button-secondary-fg: #ffffff;
+  --ds-button-secondary-border: rgba(84, 84, 88, 0.65);
+  --ds-button-secondary-bg-hover: rgba(118, 118, 128, 0.28);
+  --ds-button-secondary-bg-active: rgba(118, 118, 128, 0.34);
+
+  --ds-button-ghost-fg: #0a84ff;
+  --ds-button-ghost-border: rgba(84, 84, 88, 0.65);
+  --ds-button-ghost-bg-hover: rgba(10, 132, 255, 0.12);
+  --ds-button-ghost-bg-active: rgba(10, 132, 255, 0.2);
 }

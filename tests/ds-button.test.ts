@@ -3,17 +3,24 @@ import { DsButton } from '../src/components/ds-button';
 
 describe('DsButton', () => {
   it('renders slotted content inside the native button', async () => {
-    document.body.innerHTML = '<ds-button>Save</ds-button>';
-    const element = document.querySelector('ds-button') as DsButton;
+    document.body.innerHTML = '';
+    const element = new DsButton();
+    element.textContent = 'Save';
+    document.body.append(element);
     await element.updateComplete;
 
     const button = element.shadowRoot?.querySelector('button');
-    expect(button?.textContent).toContain('Save');
+    expect(button).toBeTruthy();
+    expect(button?.querySelector('slot')).toBeTruthy();
+    expect(element.textContent).toContain('Save');
   });
 
   it('forwards disabled state to the native button', async () => {
-    document.body.innerHTML = '<ds-button disabled>Disabled</ds-button>';
-    const element = document.querySelector('ds-button') as DsButton;
+    document.body.innerHTML = '';
+    const element = new DsButton();
+    element.disabled = true;
+    element.textContent = 'Disabled';
+    document.body.append(element);
     await element.updateComplete;
 
     const button = element.shadowRoot?.querySelector('button');
