@@ -237,8 +237,9 @@ const colorGrid = document.querySelector<HTMLDivElement>('#color-grid');
 const componentSelect = document.querySelector<HTMLSelectElement>('#component-select');
 const componentDescription = document.querySelector<HTMLParagraphElement>('#component-description');
 const componentDemo = document.querySelector<HTMLDivElement>('#component-demo');
+const themeToggle = document.querySelector<HTMLElement>('#theme-toggle');
 
-if (!colorGrid || !componentSelect || !componentDescription || !componentDemo) {
+if (!colorGrid || !componentSelect || !componentDescription || !componentDemo || !themeToggle) {
   throw new Error('Preview containers are missing in docs/index.html');
 }
 
@@ -273,6 +274,34 @@ componentDefinitions.forEach((definition) => {
   option.value = definition.id;
   option.textContent = definition.label;
   componentSelect.append(option);
+});
+
+const applyThemeToggleLabel = () => {
+  const isDark = document.documentElement.getAttribute('data-ds-theme') === 'dark';
+  themeToggle.textContent = isDark ? 'Light' : 'Dark';
+};
+
+const setTheme = (theme: 'light' | 'dark') => {
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-ds-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-ds-theme');
+  }
+
+  localStorage.setItem('ds-theme', theme);
+  applyThemeToggleLabel();
+};
+
+const savedTheme = localStorage.getItem('ds-theme');
+if (savedTheme === 'dark' || savedTheme === 'light') {
+  setTheme(savedTheme);
+} else {
+  applyThemeToggleLabel();
+}
+
+themeToggle.addEventListener('click', () => {
+  const isDark = document.documentElement.getAttribute('data-ds-theme') === 'dark';
+  setTheme(isDark ? 'light' : 'dark');
 });
 
 const renderComponent = (componentId: string) => {

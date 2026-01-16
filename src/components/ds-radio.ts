@@ -29,26 +29,63 @@ export class DsRadio extends LitElement {
   static styles = css`
     :host {
       display: inline-flex;
-      font-family: var(--ds-font-family, "Inter", system-ui, sans-serif);
+      font-family: var(
+        --ds-radio-font-family,
+        var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+      );
       color: var(--ds-color-text, #111827);
     }
 
     label {
       display: inline-flex;
       align-items: center;
-      gap: var(--ds-space-xs, 6px);
+      gap: var(--ds-radio-gap, var(--ds-space-xs, 6px));
       cursor: pointer;
+      min-height: 44px;
     }
 
     input {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--ds-color-primary, #2563eb);
+      appearance: none;
+      width: var(--ds-radio-size, 18px);
+      height: var(--ds-radio-size, 18px);
+      border-radius: 999px;
+      border: var(--ds-radio-border, 1px solid var(--ds-color-border, #e5e7eb));
+      background: var(--ds-radio-bg, #ffffff);
+      display: inline-grid;
+      place-items: center;
+      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input::after {
+      content: '';
+      width: calc(var(--ds-radio-size, 18px) * 0.45);
+      height: calc(var(--ds-radio-size, 18px) * 0.45);
+      border-radius: 999px;
+      background: var(--ds-radio-dot-color, var(--ds-color-primary, #2563eb));
+      transform: scale(0);
+      transition: transform 0.15s ease;
+    }
+
+    input:checked {
+      border: var(--ds-radio-border-checked, 1px solid var(--ds-color-primary, #2563eb));
+    }
+
+    input:checked::after {
+      transform: scale(1);
+    }
+
+    input:focus-visible {
+      outline: none;
+      box-shadow: var(--ds-radio-focus-shadow, 0 0 0 3px var(--ds-radio-focus-ring, var(--ds-color-focus)));
     }
 
     :host([disabled]) label {
       cursor: not-allowed;
-      opacity: 0.6;
+      opacity: var(--ds-radio-disabled-opacity, 0.6);
+    }
+
+    :host([disabled]) input {
+      box-shadow: none;
     }
   `;
 

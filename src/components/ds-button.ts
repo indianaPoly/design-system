@@ -39,7 +39,12 @@ export class DsButton extends LitElement {
       font-weight: var(--ds-button-font-weight, 600);
       letter-spacing: var(--ds-button-letter-spacing, normal);
       cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+      transition: var(
+        --ds-button-transition,
+        background 0.15s ease,
+        color 0.15s ease,
+        box-shadow 0.15s ease
+      );
 
       background: var(--ds-button-primary-bg, var(--ds-color-primary, #2563eb));
       color: var(--ds-button-primary-fg, var(--ds-color-on-primary, #ffffff));

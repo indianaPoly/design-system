@@ -65,7 +65,10 @@ export class DsTextarea extends LitElement {
   static styles = css`
     :host {
       display: block;
-      font-family: var(--ds-font-family, "Inter", system-ui, sans-serif);
+      font-family: var(
+        --ds-textarea-font-family,
+        var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+      );
       color: var(--ds-color-text, #111827);
     }
 
@@ -85,34 +88,38 @@ export class DsTextarea extends LitElement {
     }
 
     textarea {
-      border: 1px solid var(--ds-color-input-border, #d1d5db);
-      border-radius: var(--ds-radius-md, 8px);
-      padding: var(--ds-space-sm, 8px) var(--ds-space-md, 12px);
-      font-size: 1rem;
-      background: var(--ds-color-input-bg, #ffffff);
-      color: var(--ds-color-text, #111827);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      appearance: none;
+      border: var(--ds-textarea-border, 1px solid var(--ds-color-input-border, #d1d5db));
+      border-radius: var(--ds-textarea-radius, var(--ds-radius-md, 8px));
+      padding: var(--ds-textarea-padding-y, var(--ds-space-sm, 8px))
+        var(--ds-textarea-padding-x, var(--ds-space-md, 12px));
+      font-size: var(--ds-textarea-font-size, 1rem);
+      background: var(--ds-textarea-bg, var(--ds-color-input-bg, #ffffff));
+      color: var(--ds-textarea-text-color, var(--ds-color-text, #111827));
+      box-shadow: var(--ds-textarea-shadow, none);
+      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
       resize: vertical;
     }
 
     textarea::placeholder {
-      color: var(--ds-color-input-placeholder, #9ca3af);
+      color: var(--ds-textarea-placeholder-color, var(--ds-color-input-placeholder, #9ca3af));
     }
 
     textarea:focus-visible {
       outline: none;
-      border-color: var(--ds-color-primary, #2563eb);
-      box-shadow: 0 0 0 3px var(--ds-color-focus, rgba(37, 99, 235, 0.35));
+      border: var(--ds-textarea-border-focus, 1px solid var(--ds-color-primary, #2563eb));
+      box-shadow: var(--ds-textarea-focus-shadow, 0 0 0 3px var(--ds-textarea-focus-ring, var(--ds-color-focus)));
     }
 
     :host([disabled]) textarea {
-      opacity: 0.6;
+      opacity: var(--ds-textarea-disabled-opacity, 0.6);
       cursor: not-allowed;
-      background: var(--ds-color-surface-muted, #f9fafb);
+      background: var(--ds-textarea-disabled-bg, var(--ds-color-surface-muted, #f9fafb));
+      box-shadow: none;
     }
 
     :host([readonly]) textarea {
-      background: var(--ds-color-surface-muted, #f9fafb);
+      background: var(--ds-textarea-readonly-bg, var(--ds-color-surface-muted, #f9fafb));
     }
 
     .message {

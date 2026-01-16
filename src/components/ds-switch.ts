@@ -29,55 +29,76 @@ export class DsSwitch extends LitElement {
   static styles = css`
     :host {
       display: inline-flex;
-      font-family: var(--ds-font-family, "Inter", system-ui, sans-serif);
+      font-family: var(
+        --ds-switch-font-family,
+        var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+      );
       color: var(--ds-color-text, #111827);
     }
 
     label {
       display: inline-flex;
       align-items: center;
-      gap: var(--ds-space-xs, 6px);
+      gap: var(--ds-switch-gap, var(--ds-space-xs, 6px));
       cursor: pointer;
+      min-height: 44px;
     }
 
     .track {
       position: relative;
-      width: 38px;
-      height: 22px;
-      background: var(--ds-color-border, #e5e7eb);
-      border-radius: 999px;
-      transition: background 0.2s ease;
+      width: var(--ds-switch-track-width, 38px);
+      height: var(--ds-switch-track-height, 22px);
+      background: var(--ds-switch-track-bg, var(--ds-color-border, #e5e7eb));
+      border-radius: var(--ds-switch-track-radius, 999px);
+      transition: background 0.2s ease, box-shadow 0.2s ease;
     }
 
     .thumb {
       position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 18px;
-      height: 18px;
+      top: var(--ds-switch-thumb-inset, 2px);
+      left: var(--ds-switch-thumb-inset, 2px);
+      width: var(--ds-switch-thumb-size, 18px);
+      height: var(--ds-switch-thumb-size, 18px);
       border-radius: 50%;
-      background: #ffffff;
-      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.2);
+      background: var(--ds-switch-thumb-bg, #ffffff);
+      box-shadow: var(--ds-switch-thumb-shadow, 0 2px 6px rgba(15, 23, 42, 0.2));
       transition: transform 0.2s ease;
+    }
+
+    label:focus-within .track {
+      box-shadow: var(--ds-switch-focus-shadow, 0 0 0 3px var(--ds-switch-focus-ring, var(--ds-color-focus)));
     }
 
     input {
       position: absolute;
       opacity: 0;
-      pointer-events: none;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      border: 0;
+      padding: 0;
     }
 
     :host([checked]) .track {
-      background: var(--ds-color-primary, #2563eb);
+      background: var(--ds-switch-track-bg-checked, var(--ds-color-primary, #2563eb));
     }
 
     :host([checked]) .thumb {
-      transform: translateX(16px);
+      transform: translateX(
+        calc(
+          var(--ds-switch-track-width, 38px) - var(--ds-switch-thumb-size, 18px) -
+            (var(--ds-switch-thumb-inset, 2px) * 2)
+        )
+      );
     }
 
     :host([disabled]) label {
       cursor: not-allowed;
-      opacity: 0.6;
+      opacity: var(--ds-switch-disabled-opacity, 0.6);
+    }
+
+    :host([disabled]) .track {
+      box-shadow: none;
     }
   `;
 

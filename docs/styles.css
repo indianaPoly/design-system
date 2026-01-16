@@ -2,6 +2,10 @@
   color-scheme: light;
 }
 
+:root[data-ds-theme="dark"] {
+  color-scheme: dark;
+}
+
 body {
   margin: 0;
   font-family: var(--ds-font-family, "Inter", system-ui, sans-serif);
@@ -101,6 +105,12 @@ body {
   display: grid;
   gap: 8px;
   max-width: 320px;
+}
+
+.component-toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
 .component-controls label {

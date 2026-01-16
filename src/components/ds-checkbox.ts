@@ -29,26 +29,65 @@ export class DsCheckbox extends LitElement {
   static styles = css`
     :host {
       display: inline-flex;
-      font-family: var(--ds-font-family, "Inter", system-ui, sans-serif);
+      font-family: var(
+        --ds-checkbox-font-family,
+        var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+      );
       color: var(--ds-color-text, #111827);
     }
 
     label {
       display: inline-flex;
       align-items: center;
-      gap: var(--ds-space-xs, 6px);
+      gap: var(--ds-checkbox-gap, var(--ds-space-xs, 6px));
       cursor: pointer;
+      min-height: 44px;
     }
 
     input {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--ds-color-primary, #2563eb);
+      appearance: none;
+      width: var(--ds-checkbox-size, 18px);
+      height: var(--ds-checkbox-size, 18px);
+      border-radius: var(--ds-checkbox-radius, 4px);
+      border: var(--ds-checkbox-border, 1px solid var(--ds-color-border, #e5e7eb));
+      background: var(--ds-checkbox-bg, #ffffff);
+      display: inline-grid;
+      place-items: center;
+      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input::after {
+      content: '';
+      width: calc(var(--ds-checkbox-size, 18px) * 0.45);
+      height: calc(var(--ds-checkbox-size, 18px) * 0.25);
+      border: 2px solid var(--ds-checkbox-check-color, #ffffff);
+      border-top: 0;
+      border-left: 0;
+      transform: rotate(45deg);
+      opacity: 0;
+    }
+
+    input:checked {
+      border: var(--ds-checkbox-border-checked, 1px solid var(--ds-color-primary, #2563eb));
+      background: var(--ds-checkbox-bg-checked, var(--ds-color-primary, #2563eb));
+    }
+
+    input:checked::after {
+      opacity: 1;
+    }
+
+    input:focus-visible {
+      outline: none;
+      box-shadow: var(--ds-checkbox-focus-shadow, 0 0 0 3px var(--ds-checkbox-focus-ring, var(--ds-color-focus)));
     }
 
     :host([disabled]) label {
       cursor: not-allowed;
-      opacity: 0.6;
+      opacity: var(--ds-checkbox-disabled-opacity, 0.6);
+    }
+
+    :host([disabled]) input {
+      box-shadow: none;
     }
   `;
 
