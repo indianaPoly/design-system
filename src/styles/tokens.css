@@ -1,25 +1,25 @@
 :root {
   --ds-font-family: "Inter", system-ui, -apple-system, sans-serif;
 
-  --ds-color-primary: #2563eb;
+  --ds-color-primary: #f97316;
   --ds-color-on-primary: #ffffff;
-  --ds-color-secondary: #111827;
+  --ds-color-secondary: #292524;
   --ds-color-on-secondary: #ffffff;
-  --ds-color-text: #111827;
-  --ds-color-muted: #6b7280;
+  --ds-color-text: #1c1917;
+  --ds-color-muted: #78716c;
   --ds-color-surface: #ffffff;
-  --ds-color-surface-muted: #f9fafb;
-  --ds-color-border: #e5e7eb;
-  --ds-color-focus: rgba(37, 99, 235, 0.35);
-  --ds-color-success: #16a34a;
+  --ds-color-surface-muted: #fafaf9;
+  --ds-color-border: #e7e5e4;
+  --ds-color-focus: rgba(249, 115, 22, 0.35);
+  --ds-color-success: #22c55e;
   --ds-color-on-success: #ffffff;
   --ds-color-warning: #f59e0b;
-  --ds-color-on-warning: #111827;
-  --ds-color-danger: #dc2626;
+  --ds-color-on-warning: #1c1917;
+  --ds-color-danger: #ef4444;
   --ds-color-on-danger: #ffffff;
   --ds-color-input-bg: #ffffff;
-  --ds-color-input-border: #d1d5db;
-  --ds-color-input-placeholder: #9ca3af;
+  --ds-color-input-border: #d6d3d1;
+  --ds-color-input-placeholder: #a8a29e;
 
   --ds-input-font-family: var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif);
   --ds-input-font-size: 1rem;
@@ -205,29 +205,37 @@
 :root[data-ds-theme="dark"] {
   color-scheme: dark;
 
-  --ds-color-primary: #3b82f6;
+  --ds-color-primary: #fb923c;
   --ds-color-on-primary: #ffffff;
+  --ds-color-secondary: #fed7aa;
+  --ds-color-on-secondary: #1c1917;
+  --ds-color-success: #4ade80;
+  --ds-color-on-success: #ffffff;
+  --ds-color-warning: #fbbf24;
+  --ds-color-on-warning: #1c1917;
+  --ds-color-danger: #f87171;
+  --ds-color-on-danger: #ffffff;
 
-  --ds-color-text: #f9fafb;
-  --ds-color-muted: #9ca3af;
-  --ds-color-surface: #111827;
-  --ds-color-surface-muted: #0f172a;
-  --ds-color-border: #334155;
-  --ds-color-focus: rgba(59, 130, 246, 0.45);
+  --ds-color-text: #fafaf9;
+  --ds-color-muted: #a8a29e;
+  --ds-color-surface: #1c1917;
+  --ds-color-surface-muted: #292524;
+  --ds-color-border: #44403c;
+  --ds-color-focus: rgba(251, 146, 60, 0.5);
 
-  --ds-color-input-bg: #0f172a;
-  --ds-color-input-border: #334155;
-  --ds-color-input-placeholder: #64748b;
+  --ds-color-input-bg: #292524;
+  --ds-color-input-border: #44403c;
+  --ds-color-input-placeholder: #78716c;
 
   --ds-button-shadow: none;
-  --ds-button-focus-ring: rgba(59, 130, 246, 0.6);
+  --ds-button-focus-ring: rgba(251, 146, 60, 0.6);
   --ds-button-focus-shadow: 0 0 0 3px var(--ds-button-focus-ring);
 
-  --ds-button-primary-bg: var(--ds-color-primary, #3b82f6);
+  --ds-button-primary-bg: var(--ds-color-primary, #fb923c);
   --ds-button-primary-fg: #ffffff;
   --ds-button-primary-border: transparent;
-  --ds-button-primary-bg-hover: #2563eb;
-  --ds-button-primary-bg-active: #1d4ed8;
+  --ds-button-primary-bg-hover: #f97316;
+  --ds-button-primary-bg-active: #ea580c;
 
   --ds-button-secondary-bg: rgba(255, 255, 255, 0.1);
   --ds-button-secondary-fg: #ffffff;
@@ -235,10 +243,10 @@
   --ds-button-secondary-bg-hover: rgba(255, 255, 255, 0.14);
   --ds-button-secondary-bg-active: rgba(255, 255, 255, 0.18);
 
-  --ds-button-ghost-fg: var(--ds-color-primary, #3b82f6);
+  --ds-button-ghost-fg: var(--ds-color-primary, #fb923c);
   --ds-button-ghost-border: rgba(255, 255, 255, 0.16);
-  --ds-button-ghost-bg-hover: rgba(59, 130, 246, 0.14);
-  --ds-button-ghost-bg-active: rgba(59, 130, 246, 0.22);
+  --ds-button-ghost-bg-hover: rgba(251, 146, 60, 0.14);
+  --ds-button-ghost-bg-active: rgba(251, 146, 60, 0.22);
 }
 
 :root[data-ds-platform="ios"] {
