@@ -33,41 +33,53 @@ export class DsRadio extends LitElement {
         --ds-radio-font-family,
         var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
       );
-      color: var(--ds-color-text, #111827);
+      color: var(--ds-color-text, #111111);
     }
 
     label {
       display: inline-flex;
       align-items: center;
-      gap: var(--ds-radio-gap, var(--ds-space-xs, 6px));
-      cursor: pointer;
+      gap: var(--ds-radio-gap, 12px);
       min-height: 44px;
+      cursor: pointer;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
     }
 
     input {
       appearance: none;
-      width: var(--ds-radio-size, 18px);
-      height: var(--ds-radio-size, 18px);
+      margin: 0;
+      width: var(--ds-radio-size, 20px);
+      height: var(--ds-radio-size, 20px);
       border-radius: 999px;
-      border: var(--ds-radio-border, 1px solid var(--ds-color-border, #e5e7eb));
+      border: var(--ds-radio-border, 1.5px solid var(--ds-color-border-strong, #d4d4d8));
       background: var(--ds-radio-bg, #ffffff);
+      box-shadow: var(--ds-shadow-inset, inset 0 1px 0 rgba(255, 255, 255, 0.72));
       display: inline-grid;
       place-items: center;
-      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+      transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      flex-shrink: 0;
     }
 
     input::after {
       content: '';
-      width: calc(var(--ds-radio-size, 18px) * 0.45);
-      height: calc(var(--ds-radio-size, 18px) * 0.45);
+      width: calc(var(--ds-radio-size, 20px) * 0.38);
+      height: calc(var(--ds-radio-size, 20px) * 0.38);
       border-radius: 999px;
-      background: var(--ds-radio-dot-color, var(--ds-color-primary, #2563eb));
+      background: var(--ds-radio-dot-color, var(--ds-color-on-primary, #ffffff));
       transform: scale(0);
-      transition: transform 0.15s ease;
+      transition: transform 0.18s ease;
+    }
+
+    label:hover input:not(:disabled) {
+      border-color: var(--ds-color-text, #111111);
     }
 
     input:checked {
-      border: var(--ds-radio-border-checked, 1px solid var(--ds-color-primary, #2563eb));
+      border: var(--ds-radio-border-checked, 1.5px solid var(--ds-color-primary, #111111));
+      background: var(--ds-radio-bg-checked, var(--ds-color-primary, #111111));
+      box-shadow: none;
     }
 
     input:checked::after {
@@ -76,12 +88,16 @@ export class DsRadio extends LitElement {
 
     input:focus-visible {
       outline: none;
-      box-shadow: var(--ds-radio-focus-shadow, 0 0 0 3px var(--ds-radio-focus-ring, var(--ds-color-focus)));
+      box-shadow: var(--ds-radio-focus-shadow, 0 0 0 4px var(--ds-radio-focus-ring, rgba(17, 17, 17, 0.1)));
+    }
+
+    .text {
+      line-height: 1.45;
     }
 
     :host([disabled]) label {
       cursor: not-allowed;
-      opacity: var(--ds-radio-disabled-opacity, 0.6);
+      opacity: var(--ds-radio-disabled-opacity, 0.56);
     }
 
     :host([disabled]) input {
@@ -109,7 +125,7 @@ export class DsRadio extends LitElement {
           value=${this.value}
           @change=${this.handleChange}
         />
-        <span part="text"><slot></slot></span>
+        <span class="text" part="text"><slot></slot></span>
       </label>
     `;
   }

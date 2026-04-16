@@ -27,38 +27,76 @@ export class DsAlert extends LitElement {
     }
 
     .alert {
-      border-radius: var(--ds-alert-radius, var(--ds-radius-lg, 12px));
-      padding: var(--ds-alert-padding-y, var(--ds-space-md, 12px))
-        var(--ds-alert-padding-x, var(--ds-space-lg, 16px));
-      border: 1px solid transparent;
+      position: relative;
       display: grid;
-      gap: var(--ds-alert-gap, var(--ds-space-xs, 6px));
-      background: var(--ds-alert-bg, var(--ds-color-surface-muted, #f9fafb));
-      color: var(--ds-alert-text-color, var(--ds-color-text, #111827));
+      gap: var(--ds-alert-gap, 6px);
+      padding: var(--ds-alert-padding-y, 18px) var(--ds-alert-padding-x, 20px);
+      padding-left: calc(var(--ds-alert-padding-x, 20px) + var(--ds-alert-indicator-size, 10px) + 10px);
+      border-radius: var(--ds-alert-radius, var(--ds-radius-lg, 20px));
+      border: 1px solid var(--ds-alert-border-color, var(--ds-color-border, #e4e4e7));
+      background: var(--ds-alert-bg, var(--ds-color-surface-raised, #fcfcfc));
+      color: var(--ds-alert-text-color, var(--ds-color-text, #111111));
+      box-shadow: var(--ds-alert-shadow, 0 1px 2px rgba(17, 17, 17, 0.04));
+      overflow: hidden;
+    }
+
+    .alert::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: var(--ds-alert-indicator-size, 10px);
+      height: var(--ds-alert-indicator-size, 10px);
+      border-radius: 999px;
+      background: var(--ds-alert-info-accent, #111111);
     }
 
     .title {
+      font-size: 0.9375rem;
       font-weight: var(--ds-alert-title-weight, 700);
+      letter-spacing: -0.01em;
+    }
+
+    .body {
+      color: var(--ds-color-muted, #6b7280);
+      line-height: 1.55;
+      font-size: 0.9375rem;
     }
 
     :host([variant="info"]) .alert {
-      border-color: var(--ds-alert-info-border-color, rgba(37, 99, 235, 0.3));
-      background: var(--ds-alert-info-bg, rgba(37, 99, 235, 0.1));
+      border-color: var(--ds-alert-info-border-color, #e4e4e7);
+      background: var(--ds-alert-info-bg, #fafafa);
+    }
+
+    :host([variant="info"]) .alert::before {
+      background: var(--ds-alert-info-accent, #111111);
     }
 
     :host([variant="success"]) .alert {
-      border-color: var(--ds-alert-success-border-color, rgba(22, 163, 74, 0.3));
-      background: var(--ds-alert-success-bg, rgba(22, 163, 74, 0.12));
+      border-color: var(--ds-alert-success-border-color, #d4d4d8);
+      background: var(--ds-alert-success-bg, #f7f7f8);
+    }
+
+    :host([variant="success"]) .alert::before {
+      background: var(--ds-alert-success-accent, #2f2f33);
     }
 
     :host([variant="warning"]) .alert {
-      border-color: var(--ds-alert-warning-border-color, rgba(245, 158, 11, 0.35));
-      background: var(--ds-alert-warning-bg, rgba(245, 158, 11, 0.15));
+      border-color: var(--ds-alert-warning-border-color, #d4d4d8);
+      background: var(--ds-alert-warning-bg, #f4f4f5);
+    }
+
+    :host([variant="warning"]) .alert::before {
+      background: var(--ds-alert-warning-accent, #52525b);
     }
 
     :host([variant="danger"]) .alert {
-      border-color: var(--ds-alert-danger-border-color, rgba(220, 38, 38, 0.35));
-      background: var(--ds-alert-danger-bg, rgba(220, 38, 38, 0.12));
+      border-color: var(--ds-alert-danger-border-color, #c7c7cc);
+      background: var(--ds-alert-danger-bg, #ededf0);
+    }
+
+    :host([variant="danger"]) .alert::before {
+      background: var(--ds-alert-danger-accent, #27272a);
     }
   `;
 

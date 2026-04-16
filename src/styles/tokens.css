@@ -1,479 +1,346 @@
 :root {
-  --ds-font-family: "Inter", system-ui, -apple-system, sans-serif;
+  color-scheme: light;
 
-  --ds-color-primary: #f97316;
+  --ds-font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --ds-color-primary: #111111;
   --ds-color-on-primary: #ffffff;
-  --ds-color-secondary: #292524;
-  --ds-color-on-secondary: #ffffff;
-  --ds-color-text: #1c1917;
-  --ds-color-muted: #78716c;
+  --ds-color-secondary: #f4f4f5;
+  --ds-color-on-secondary: #18181b;
+  --ds-color-text: #111111;
+  --ds-color-muted: #6b7280;
   --ds-color-surface: #ffffff;
-  --ds-color-surface-muted: #fafaf9;
-  --ds-color-border: #e7e5e4;
-  --ds-color-focus: rgba(249, 115, 22, 0.35);
-  --ds-color-success: #22c55e;
+  --ds-color-surface-muted: #f7f7f8;
+  --ds-color-surface-raised: #fcfcfc;
+  --ds-color-border: #e4e4e7;
+  --ds-color-border-strong: #d4d4d8;
+  --ds-color-focus: rgba(17, 17, 17, 0.1);
+  --ds-color-success: #2f2f33;
   --ds-color-on-success: #ffffff;
-  --ds-color-warning: #f59e0b;
-  --ds-color-on-warning: #1c1917;
-  --ds-color-danger: #ef4444;
+  --ds-color-warning: #52525b;
+  --ds-color-on-warning: #ffffff;
+  --ds-color-danger: #27272a;
   --ds-color-on-danger: #ffffff;
   --ds-color-input-bg: #ffffff;
-  --ds-color-input-border: #d6d3d1;
-  --ds-color-input-placeholder: #a8a29e;
+  --ds-color-input-border: #e4e4e7;
+  --ds-color-input-placeholder: #9ca3af;
+
+  --ds-radius-sm: 12px;
+  --ds-radius-md: 16px;
+  --ds-radius-lg: 20px;
+  --ds-radius-xl: 24px;
+
+  --ds-space-2xs: 4px;
+  --ds-space-xs: 8px;
+  --ds-space-sm: 12px;
+  --ds-space-md: 16px;
+  --ds-space-lg: 20px;
+  --ds-space-xl: 24px;
+
+  --ds-shadow-xs: 0 1px 2px rgba(17, 17, 17, 0.04);
+  --ds-shadow-sm: 0 8px 24px rgba(17, 17, 17, 0.06);
+  --ds-shadow-md: 0 18px 40px rgba(17, 17, 17, 0.08);
+  --ds-shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.72);
 
   --ds-input-font-family: var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif);
-  --ds-input-font-size: 1rem;
-  --ds-input-min-height: auto;
-  --ds-input-padding-y: var(--ds-space-sm, 8px);
-  --ds-input-padding-x: var(--ds-space-md, 12px);
-  --ds-input-radius: var(--ds-radius-md, 8px);
+  --ds-input-font-size: 0.9375rem;
+  --ds-input-min-height: 52px;
+  --ds-input-padding-y: 14px;
+  --ds-input-padding-x: 16px;
+  --ds-input-radius: var(--ds-radius-md, 16px);
   --ds-input-bg: var(--ds-color-input-bg, #ffffff);
-  --ds-input-text-color: var(--ds-color-text, #111827);
+  --ds-input-text-color: var(--ds-color-text, #111111);
   --ds-input-placeholder-color: var(--ds-color-input-placeholder, #9ca3af);
-  --ds-input-border: 1px solid var(--ds-color-input-border, #d1d5db);
-  --ds-input-shadow: none;
-  --ds-input-focus-ring: var(--ds-color-focus, rgba(37, 99, 235, 0.35));
-  --ds-input-focus-shadow: 0 0 0 3px var(--ds-input-focus-ring);
-  --ds-input-border-focus: 1px solid var(--ds-color-primary, #2563eb);
-  --ds-input-disabled-opacity: 0.6;
-  --ds-input-disabled-bg: var(--ds-color-surface-muted, #f9fafb);
-  --ds-input-readonly-bg: var(--ds-color-surface-muted, #f9fafb);
+  --ds-input-border: 1px solid var(--ds-color-input-border, #e4e4e7);
+  --ds-input-shadow: var(--ds-shadow-inset, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+  --ds-input-focus-ring: var(--ds-color-focus, rgba(17, 17, 17, 0.1));
+  --ds-input-focus-shadow: 0 0 0 4px var(--ds-input-focus-ring), var(--ds-shadow-xs, 0 1px 2px rgba(17, 17, 17, 0.04));
+  --ds-input-border-focus: 1px solid var(--ds-color-primary, #111111);
+  --ds-input-border-error: 1px solid var(--ds-color-danger, #27272a);
+  --ds-input-error-shadow: 0 0 0 4px rgba(39, 39, 42, 0.08);
+  --ds-input-disabled-opacity: 0.56;
+  --ds-input-disabled-bg: #f3f4f6;
+  --ds-input-readonly-bg: #fafafa;
 
   --ds-textarea-font-family: var(--ds-input-font-family, var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif));
-  --ds-textarea-font-size: var(--ds-input-font-size, 1rem);
-  --ds-textarea-padding-y: var(--ds-input-padding-y, var(--ds-space-sm, 8px));
-  --ds-textarea-padding-x: var(--ds-input-padding-x, var(--ds-space-md, 12px));
-  --ds-textarea-radius: var(--ds-input-radius, var(--ds-radius-md, 8px));
-  --ds-textarea-bg: var(--ds-input-bg, var(--ds-color-input-bg, #ffffff));
-  --ds-textarea-text-color: var(--ds-input-text-color, var(--ds-color-text, #111827));
-  --ds-textarea-placeholder-color: var(--ds-input-placeholder-color, var(--ds-color-input-placeholder, #9ca3af));
-  --ds-textarea-border: var(--ds-input-border, 1px solid var(--ds-color-input-border, #d1d5db));
-  --ds-textarea-shadow: var(--ds-input-shadow, none);
-  --ds-textarea-focus-ring: var(--ds-input-focus-ring, var(--ds-color-focus, rgba(37, 99, 235, 0.35)));
-  --ds-textarea-focus-shadow: var(--ds-input-focus-shadow, 0 0 0 3px var(--ds-textarea-focus-ring));
-  --ds-textarea-border-focus: var(--ds-input-border-focus, 1px solid var(--ds-color-primary, #2563eb));
-  --ds-textarea-disabled-opacity: 0.6;
-  --ds-textarea-disabled-bg: var(--ds-input-disabled-bg, var(--ds-color-surface-muted, #f9fafb));
-  --ds-textarea-readonly-bg: var(--ds-input-readonly-bg, var(--ds-color-surface-muted, #f9fafb));
+  --ds-textarea-font-size: var(--ds-input-font-size, 0.9375rem);
+  --ds-textarea-padding-y: var(--ds-input-padding-y, 14px);
+  --ds-textarea-padding-x: var(--ds-input-padding-x, 16px);
+  --ds-textarea-radius: var(--ds-input-radius, var(--ds-radius-md, 16px));
+  --ds-textarea-bg: var(--ds-input-bg, #ffffff);
+  --ds-textarea-text-color: var(--ds-input-text-color, #111111);
+  --ds-textarea-placeholder-color: var(--ds-input-placeholder-color, #9ca3af);
+  --ds-textarea-border: var(--ds-input-border, 1px solid var(--ds-color-input-border, #e4e4e7));
+  --ds-textarea-shadow: var(--ds-input-shadow, var(--ds-shadow-inset));
+  --ds-textarea-focus-ring: var(--ds-input-focus-ring, rgba(17, 17, 17, 0.1));
+  --ds-textarea-focus-shadow: var(--ds-input-focus-shadow, 0 0 0 4px var(--ds-textarea-focus-ring));
+  --ds-textarea-border-focus: var(--ds-input-border-focus, 1px solid var(--ds-color-primary, #111111));
+  --ds-textarea-border-error: var(--ds-input-border-error, 1px solid var(--ds-color-danger, #27272a));
+  --ds-textarea-error-shadow: var(--ds-input-error-shadow, 0 0 0 4px rgba(39, 39, 42, 0.08));
+  --ds-textarea-disabled-opacity: var(--ds-input-disabled-opacity, 0.56);
+  --ds-textarea-disabled-bg: var(--ds-input-disabled-bg, #f3f4f6);
+  --ds-textarea-readonly-bg: var(--ds-input-readonly-bg, #fafafa);
 
   --ds-switch-font-family: var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif);
-  --ds-switch-gap: var(--ds-space-xs, 6px);
-  --ds-switch-track-width: 38px;
-  --ds-switch-track-height: 22px;
+  --ds-switch-gap: 12px;
+  --ds-switch-track-width: 46px;
+  --ds-switch-track-height: 28px;
   --ds-switch-track-radius: 999px;
-  --ds-switch-track-bg: var(--ds-color-border, #e5e7eb);
-  --ds-switch-track-bg-checked: var(--ds-color-primary, #2563eb);
-  --ds-switch-thumb-size: 18px;
+  --ds-switch-track-bg: #d4d4d8;
+  --ds-switch-track-bg-checked: var(--ds-color-primary, #111111);
+  --ds-switch-thumb-size: 24px;
   --ds-switch-thumb-inset: 2px;
   --ds-switch-thumb-bg: #ffffff;
-  --ds-switch-thumb-shadow: 0 2px 6px rgba(15, 23, 42, 0.2);
-  --ds-switch-focus-ring: var(--ds-input-focus-ring, var(--ds-color-focus, rgba(37, 99, 235, 0.35)));
-  --ds-switch-focus-shadow: 0 0 0 3px var(--ds-switch-focus-ring);
-  --ds-switch-disabled-opacity: 0.6;
+  --ds-switch-thumb-shadow: 0 4px 10px rgba(17, 17, 17, 0.16);
+  --ds-switch-focus-ring: var(--ds-input-focus-ring, rgba(17, 17, 17, 0.1));
+  --ds-switch-focus-shadow: 0 0 0 4px var(--ds-switch-focus-ring);
+  --ds-switch-disabled-opacity: 0.56;
 
   --ds-checkbox-font-family: var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif);
-  --ds-checkbox-gap: var(--ds-space-xs, 6px);
-  --ds-checkbox-size: 18px;
-  --ds-checkbox-radius: 4px;
-  --ds-checkbox-border: 1px solid var(--ds-color-border, #e5e7eb);
+  --ds-checkbox-gap: 12px;
+  --ds-checkbox-size: 20px;
+  --ds-checkbox-radius: 6px;
+  --ds-checkbox-border: 1.5px solid var(--ds-color-border-strong, #d4d4d8);
   --ds-checkbox-bg: #ffffff;
-  --ds-checkbox-border-checked: 1px solid var(--ds-color-primary, #2563eb);
-  --ds-checkbox-bg-checked: var(--ds-color-primary, #2563eb);
-  --ds-checkbox-check-color: #ffffff;
-  --ds-checkbox-focus-ring: var(--ds-input-focus-ring, var(--ds-color-focus, rgba(37, 99, 235, 0.35)));
-  --ds-checkbox-focus-shadow: 0 0 0 3px var(--ds-checkbox-focus-ring);
-  --ds-checkbox-disabled-opacity: 0.6;
+  --ds-checkbox-border-checked: 1.5px solid var(--ds-color-primary, #111111);
+  --ds-checkbox-bg-checked: var(--ds-color-primary, #111111);
+  --ds-checkbox-check-color: var(--ds-color-on-primary, #ffffff);
+  --ds-checkbox-focus-ring: var(--ds-input-focus-ring, rgba(17, 17, 17, 0.1));
+  --ds-checkbox-focus-shadow: 0 0 0 4px var(--ds-checkbox-focus-ring);
+  --ds-checkbox-disabled-opacity: 0.56;
 
   --ds-radio-font-family: var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif);
-  --ds-radio-gap: var(--ds-space-xs, 6px);
-  --ds-radio-size: 18px;
-  --ds-radio-border: 1px solid var(--ds-color-border, #e5e7eb);
+  --ds-radio-gap: 12px;
+  --ds-radio-size: 20px;
+  --ds-radio-border: 1.5px solid var(--ds-color-border-strong, #d4d4d8);
   --ds-radio-bg: #ffffff;
-  --ds-radio-border-checked: 1px solid var(--ds-color-primary, #2563eb);
-  --ds-radio-dot-color: var(--ds-color-primary, #2563eb);
-  --ds-radio-focus-ring: var(--ds-input-focus-ring, var(--ds-color-focus, rgba(37, 99, 235, 0.35)));
-  --ds-radio-focus-shadow: 0 0 0 3px var(--ds-radio-focus-ring);
-  --ds-radio-disabled-opacity: 0.6;
+  --ds-radio-border-checked: 1.5px solid var(--ds-color-primary, #111111);
+  --ds-radio-bg-checked: var(--ds-color-primary, #111111);
+  --ds-radio-dot-color: var(--ds-color-on-primary, #ffffff);
+  --ds-radio-focus-ring: var(--ds-input-focus-ring, rgba(17, 17, 17, 0.1));
+  --ds-radio-focus-shadow: 0 0 0 4px var(--ds-radio-focus-ring);
+  --ds-radio-disabled-opacity: 0.56;
 
   --ds-card-font-family: var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif);
-  --ds-card-radius: var(--ds-radius-lg, 12px);
-  --ds-card-border: 1px solid var(--ds-color-border, #e5e7eb);
-  --ds-card-padding: var(--ds-space-lg, 16px);
+  --ds-card-radius: var(--ds-radius-xl, 24px);
+  --ds-card-border: 1px solid var(--ds-color-border, #e4e4e7);
+  --ds-card-padding: 24px;
   --ds-card-bg: var(--ds-color-surface, #ffffff);
-  --ds-card-gap: var(--ds-space-md, 12px);
-  --ds-card-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
-  --ds-card-shadow-elevation-2: 0 8px 20px rgba(15, 23, 42, 0.12);
+  --ds-card-gap: 16px;
+  --ds-card-shadow: var(--ds-shadow-sm, 0 8px 24px rgba(17, 17, 17, 0.06));
+  --ds-card-shadow-elevation-2: var(--ds-shadow-md, 0 18px 40px rgba(17, 17, 17, 0.08));
   --ds-card-shadow-elevation-0: none;
 
   --ds-alert-font-family: var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif);
-  --ds-alert-radius: var(--ds-radius-lg, 12px);
-  --ds-alert-padding-y: var(--ds-space-md, 12px);
-  --ds-alert-padding-x: var(--ds-space-lg, 16px);
-  --ds-alert-gap: var(--ds-space-xs, 6px);
-  --ds-alert-bg: var(--ds-color-surface-muted, #f9fafb);
-  --ds-alert-text-color: var(--ds-color-text, #111827);
+  --ds-alert-radius: var(--ds-radius-lg, 20px);
+  --ds-alert-padding-y: 18px;
+  --ds-alert-padding-x: 20px;
+  --ds-alert-gap: 6px;
+  --ds-alert-bg: var(--ds-color-surface-raised, #fcfcfc);
+  --ds-alert-border-color: var(--ds-color-border, #e4e4e7);
+  --ds-alert-text-color: var(--ds-color-text, #111111);
   --ds-alert-title-weight: 700;
-
-  --ds-alert-info-border-color: rgba(37, 99, 235, 0.3);
-  --ds-alert-info-bg: rgba(37, 99, 235, 0.1);
-
-  --ds-alert-success-border-color: rgba(22, 163, 74, 0.3);
-  --ds-alert-success-bg: rgba(22, 163, 74, 0.12);
-
-  --ds-alert-warning-border-color: rgba(245, 158, 11, 0.35);
-  --ds-alert-warning-bg: rgba(245, 158, 11, 0.15);
-
-  --ds-alert-danger-border-color: rgba(220, 38, 38, 0.35);
-  --ds-alert-danger-bg: rgba(220, 38, 38, 0.12);
+  --ds-alert-indicator-size: 10px;
+  --ds-alert-shadow: var(--ds-shadow-xs, 0 1px 2px rgba(17, 17, 17, 0.04));
+  --ds-alert-info-border-color: #e4e4e7;
+  --ds-alert-info-bg: #fafafa;
+  --ds-alert-info-accent: #111111;
+  --ds-alert-success-border-color: #d4d4d8;
+  --ds-alert-success-bg: #f7f7f8;
+  --ds-alert-success-accent: #2f2f33;
+  --ds-alert-warning-border-color: #d4d4d8;
+  --ds-alert-warning-bg: #f4f4f5;
+  --ds-alert-warning-accent: #52525b;
+  --ds-alert-danger-border-color: #c7c7cc;
+  --ds-alert-danger-bg: #ededf0;
+  --ds-alert-danger-accent: #27272a;
 
   --ds-badge-font-family: var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif);
-  --ds-badge-gap: 4px;
-  --ds-badge-padding-y: 2px;
-  --ds-badge-padding-x: 8px;
+  --ds-badge-gap: 6px;
+  --ds-badge-padding-y: 6px;
+  --ds-badge-padding-x: 10px;
   --ds-badge-radius: 999px;
   --ds-badge-font-size: 0.75rem;
-  --ds-badge-font-weight: 600;
-
-  --ds-badge-neutral-bg: var(--ds-color-surface-muted, #f3f4f6);
-  --ds-badge-neutral-fg: var(--ds-color-text, #111827);
-
-  --ds-badge-primary-bg: var(--ds-color-primary, #2563eb);
+  --ds-badge-font-weight: 700;
+  --ds-badge-neutral-bg: #f4f4f5;
+  --ds-badge-neutral-fg: #3f3f46;
+  --ds-badge-neutral-border: #e4e4e7;
+  --ds-badge-primary-bg: var(--ds-color-primary, #111111);
   --ds-badge-primary-fg: var(--ds-color-on-primary, #ffffff);
-
-  --ds-badge-success-bg: var(--ds-color-success, #16a34a);
-  --ds-badge-success-fg: var(--ds-color-on-success, #ffffff);
-
-  --ds-badge-warning-bg: var(--ds-color-warning, #f59e0b);
-  --ds-badge-warning-fg: var(--ds-color-on-warning, #111827);
-
-  --ds-badge-danger-bg: var(--ds-color-danger, #dc2626);
-  --ds-badge-danger-fg: var(--ds-color-on-danger, #ffffff);
-
-  --ds-radius-md: 8px;
-  --ds-radius-lg: 12px;
-
-  --ds-space-xs: 6px;
-  --ds-space-sm: 8px;
-  --ds-space-md: 12px;
-  --ds-space-lg: 16px;
+  --ds-badge-primary-border: transparent;
+  --ds-badge-success-bg: #f5f5f5;
+  --ds-badge-success-fg: #27272a;
+  --ds-badge-success-border: #d4d4d8;
+  --ds-badge-warning-bg: #fafafa;
+  --ds-badge-warning-fg: #52525b;
+  --ds-badge-warning-border: #d4d4d8;
+  --ds-badge-danger-bg: #ededf0;
+  --ds-badge-danger-fg: #18181b;
+  --ds-badge-danger-border: #c7c7cc;
 
   --ds-button-font-family: var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif);
   --ds-button-font-weight: 600;
-  --ds-button-letter-spacing: normal;
-  --ds-button-transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
-  --ds-button-radius: var(--ds-radius-md, 8px);
-  --ds-button-shadow: none;
-  --ds-button-focus-ring: var(--ds-color-focus, rgba(37, 99, 235, 0.35));
-  --ds-button-focus-shadow: 0 0 0 3px var(--ds-button-focus-ring);
-
-  --ds-button-primary-bg: var(--ds-color-primary, #2563eb);
+  --ds-button-letter-spacing: -0.01em;
+  --ds-button-transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease,
+    transform 0.18s ease;
+  --ds-button-radius: var(--ds-radius-md, 16px);
+  --ds-button-shadow: 0 10px 24px rgba(17, 17, 17, 0.1);
+  --ds-button-focus-ring: var(--ds-color-focus, rgba(17, 17, 17, 0.1));
+  --ds-button-focus-shadow: 0 0 0 4px var(--ds-button-focus-ring);
+  --ds-button-primary-bg: var(--ds-color-primary, #111111);
   --ds-button-primary-fg: var(--ds-color-on-primary, #ffffff);
   --ds-button-primary-border: transparent;
-  --ds-button-primary-bg-hover: var(--ds-button-primary-bg);
-  --ds-button-primary-bg-active: var(--ds-button-primary-bg);
-
-  --ds-button-secondary-bg: var(--ds-color-secondary, #111827);
-  --ds-button-secondary-fg: var(--ds-color-on-secondary, #ffffff);
-  --ds-button-secondary-border: transparent;
-  --ds-button-secondary-bg-hover: var(--ds-button-secondary-bg);
-  --ds-button-secondary-bg-active: var(--ds-button-secondary-bg);
-
+  --ds-button-primary-bg-hover: #1f1f22;
+  --ds-button-primary-bg-active: #000000;
+  --ds-button-secondary-bg: var(--ds-color-secondary, #f4f4f5);
+  --ds-button-secondary-fg: var(--ds-color-on-secondary, #18181b);
+  --ds-button-secondary-border: var(--ds-color-border, #e4e4e7);
+  --ds-button-secondary-bg-hover: #ececf0;
+  --ds-button-secondary-bg-active: #e4e4e7;
   --ds-button-ghost-bg: transparent;
-  --ds-button-ghost-fg: var(--ds-color-primary, #2563eb);
-  --ds-button-ghost-border: var(--ds-color-border, #d1d5db);
-  --ds-button-ghost-bg-hover: transparent;
-  --ds-button-ghost-bg-active: transparent;
-
-  --ds-button-disabled-opacity: 0.6;
-
+  --ds-button-ghost-fg: #52525b;
+  --ds-button-ghost-border: transparent;
+  --ds-button-ghost-bg-hover: #f4f4f5;
+  --ds-button-ghost-bg-active: #eaeaec;
+  --ds-button-disabled-opacity: 0.48;
   --ds-button-sm-font-size: 0.875rem;
-  --ds-button-sm-padding-y: var(--ds-space-xs, 6px);
-  --ds-button-sm-padding-x: var(--ds-space-sm, 8px);
-  --ds-button-sm-min-height: auto;
-
-  --ds-button-md-font-size: 1rem;
-  --ds-button-md-padding-y: var(--ds-space-sm, 8px);
-  --ds-button-md-padding-x: var(--ds-space-md, 12px);
-  --ds-button-md-min-height: auto;
-
-  --ds-button-lg-font-size: 1.125rem;
-  --ds-button-lg-padding-y: var(--ds-space-md, 12px);
-  --ds-button-lg-padding-x: var(--ds-space-lg, 16px);
-  --ds-button-lg-min-height: auto;
+  --ds-button-sm-padding-y: 10px;
+  --ds-button-sm-padding-x: 14px;
+  --ds-button-sm-min-height: 40px;
+  --ds-button-md-font-size: 0.9375rem;
+  --ds-button-md-padding-y: 13px;
+  --ds-button-md-padding-x: 18px;
+  --ds-button-md-min-height: 48px;
+  --ds-button-lg-font-size: 1rem;
+  --ds-button-lg-padding-y: 16px;
+  --ds-button-lg-padding-x: 22px;
+  --ds-button-lg-min-height: 56px;
 }
 
 :root[data-ds-theme="dark"] {
   color-scheme: dark;
 
-  --ds-color-primary: #fb923c;
-  --ds-color-on-primary: #ffffff;
-  --ds-color-secondary: #fed7aa;
-  --ds-color-on-secondary: #1c1917;
-  --ds-color-success: #4ade80;
-  --ds-color-on-success: #ffffff;
-  --ds-color-warning: #fbbf24;
-  --ds-color-on-warning: #1c1917;
-  --ds-color-danger: #f87171;
-  --ds-color-on-danger: #ffffff;
+  --ds-color-primary: #fafafa;
+  --ds-color-on-primary: #111111;
+  --ds-color-secondary: #18181b;
+  --ds-color-on-secondary: #f5f5f5;
+  --ds-color-text: #f5f5f5;
+  --ds-color-muted: #a1a1aa;
+  --ds-color-surface: #09090b;
+  --ds-color-surface-muted: #111114;
+  --ds-color-surface-raised: #151519;
+  --ds-color-border: #27272a;
+  --ds-color-border-strong: #3f3f46;
+  --ds-color-focus: rgba(255, 255, 255, 0.12);
+  --ds-color-success: #fafafa;
+  --ds-color-on-success: #111111;
+  --ds-color-warning: #d4d4d8;
+  --ds-color-on-warning: #111111;
+  --ds-color-danger: #e4e4e7;
+  --ds-color-on-danger: #111111;
+  --ds-color-input-bg: #111114;
+  --ds-color-input-border: #27272a;
+  --ds-color-input-placeholder: #71717a;
 
-  --ds-color-text: #fafaf9;
-  --ds-color-muted: #a8a29e;
-  --ds-color-surface: #1c1917;
-  --ds-color-surface-muted: #292524;
-  --ds-color-border: #44403c;
-  --ds-color-focus: rgba(251, 146, 60, 0.5);
+  --ds-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.24);
+  --ds-shadow-sm: 0 12px 28px rgba(0, 0, 0, 0.3);
+  --ds-shadow-md: 0 20px 48px rgba(0, 0, 0, 0.36);
+  --ds-shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.02);
 
-  --ds-color-input-bg: #292524;
-  --ds-color-input-border: #44403c;
-  --ds-color-input-placeholder: #78716c;
+  --ds-input-disabled-bg: #18181b;
+  --ds-input-readonly-bg: #141417;
+  --ds-input-error-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
 
-  --ds-button-shadow: none;
-  --ds-button-focus-ring: rgba(251, 146, 60, 0.6);
-  --ds-button-focus-shadow: 0 0 0 3px var(--ds-button-focus-ring);
+  --ds-switch-track-bg: #3f3f46;
+  --ds-switch-thumb-bg: #ffffff;
 
-  --ds-button-primary-bg: var(--ds-color-primary, #fb923c);
-  --ds-button-primary-fg: #ffffff;
+  --ds-alert-info-border-color: #27272a;
+  --ds-alert-info-bg: #121215;
+  --ds-alert-info-accent: #fafafa;
+  --ds-alert-success-border-color: #3f3f46;
+  --ds-alert-success-bg: #17171b;
+  --ds-alert-success-accent: #fafafa;
+  --ds-alert-warning-border-color: #3f3f46;
+  --ds-alert-warning-bg: #1b1b20;
+  --ds-alert-warning-accent: #d4d4d8;
+  --ds-alert-danger-border-color: #52525b;
+  --ds-alert-danger-bg: #202028;
+  --ds-alert-danger-accent: #f4f4f5;
+
+  --ds-badge-neutral-bg: #18181b;
+  --ds-badge-neutral-fg: #d4d4d8;
+  --ds-badge-neutral-border: #27272a;
+  --ds-badge-primary-bg: #fafafa;
+  --ds-badge-primary-fg: #111111;
+  --ds-badge-primary-border: transparent;
+  --ds-badge-success-bg: #202024;
+  --ds-badge-success-fg: #f5f5f5;
+  --ds-badge-success-border: #3f3f46;
+  --ds-badge-warning-bg: #1a1a1f;
+  --ds-badge-warning-fg: #d4d4d8;
+  --ds-badge-warning-border: #3f3f46;
+  --ds-badge-danger-bg: #23232a;
+  --ds-badge-danger-fg: #f5f5f5;
+  --ds-badge-danger-border: #52525b;
+
+  --ds-button-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  --ds-button-primary-bg: #fafafa;
+  --ds-button-primary-fg: #111111;
   --ds-button-primary-border: transparent;
-  --ds-button-primary-bg-hover: #f97316;
-  --ds-button-primary-bg-active: #ea580c;
-
-  --ds-button-secondary-bg: rgba(255, 255, 255, 0.1);
-  --ds-button-secondary-fg: #ffffff;
-  --ds-button-secondary-border: rgba(255, 255, 255, 0.16);
-  --ds-button-secondary-bg-hover: rgba(255, 255, 255, 0.14);
-  --ds-button-secondary-bg-active: rgba(255, 255, 255, 0.18);
-
-  --ds-button-ghost-fg: var(--ds-color-primary, #fb923c);
-  --ds-button-ghost-border: rgba(255, 255, 255, 0.16);
-  --ds-button-ghost-bg-hover: rgba(251, 146, 60, 0.14);
-  --ds-button-ghost-bg-active: rgba(251, 146, 60, 0.22);
+  --ds-button-primary-bg-hover: #ededee;
+  --ds-button-primary-bg-active: #dcdcdf;
+  --ds-button-secondary-bg: #18181b;
+  --ds-button-secondary-fg: #f5f5f5;
+  --ds-button-secondary-border: #27272a;
+  --ds-button-secondary-bg-hover: #202024;
+  --ds-button-secondary-bg-active: #27272a;
+  --ds-button-ghost-fg: #d4d4d8;
+  --ds-button-ghost-bg-hover: #18181b;
+  --ds-button-ghost-bg-active: #202024;
 }
 
 :root[data-ds-platform="ios"] {
   --ds-button-font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
-  --ds-button-radius: 12px;
-  --ds-button-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  --ds-button-radius: 18px;
   --ds-button-transition: background 0.2s cubic-bezier(0.2, 0, 0, 1), color 0.2s cubic-bezier(0.2, 0, 0, 1),
-    box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1);
-  --ds-button-focus-ring: rgba(0, 122, 255, 0.45);
-  --ds-button-focus-shadow: 0 0 0 3px var(--ds-button-focus-ring), var(--ds-button-shadow);
+    border-color 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1),
+    transform 0.2s cubic-bezier(0.2, 0, 0, 1);
 
   --ds-input-font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
-  --ds-input-font-size: 1.0625rem;
-  --ds-input-min-height: 44px;
-  --ds-input-padding-y: 10px;
+  --ds-input-font-size: 1rem;
+  --ds-input-min-height: 50px;
+  --ds-input-padding-y: 13px;
   --ds-input-padding-x: 16px;
-  --ds-input-radius: 12px;
-  --ds-input-bg: #ffffff;
-  --ds-input-placeholder-color: rgba(60, 60, 67, 0.3);
-  --ds-input-border: 1px solid rgba(60, 60, 67, 0.18);
-  --ds-input-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-  --ds-input-focus-ring: rgba(0, 122, 255, 0.35);
-  --ds-input-focus-shadow: 0 0 0 3px var(--ds-input-focus-ring), var(--ds-input-shadow);
-  --ds-input-border-focus: 1px solid #007aff;
-  --ds-input-disabled-bg: rgba(118, 118, 128, 0.12);
-  --ds-input-readonly-bg: rgba(118, 118, 128, 0.12);
+  --ds-input-radius: 18px;
 
   --ds-card-font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
-  --ds-card-radius: 16px;
-  --ds-card-border: 1px solid rgba(60, 60, 67, 0.18);
-  --ds-card-padding: 16px;
-  --ds-card-bg: #ffffff;
-  --ds-card-gap: 12px;
-  --ds-card-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-  --ds-card-shadow-elevation-2: 0 8px 24px rgba(0, 0, 0, 0.12);
-  --ds-card-shadow-elevation-0: none;
+  --ds-card-radius: 24px;
+  --ds-card-padding: 22px;
 
   --ds-alert-font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
-  --ds-alert-radius: 14px;
-  --ds-alert-padding-y: 12px;
-  --ds-alert-padding-x: 16px;
-  --ds-alert-gap: 6px;
-  --ds-alert-bg: rgba(118, 118, 128, 0.12);
-  --ds-alert-text-color: #111827;
-
-  --ds-alert-info-border-color: rgba(0, 122, 255, 0.35);
-  --ds-alert-info-bg: rgba(0, 122, 255, 0.12);
-
-  --ds-alert-success-border-color: rgba(52, 199, 89, 0.35);
-  --ds-alert-success-bg: rgba(52, 199, 89, 0.12);
-
-  --ds-alert-warning-border-color: rgba(255, 149, 0, 0.35);
-  --ds-alert-warning-bg: rgba(255, 149, 0, 0.12);
-
-  --ds-alert-danger-border-color: rgba(255, 59, 48, 0.35);
-  --ds-alert-danger-bg: rgba(255, 59, 48, 0.12);
+  --ds-alert-radius: 22px;
+  --ds-alert-padding-y: 18px;
+  --ds-alert-padding-x: 20px;
 
   --ds-badge-font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
-  --ds-badge-padding-y: 3px;
+  --ds-badge-padding-y: 6px;
   --ds-badge-padding-x: 10px;
-  --ds-badge-font-size: 0.8125rem;
-
-  --ds-badge-neutral-bg: rgba(118, 118, 128, 0.12);
-  --ds-badge-neutral-fg: #000000;
-
-  --ds-badge-primary-bg: #007aff;
-  --ds-badge-primary-fg: #ffffff;
-
-  --ds-badge-success-bg: #34c759;
-  --ds-badge-success-fg: #ffffff;
-
-  --ds-badge-warning-bg: #ff9500;
-  --ds-badge-warning-fg: #111827;
-
-  --ds-badge-danger-bg: #ff3b30;
-  --ds-badge-danger-fg: #ffffff;
+  --ds-badge-font-size: 0.75rem;
 
   --ds-switch-font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
-  --ds-switch-gap: 8px;
-  --ds-switch-track-width: 51px;
-  --ds-switch-track-height: 31px;
-  --ds-switch-track-bg: #e5e5ea;
-  --ds-switch-track-bg-checked: #34c759;
-  --ds-switch-thumb-size: 27px;
-  --ds-switch-thumb-inset: 2px;
-  --ds-switch-thumb-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
-  --ds-switch-focus-ring: var(--ds-input-focus-ring, rgba(0, 122, 255, 0.35));
-  --ds-switch-focus-shadow: 0 0 0 3px var(--ds-switch-focus-ring);
+  --ds-switch-track-width: 48px;
+  --ds-switch-track-height: 30px;
+  --ds-switch-thumb-size: 26px;
 
   --ds-checkbox-font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
-  --ds-checkbox-gap: 8px;
-  --ds-checkbox-size: 22px;
-  --ds-checkbox-radius: 6px;
-  --ds-checkbox-border: 1px solid rgba(60, 60, 67, 0.18);
-  --ds-checkbox-bg: #ffffff;
-  --ds-checkbox-border-checked: 1px solid #007aff;
-  --ds-checkbox-bg-checked: #007aff;
-  --ds-checkbox-focus-ring: var(--ds-input-focus-ring, rgba(0, 122, 255, 0.35));
-  --ds-checkbox-focus-shadow: 0 0 0 3px var(--ds-checkbox-focus-ring);
+  --ds-checkbox-size: 20px;
 
   --ds-radio-font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
-  --ds-radio-gap: 8px;
-  --ds-radio-size: 22px;
-  --ds-radio-border: 1px solid rgba(60, 60, 67, 0.18);
-  --ds-radio-bg: #ffffff;
-  --ds-radio-border-checked: 1px solid #007aff;
-  --ds-radio-dot-color: #007aff;
-  --ds-radio-focus-ring: var(--ds-input-focus-ring, rgba(0, 122, 255, 0.35));
-  --ds-radio-focus-shadow: 0 0 0 3px var(--ds-radio-focus-ring);
-
-  --ds-button-primary-bg: #007aff;
-  --ds-button-primary-fg: #ffffff;
-  --ds-button-primary-bg-hover: #006de0;
-  --ds-button-primary-bg-active: #005fcc;
-
-  --ds-button-secondary-bg: rgba(120, 120, 128, 0.12);
-  --ds-button-secondary-fg: #000000;
-  --ds-button-secondary-border: rgba(60, 60, 67, 0.18);
-  --ds-button-secondary-bg-hover: rgba(120, 120, 128, 0.16);
-  --ds-button-secondary-bg-active: rgba(120, 120, 128, 0.2);
-
-  --ds-button-ghost-fg: #007aff;
-  --ds-button-ghost-border: rgba(60, 60, 67, 0.18);
-  --ds-button-ghost-bg-hover: rgba(0, 122, 255, 0.08);
-  --ds-button-ghost-bg-active: rgba(0, 122, 255, 0.16);
-
-  --ds-button-sm-font-size: 0.9375rem;
-  --ds-button-sm-padding-y: 7px;
-  --ds-button-sm-padding-x: 12px;
-  --ds-button-sm-min-height: 32px;
-
-  --ds-button-md-font-size: 1.0625rem;
-  --ds-button-md-padding-y: 10px;
-  --ds-button-md-padding-x: 16px;
-  --ds-button-md-min-height: 44px;
-
-  --ds-button-lg-font-size: 1.125rem;
-  --ds-button-lg-padding-y: 12px;
-  --ds-button-lg-padding-x: 18px;
-  --ds-button-lg-min-height: 50px;
+  --ds-radio-size: 20px;
 }
 
 :root[data-ds-platform="ios"][data-ds-theme="dark"] {
-  --ds-button-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  --ds-button-transition: background 0.2s cubic-bezier(0.2, 0, 0, 1), color 0.2s cubic-bezier(0.2, 0, 0, 1),
-    box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1);
-  --ds-button-focus-ring: rgba(10, 132, 255, 0.6);
-  --ds-button-focus-shadow: 0 0 0 3px var(--ds-button-focus-ring), var(--ds-button-shadow);
-
-  --ds-switch-track-bg: #2c2c2e;
-  --ds-switch-track-bg-checked: #32d74b;
-  --ds-switch-thumb-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
-  --ds-switch-focus-ring: rgba(10, 132, 255, 0.5);
-  --ds-switch-focus-shadow: 0 0 0 3px var(--ds-switch-focus-ring);
-
-  --ds-checkbox-border: 1px solid rgba(84, 84, 88, 0.65);
-  --ds-checkbox-bg: rgba(118, 118, 128, 0.24);
-  --ds-checkbox-border-checked: 1px solid #0a84ff;
-  --ds-checkbox-bg-checked: #0a84ff;
-  --ds-checkbox-focus-ring: rgba(10, 132, 255, 0.5);
-  --ds-checkbox-focus-shadow: 0 0 0 3px var(--ds-checkbox-focus-ring);
-
-  --ds-radio-border: 1px solid rgba(84, 84, 88, 0.65);
-  --ds-radio-bg: rgba(118, 118, 128, 0.24);
-  --ds-radio-border-checked: 1px solid #0a84ff;
-  --ds-radio-dot-color: #0a84ff;
-  --ds-radio-focus-ring: rgba(10, 132, 255, 0.5);
-  --ds-radio-focus-shadow: 0 0 0 3px var(--ds-radio-focus-ring);
-
-  --ds-input-bg: rgba(118, 118, 128, 0.24);
-  --ds-input-text-color: #ffffff;
-  --ds-input-placeholder-color: rgba(235, 235, 245, 0.3);
-  --ds-input-border: 1px solid rgba(84, 84, 88, 0.65);
-  --ds-input-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  --ds-input-focus-ring: rgba(10, 132, 255, 0.5);
-  --ds-input-focus-shadow: 0 0 0 3px var(--ds-input-focus-ring), var(--ds-input-shadow);
-  --ds-input-border-focus: 1px solid #0a84ff;
-  --ds-input-disabled-bg: rgba(118, 118, 128, 0.24);
-  --ds-input-readonly-bg: rgba(118, 118, 128, 0.24);
-
-  --ds-card-bg: #1c1c1e;
-  --ds-card-border: 1px solid rgba(84, 84, 88, 0.65);
-  --ds-card-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
-  --ds-card-shadow-elevation-2: 0 10px 30px rgba(0, 0, 0, 0.75);
-
-  --ds-alert-bg: rgba(118, 118, 128, 0.24);
-  --ds-alert-text-color: #ffffff;
-
-  --ds-alert-info-border-color: rgba(10, 132, 255, 0.45);
-  --ds-alert-info-bg: rgba(10, 132, 255, 0.22);
-
-  --ds-alert-success-border-color: rgba(50, 215, 75, 0.45);
-  --ds-alert-success-bg: rgba(50, 215, 75, 0.22);
-
-  --ds-alert-warning-border-color: rgba(255, 159, 10, 0.5);
-  --ds-alert-warning-bg: rgba(255, 159, 10, 0.22);
-
-  --ds-alert-danger-border-color: rgba(255, 69, 58, 0.5);
-  --ds-alert-danger-bg: rgba(255, 69, 58, 0.22);
-
-  --ds-badge-neutral-bg: rgba(118, 118, 128, 0.24);
-  --ds-badge-neutral-fg: #ffffff;
-
-  --ds-badge-primary-bg: #0a84ff;
-  --ds-badge-primary-fg: #ffffff;
-
-  --ds-badge-success-bg: #32d74b;
-  --ds-badge-success-fg: #ffffff;
-
-  --ds-badge-warning-bg: #ff9f0a;
-  --ds-badge-warning-fg: #111827;
-
-  --ds-badge-danger-bg: #ff453a;
-  --ds-badge-danger-fg: #ffffff;
-
-  --ds-button-primary-bg: #0a84ff;
-  --ds-button-primary-bg-hover: #0077e6;
-  --ds-button-primary-bg-active: #0069cf;
-
-  --ds-button-secondary-bg: rgba(118, 118, 128, 0.24);
-  --ds-button-secondary-fg: #ffffff;
-  --ds-button-secondary-border: rgba(84, 84, 88, 0.65);
-  --ds-button-secondary-bg-hover: rgba(118, 118, 128, 0.28);
-  --ds-button-secondary-bg-active: rgba(118, 118, 128, 0.34);
-
-  --ds-button-ghost-fg: #0a84ff;
-  --ds-button-ghost-border: rgba(84, 84, 88, 0.65);
-  --ds-button-ghost-bg-hover: rgba(10, 132, 255, 0.12);
-  --ds-button-ghost-bg-active: rgba(10, 132, 255, 0.2);
+  --ds-input-error-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+  --ds-switch-track-bg: #3f3f46;
+  --ds-switch-thumb-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
 }

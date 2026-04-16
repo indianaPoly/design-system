@@ -39,29 +39,29 @@ const componentDefinitions: ComponentDefinition[] = [
   {
     id: 'button',
     label: 'Button',
-    description: '주요/보조/고스트 버튼과 크기 옵션을 확인합니다.',
+    description: '주요 액션, 보조 액션, 낮은 강조 액션이 한 화면에서 어떻게 위계를 만드는지 확인합니다.',
     render: (container) => {
       const row = document.createElement('div');
       row.className = 'demo-row';
 
       const primary = document.createElement('ds-button');
-      primary.textContent = 'Primary';
+      primary.textContent = '계속하기';
 
       const secondary = document.createElement('ds-button');
       secondary.setAttribute('variant', 'secondary');
-      secondary.textContent = 'Secondary';
+      secondary.textContent = '나중에';
 
       const ghost = document.createElement('ds-button');
       ghost.setAttribute('variant', 'ghost');
-      ghost.textContent = 'Ghost';
+      ghost.textContent = '자세히';
 
       const small = document.createElement('ds-button');
       small.setAttribute('size', 'sm');
-      small.textContent = 'Small';
+      small.textContent = '필터';
 
       const large = document.createElement('ds-button');
       large.setAttribute('size', 'lg');
-      large.textContent = 'Large';
+      large.textContent = '지금 시작하기';
 
       row.append(primary, secondary, ghost, small, large);
       container.append(row);
@@ -70,13 +70,13 @@ const componentDefinitions: ComponentDefinition[] = [
   {
     id: 'card',
     label: 'Card',
-    description: '헤더/본문/푸터 슬롯 구성을 확인합니다.',
+    description: '요약 정보와 보조 액션이 차분하게 묶이는 기본 카드 패턴입니다.',
     render: (container) => {
       const card = document.createElement('ds-card');
       card.innerHTML = `
-        <div slot="header"><strong>계정 요약</strong></div>
-        <div>이번 달 사용 금액과 알림 정보를 확인하세요.</div>
-        <div slot="footer"><ds-button size="sm">자세히 보기</ds-button></div>
+        <div slot="header"><strong>이번 달 요약</strong></div>
+        <div>결제 12건, 구독 3건, 알림 2건이 있습니다. 지금 필요한 정보만 빠르게 확인하세요.</div>
+        <div slot="footer"><ds-button size="sm" variant="secondary">상세 보기</ds-button></div>
       `;
       container.append(card);
     },
@@ -84,7 +84,7 @@ const componentDefinitions: ComponentDefinition[] = [
   {
     id: 'input',
     label: 'Input',
-    description: '라벨, 헬퍼, 에러 상태를 함께 확인합니다.',
+    description: '큰 입력 영역과 간결한 피드백으로 빠르게 작성할 수 있는 필드 스타일입니다.',
     render: (container) => {
       const stack = document.createElement('div');
       stack.className = 'demo-stack';
@@ -92,11 +92,12 @@ const componentDefinitions: ComponentDefinition[] = [
       const input = document.createElement('ds-input');
       input.setAttribute('label', '이메일');
       input.setAttribute('placeholder', 'name@example.com');
+      input.setAttribute('helper', '업무용 이메일을 입력하면 초대 링크를 보내드려요.');
 
       const inputError = document.createElement('ds-input');
       inputError.setAttribute('label', '휴대폰 번호');
-      inputError.setAttribute('error', '형식이 올바르지 않습니다.');
-      inputError.setAttribute('placeholder', '010-0000-0000');
+      inputError.setAttribute('error', '숫자만 입력해 주세요.');
+      inputError.setAttribute('placeholder', '01012345678');
 
       stack.append(input, inputError);
       container.append(stack);
@@ -105,29 +106,29 @@ const componentDefinitions: ComponentDefinition[] = [
   {
     id: 'textarea',
     label: 'Textarea',
-    description: '다중 행 입력 필드 예시입니다.',
+    description: '긴 문장을 적어도 답답하지 않도록 여백과 줄 간격을 넉넉하게 둔 텍스트 영역입니다.',
     render: (container) => {
       const textarea = document.createElement('ds-textarea');
-      textarea.setAttribute('label', '메시지');
-      textarea.setAttribute('placeholder', '남길 메시지를 입력하세요.');
-      textarea.setAttribute('helper', '최대 500자까지 입력 가능합니다.');
+      textarea.setAttribute('label', '메모');
+      textarea.setAttribute('placeholder', '팀에 공유할 메모를 남겨 주세요.');
+      textarea.setAttribute('helper', '핵심만 짧고 명확하게 적는 것을 권장합니다.');
       container.append(textarea);
     },
   },
   {
     id: 'checkbox',
     label: 'Checkbox',
-    description: '기본 체크박스와 비활성 상태를 확인합니다.',
+    description: '선택형 옵션은 명확한 체크 상태와 넉넉한 터치 영역을 우선합니다.',
     render: (container) => {
       const row = document.createElement('div');
       row.className = 'demo-row';
 
       const checkbox = document.createElement('ds-checkbox');
-      checkbox.textContent = '이용약관 동의';
+      checkbox.textContent = '이용약관에 동의합니다';
 
       const disabled = document.createElement('ds-checkbox');
       disabled.setAttribute('disabled', 'true');
-      disabled.textContent = '비활성화';
+      disabled.textContent = '선택 불가 항목';
 
       row.append(checkbox, disabled);
       container.append(row);
@@ -136,7 +137,7 @@ const componentDefinitions: ComponentDefinition[] = [
   {
     id: 'radio',
     label: 'Radio',
-    description: '라디오 버튼 그룹 예시입니다.',
+    description: '한 번에 하나만 선택해야 하는 결정형 인터페이스에 어울리는 라디오 스타일입니다.',
     render: (container) => {
       const stack = document.createElement('div');
       stack.className = 'demo-stack';
@@ -144,11 +145,11 @@ const componentDefinitions: ComponentDefinition[] = [
       const optionA = document.createElement('ds-radio');
       optionA.setAttribute('name', 'plan');
       optionA.setAttribute('checked', 'true');
-      optionA.textContent = '기본 요금제';
+      optionA.textContent = '기본 플랜';
 
       const optionB = document.createElement('ds-radio');
       optionB.setAttribute('name', 'plan');
-      optionB.textContent = '프리미엄 요금제';
+      optionB.textContent = '프리미엄 플랜';
 
       stack.append(optionA, optionB);
       container.append(stack);
@@ -157,17 +158,17 @@ const componentDefinitions: ComponentDefinition[] = [
   {
     id: 'switch',
     label: 'Switch',
-    description: '토글 스위치 기본 상태를 확인합니다.',
+    description: '즉시 켜고 끄는 설정은 상태 변화가 빠르게 읽히도록 대비를 높였습니다.',
     render: (container) => {
       const row = document.createElement('div');
       row.className = 'demo-row';
 
       const active = document.createElement('ds-switch');
       active.setAttribute('checked', 'true');
-      active.textContent = '자동 갱신';
+      active.textContent = '알림 받기';
 
       const inactive = document.createElement('ds-switch');
-      inactive.textContent = '알림 받기';
+      inactive.textContent = '자동 저장';
 
       row.append(active, inactive);
       container.append(row);
@@ -176,25 +177,25 @@ const componentDefinitions: ComponentDefinition[] = [
   {
     id: 'badge',
     label: 'Badge',
-    description: '상태 배지 variants를 확인합니다.',
+    description: '배지는 과한 색 사용 없이도 정보의 상태와 우선순위를 구분하도록 구성했습니다.',
     render: (container) => {
       const stack = document.createElement('div');
       stack.className = 'badge-stack';
 
       const info = document.createElement('ds-badge');
-      info.textContent = 'Info';
+      info.textContent = '기본';
 
       const success = document.createElement('ds-badge');
       success.setAttribute('variant', 'success');
-      success.textContent = 'Success';
+      success.textContent = '완료';
 
       const warning = document.createElement('ds-badge');
       warning.setAttribute('variant', 'warning');
-      warning.textContent = 'Warning';
+      warning.textContent = '검토 필요';
 
       const danger = document.createElement('ds-badge');
       danger.setAttribute('variant', 'danger');
-      danger.textContent = 'Danger';
+      danger.textContent = '중요';
 
       stack.append(info, success, warning, danger);
       container.append(stack);
@@ -203,29 +204,29 @@ const componentDefinitions: ComponentDefinition[] = [
   {
     id: 'alert',
     label: 'Alert',
-    description: '알림 컴포넌트의 4가지 상태를 확인합니다.',
+    description: '알림은 색상보다 구조와 밀도로 정보를 먼저 읽을 수 있도록 정리했습니다.',
     render: (container) => {
       const stack = document.createElement('div');
       stack.className = 'demo-stack';
 
       const info = document.createElement('ds-alert');
-      info.setAttribute('title', '정보');
-      info.textContent = '새 업데이트가 준비되었습니다.';
+      info.setAttribute('title', '업데이트 준비 완료');
+      info.textContent = '지금 새 버전으로 전환하면 최신 설정을 바로 사용할 수 있습니다.';
 
       const success = document.createElement('ds-alert');
       success.setAttribute('variant', 'success');
-      success.setAttribute('title', '완료');
-      success.textContent = '결제가 완료되었습니다.';
+      success.setAttribute('title', '저장되었습니다');
+      success.textContent = '변경한 내용이 안전하게 반영되었습니다.';
 
       const warning = document.createElement('ds-alert');
       warning.setAttribute('variant', 'warning');
-      warning.setAttribute('title', '주의');
-      warning.textContent = '저장되지 않은 변경 사항이 있습니다.';
+      warning.setAttribute('title', '확인이 필요합니다');
+      warning.textContent = '입력한 정보 중 일부가 누락되어 있을 수 있습니다.';
 
       const danger = document.createElement('ds-alert');
       danger.setAttribute('variant', 'danger');
-      danger.setAttribute('title', '오류');
-      danger.textContent = '요청을 처리할 수 없습니다.';
+      danger.setAttribute('title', '요청을 완료하지 못했습니다');
+      danger.textContent = '잠시 후 다시 시도하거나 관리자에게 문의해 주세요.';
 
       stack.append(info, success, warning, danger);
       container.append(stack);
