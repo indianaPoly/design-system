@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design System - Textarea</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Textarea</h1>
+        <p class="lead">Textareas allow users to enter and edit multiline text.</p>
+      </header>
+      <section class="usage-section">
+        <h2 class="usage-section">Usage</h2>
+        <div class="component-preview">
+          <ds-textarea label="Description" placeholder="Enter description..." style="width: 100%; max-width: 400px;"></ds-textarea>
+        </div>
+        <div class="code-block-header">
+          <span class="code-block-title">HTML</span>
+          <button class="copy-button">Copy</button>
+        </div>
+        <pre><code>&lt;ds-textarea label="Description" placeholder="Enter description..."&gt;&lt;/ds-textarea&gt;</code></pre>
+      </section>
+    </main>
+    <script type="module" src="./src/shared-layout.ts"></script>
+  </body>
+</html>

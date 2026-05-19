@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design System - Radio</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Radio</h1>
+        <p class="lead">Radio buttons allow users to select one option from a set.</p>
+      </header>
+      <section class="usage-section">
+        <h2 class="usage-section">Usage</h2>
+        <div class="component-preview">
+          <div class="demo-stack">
+            <ds-radio name="choice" value="1" checked>Option 1</ds-radio>
+            <ds-radio name="choice" value="2">Option 2</ds-radio>
+          </div>
+        </div>
+        <div class="code-block-header">
+          <span class="code-block-title">HTML</span>
+          <button class="copy-button">Copy</button>
+        </div>
+        <pre><code>&lt;ds-radio name="choice" value="1" checked&gt;Option 1&lt;/ds-radio&gt;
+&lt;ds-radio name="choice" value="2"&gt;Option 2&lt;/ds-radio&gt;</code></pre>
+      </section>
+    </main>
+    <script type="module" src="./src/shared-layout.ts"></script>
+  </body>
+</html>

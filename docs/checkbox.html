@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design System - Checkbox</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Checkbox</h1>
+        <p class="lead">Checkboxes allow users to select one or more items from a set.</p>
+      </header>
+      <section class="usage-section">
+        <h2 class="usage-section">Usage</h2>
+        <div class="component-preview">
+          <div class="demo-stack">
+            <ds-checkbox checked>Option 1</ds-checkbox>
+            <ds-checkbox>Option 2</ds-checkbox>
+            <ds-checkbox disabled>Disabled Option</ds-checkbox>
+          </div>
+        </div>
+        <div class="code-block-header">
+          <span class="code-block-title">HTML</span>
+          <button class="copy-button">Copy</button>
+        </div>
+        <pre><code>&lt;ds-checkbox checked&gt;Option 1&lt;/ds-checkbox&gt;
+&lt;ds-checkbox&gt;Option 2&lt;/ds-checkbox&gt;
+&lt;ds-checkbox disabled&gt;Disabled Option&lt;/ds-checkbox&gt;</code></pre>
+      </section>
+    </main>
+    <script type="module" src="./src/shared-layout.ts"></script>
+  </body>
+</html>

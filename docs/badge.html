@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design System - Badge</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Badge</h1>
+        <p class="lead">Badges are small status descriptors for UI elements.</p>
+      </header>
+      <section class="usage-section">
+        <h2 class="usage-section">Usage</h2>
+        <div class="component-preview">
+          <div class="demo-row">
+            <ds-badge>Neutral</ds-badge>
+            <ds-badge variant="primary">Primary</ds-badge>
+            <ds-badge variant="success">Success</ds-badge>
+            <ds-badge variant="warning">Warning</ds-badge>
+            <ds-badge variant="danger">Danger</ds-badge>
+          </div>
+        </div>
+        <div class="code-block-header">
+          <span class="code-block-title">HTML</span>
+          <button class="copy-button">Copy</button>
+        </div>
+        <pre><code>&lt;ds-badge&gt;Neutral&lt;/ds-badge&gt;
+&lt;ds-badge variant="primary"&gt;Primary&lt;/ds-badge&gt;
+&lt;ds-badge variant="success"&gt;Success&lt;/ds-badge&gt;
+&lt;ds-badge variant="warning"&gt;Warning&lt;/ds-badge&gt;
+&lt;ds-badge variant="danger"&gt;Danger&lt;/ds-badge&gt;</code></pre>
+      </section>
+    </main>
+    <script type="module" src="./src/shared-layout.ts"></script>
+  </body>
+</html>

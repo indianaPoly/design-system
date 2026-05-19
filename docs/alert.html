@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design System - Alert</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Alert</h1>
+        <p class="lead">Alerts display important messages that require the user's attention.</p>
+      </header>
+      <section class="usage-section">
+        <h2 class="usage-section">Usage</h2>
+        <div class="component-preview">
+          <div class="demo-stack">
+            <ds-alert title="Info">This is an informational message.</ds-alert>
+            <ds-alert variant="success" title="Success">Operation completed successfully.</ds-alert>
+            <ds-alert variant="warning" title="Warning">Please check your configuration.</ds-alert>
+            <ds-alert variant="danger" title="Error">Something went wrong.</ds-alert>
+          </div>
+        </div>
+        <div class="code-block-header">
+          <span class="code-block-title">HTML</span>
+          <button class="copy-button">Copy</button>
+        </div>
+        <pre><code>&lt;ds-alert title="Info"&gt;This is an informational message.&lt;/ds-alert&gt;
+&lt;ds-alert variant="success" title="Success"&gt;Operation completed successfully.&lt;/ds-alert&gt;
+&lt;ds-alert variant="warning" title="Warning"&gt;Please check your configuration.&lt;/ds-alert&gt;
+&lt;ds-alert variant="danger" title="Error"&gt;Something went wrong.&lt;/ds-alert&gt;</code></pre>
+      </section>
+    </main>
+    <script type="module" src="./src/shared-layout.ts"></script>
+  </body>
+</html>

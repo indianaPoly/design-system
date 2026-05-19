@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design System - Tokens</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Design Tokens</h1>
+        <p class="lead">The foundation of the design system. These tokens define the visual language of the application.</p>
+      </header>
+
+      <section class="usage-section">
+        <h2>Colors</h2>
+        <p>We use a set of functional color tokens that adapt to light and dark themes.</p>
+        <div class="token-grid" id="color-grid"></div>
+      </section>
+
+      <section class="usage-section">
+        <h2>Typography</h2>
+        <div class="token-card" style="padding: 24px;">
+          <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 8px;">Headline 1</div>
+          <div style="font-size: 1.875rem; font-weight: 700; margin-bottom: 8px;">Headline 2</div>
+          <div style="font-size: 1.25rem; font-weight: 600; margin-bottom: 8px;">Headline 3</div>
+          <div style="font-size: 1rem; font-weight: 400;">Body text - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./src/shared-layout.ts"></script>
+    <script type="module" src="./src/tokens.ts"></script>
+  </body>
+</html>

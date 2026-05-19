@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design System - Card</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Card</h1>
+        <p class="lead">Cards are surfaces that display content and actions on a single topic.</p>
+      </header>
+
+      <section class="usage-section">
+        <h2 class="usage-section">Usage</h2>
+        <div class="component-preview">
+          <ds-card style="width: 100%; max-width: 400px;">
+            <div slot="header" style="display: flex; justify-content: space-between; align-items: center;">
+              <span>Card Title</span>
+              <ds-badge>Badge</ds-badge>
+            </div>
+            <p>This is the main content area of the card. You can put anything here.</p>
+            <div slot="footer" class="demo-row">
+              <ds-button size="sm">Action</ds-button>
+              <ds-button size="sm" variant="secondary">Cancel</ds-button>
+            </div>
+          </ds-card>
+        </div>
+
+        <div class="code-block-header">
+          <span class="code-block-title">HTML</span>
+          <button class="copy-button">Copy</button>
+        </div>
+        <pre><code>&lt;ds-card&gt;
+  &lt;div slot="header" style="display: flex; justify-content: space-between; align-items: center;"&gt;
+    &lt;span&gt;Card Title&lt;/span&gt;
+    &lt;ds-badge&gt;Badge&lt;/ds-badge&gt;
+  &lt;/div&gt;
+  &lt;p&gt;This is the main content area of the card. You can put anything here.&lt;/p&gt;
+  &lt;div slot="footer" class="demo-row"&gt;
+    &lt;ds-button size="sm"&gt;Action&lt;/ds-button&gt;
+    &lt;ds-button size="sm" variant="secondary"&gt;Cancel&lt;/ds-button&gt;
+  &lt;/div&gt;
+&lt;/ds-card&gt;</code></pre>
+      </section>
+
+      <section class="usage-section">
+        <h2>Properties</h2>
+        <div class="token-card" style="padding: 0; overflow: auto;">
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--ds-color-border);">
+                <th style="padding: 12px 16px;">Property</th>
+                <th style="padding: 12px 16px;">Attribute</th>
+                <th style="padding: 12px 16px;">Type</th>
+                <th style="padding: 12px 16px;">Default</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 12px 16px;"><code>elevation</code></td>
+                <td style="padding: 12px 16px;"><code>elevation</code></td>
+                <td style="padding: 12px 16px;"><code>number</code></td>
+                <td style="padding: 12px 16px;"><code>1</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./src/shared-layout.ts"></script>
+  </body>
+</html>

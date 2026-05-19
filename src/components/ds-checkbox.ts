@@ -192,22 +192,15 @@ export class DsCheckbox extends LitElement {
       border: var(--ds-checkbox-border, 1.5px solid var(--ds-color-border-strong, #d4d4d8));
       background: var(--ds-checkbox-bg, #ffffff);
       box-shadow: var(--ds-shadow-inset, inset 0 1px 0 rgba(255, 255, 255, 0.72));
-      display: inline-grid;
-      place-items: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
       flex-shrink: 0;
       box-sizing: border-box;
-    }
-
-    input::after {
-      content: '';
-      width: calc(var(--ds-checkbox-size, 20px) * 0.42);
-      height: calc(var(--ds-checkbox-size, 20px) * 0.22);
-      border: 2px solid var(--ds-checkbox-check-color, var(--ds-color-on-primary, #ffffff));
-      border-top: 0;
-      border-left: 0;
-      transform: rotate(45deg) translateY(-1px);
-      opacity: 0;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 14px;
     }
 
     label:hover input:not(:disabled) {
@@ -215,13 +208,10 @@ export class DsCheckbox extends LitElement {
     }
 
     input:checked {
-      border: var(--ds-checkbox-border-checked, 1.5px solid var(--ds-color-primary, #111111));
-      background: var(--ds-checkbox-bg-checked, var(--ds-color-primary, #111111));
+      border-color: var(--ds-checkbox-border-checked, var(--ds-color-primary, #111111));
+      background-color: var(--ds-checkbox-bg-checked, var(--ds-color-primary, #111111));
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'%3E%3C/path%3E%3C/svg%3E");
       box-shadow: none;
-    }
-
-    input:checked::after {
-      opacity: 1;
     }
 
     input:focus-visible {
