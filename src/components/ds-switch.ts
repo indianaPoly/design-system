@@ -191,6 +191,7 @@ export class DsSwitch extends LitElement {
       background: var(--ds-switch-track-bg, #d4d4d8);
       transition: background 0.18s ease, box-shadow 0.18s ease;
       flex-shrink: 0;
+      box-sizing: border-box;
     }
 
     .thumb {
@@ -203,6 +204,10 @@ export class DsSwitch extends LitElement {
       background: var(--ds-switch-thumb-bg, #ffffff);
       box-shadow: var(--ds-switch-thumb-shadow, 0 4px 10px rgba(17, 17, 17, 0.16));
       transition: transform 0.18s ease;
+    }
+
+    label:hover .track {
+      box-shadow: inset 0 0 0 1px var(--ds-color-border-strong, #d4d4d8);
     }
 
     label:focus-within .track {

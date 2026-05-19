@@ -229,6 +229,7 @@ export class DsTextarea extends LitElement {
       background: var(--ds-textarea-bg, #ffffff);
       box-shadow: var(--ds-textarea-shadow, inset 0 1px 0 rgba(255, 255, 255, 0.72));
       transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      box-sizing: border-box;
     }
 
     .field:focus-within .control {
@@ -295,7 +296,7 @@ export class DsTextarea extends LitElement {
     }
 
     .message.error {
-      color: var(--ds-color-text, #111111);
+      color: var(--ds-color-danger, #27272a);
       font-weight: 600;
     }
 

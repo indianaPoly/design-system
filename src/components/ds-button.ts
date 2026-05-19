@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonType = 'button' | 'submit' | 'reset';
 
 @customElement('ds-button')
 export class DsButton extends LitElement {
@@ -15,11 +16,15 @@ export class DsButton extends LitElement {
   @property({ type: Boolean, reflect: true })
   declare disabled: boolean;
 
+  @property({ type: String, reflect: true })
+  declare type: ButtonType;
+
   constructor() {
     super();
     this.variant = 'primary';
     this.size = 'md';
     this.disabled = false;
+    this.type = 'submit';
   }
 
   static styles = css`
@@ -46,6 +51,8 @@ export class DsButton extends LitElement {
       font-weight: var(--ds-button-font-weight, 600);
       letter-spacing: var(--ds-button-letter-spacing, -0.01em);
       cursor: pointer;
+      box-sizing: border-box;
+      user-select: none;
       transition: var(
         --ds-button-transition,
         background 0.18s ease,
@@ -59,6 +66,8 @@ export class DsButton extends LitElement {
 
     button:hover:not(:disabled) {
       background: var(--ds-button-primary-bg-hover, var(--ds-button-primary-bg, var(--ds-color-primary, #111111)));
+      transform: translateY(-1px);
+      box-shadow: var(--ds-shadow-md, var(--ds-button-shadow, 0 10px 24px rgba(17, 17, 17, 0.1)));
     }
 
     button:active:not(:disabled) {
@@ -67,6 +76,7 @@ export class DsButton extends LitElement {
         var(--ds-button-primary-bg, var(--ds-color-primary, #111111))
       );
       transform: translateY(1px);
+      box-shadow: var(--ds-shadow-xs, 0 1px 2px rgba(17, 17, 17, 0.04));
     }
 
     button:focus-visible {
@@ -83,6 +93,7 @@ export class DsButton extends LitElement {
 
     :host([variant="secondary"]) button:hover:not(:disabled) {
       background: var(--ds-button-secondary-bg-hover, var(--ds-button-secondary-bg, var(--ds-color-secondary, #f4f4f5)));
+      box-shadow: var(--ds-shadow-xs, 0 1px 2px rgba(17, 17, 17, 0.04));
     }
 
     :host([variant="secondary"]) button:active:not(:disabled) {
@@ -101,6 +112,7 @@ export class DsButton extends LitElement {
 
     :host([variant="ghost"]) button:hover:not(:disabled) {
       background: var(--ds-button-ghost-bg-hover, #f4f4f5);
+      box-shadow: none;
     }
 
     :host([variant="ghost"]) button:active:not(:disabled) {
@@ -128,7 +140,7 @@ export class DsButton extends LitElement {
   `;
 
   render() {
-    return html`<button part="button" ?disabled=${this.disabled}>
+    return html`<button part="button" type=${this.type} ?disabled=${this.disabled}>
       <slot></slot>
     </button>`;
   }

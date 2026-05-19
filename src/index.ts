@@ -8,7 +8,7 @@ export { DsSwitch } from './components/ds-switch';
 export { DsBadge } from './components/ds-badge';
 export { DsAlert } from './components/ds-alert';
 
-export type { ButtonSize, ButtonVariant } from './components/ds-button';
+export type { ButtonSize, ButtonType, ButtonVariant } from './components/ds-button';
 export type { InputType } from './components/ds-input';
 export type { BadgeVariant } from './components/ds-badge';
 export type { AlertVariant } from './components/ds-alert';

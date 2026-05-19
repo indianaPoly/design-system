@@ -196,6 +196,7 @@ export class DsCheckbox extends LitElement {
       place-items: center;
       transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
       flex-shrink: 0;
+      box-sizing: border-box;
     }
 
     input::after {
@@ -210,7 +211,7 @@ export class DsCheckbox extends LitElement {
     }
 
     label:hover input:not(:disabled) {
-      border-color: var(--ds-color-text, #111111);
+      border-color: var(--ds-color-accent, var(--ds-color-text, #111111));
     }
 
     input:checked {

@@ -13,234 +13,244 @@ type ComponentDefinition = {
   render: (container: HTMLElement) => void;
 };
 
+type CopyBlock = {
+  id: string;
+  title: string;
+  description: string;
+  code: string;
+};
+
 const colorTokens: TokenDefinition[] = [
   { name: '--ds-color-primary', label: 'Primary' },
-  { name: '--ds-color-on-primary', label: 'On Primary' },
-  { name: '--ds-color-secondary', label: 'Secondary' },
-  { name: '--ds-color-on-secondary', label: 'On Secondary' },
+  { name: '--ds-color-accent', label: 'Accent' },
   { name: '--ds-color-text', label: 'Text' },
   { name: '--ds-color-muted', label: 'Muted' },
+  { name: '--ds-color-canvas', label: 'Canvas' },
   { name: '--ds-color-surface', label: 'Surface' },
-  { name: '--ds-color-surface-muted', label: 'Surface Muted' },
+  { name: '--ds-color-surface-raised', label: 'Raised' },
   { name: '--ds-color-border', label: 'Border' },
   { name: '--ds-color-focus', label: 'Focus' },
   { name: '--ds-color-success', label: 'Success' },
-  { name: '--ds-color-on-success', label: 'On Success' },
   { name: '--ds-color-warning', label: 'Warning' },
-  { name: '--ds-color-on-warning', label: 'On Warning' },
   { name: '--ds-color-danger', label: 'Danger' },
-  { name: '--ds-color-on-danger', label: 'On Danger' },
-  { name: '--ds-color-input-bg', label: 'Input Background' },
-  { name: '--ds-color-input-border', label: 'Input Border' },
-  { name: '--ds-color-input-placeholder', label: 'Input Placeholder' },
 ];
+
+const setHTML = (container: HTMLElement, html: string) => {
+  container.innerHTML = html;
+};
 
 const componentDefinitions: ComponentDefinition[] = [
   {
     id: 'button',
     label: 'Button',
-    description: '주요 액션, 보조 액션, 낮은 강조 액션이 한 화면에서 어떻게 위계를 만드는지 확인합니다.',
-    render: (container) => {
-      const row = document.createElement('div');
-      row.className = 'demo-row';
-
-      const primary = document.createElement('ds-button');
-      primary.textContent = '계속하기';
-
-      const secondary = document.createElement('ds-button');
-      secondary.setAttribute('variant', 'secondary');
-      secondary.textContent = '나중에';
-
-      const ghost = document.createElement('ds-button');
-      ghost.setAttribute('variant', 'ghost');
-      ghost.textContent = '자세히';
-
-      const small = document.createElement('ds-button');
-      small.setAttribute('size', 'sm');
-      small.textContent = '필터';
-
-      const large = document.createElement('ds-button');
-      large.setAttribute('size', 'lg');
-      large.textContent = '지금 시작하기';
-
-      row.append(primary, secondary, ghost, small, large);
-      container.append(row);
-    },
+    description: '작은 SaaS 화면에서 바로 쓸 수 있는 액션 위계입니다. Primary는 한 화면에 하나만 두는 것을 권장합니다.',
+    render: (container) => setHTML(container, `
+      <div class="demo-row">
+        <ds-button>배포하기</ds-button>
+        <ds-button variant="secondary">미리보기</ds-button>
+        <ds-button variant="ghost">취소</ds-button>
+        <ds-button size="sm" variant="secondary">필터</ds-button>
+        <ds-button size="lg">프로젝트 생성</ds-button>
+      </div>
+    `),
   },
   {
     id: 'card',
     label: 'Card',
-    description: '요약 정보와 보조 액션이 차분하게 묶이는 기본 카드 패턴입니다.',
-    render: (container) => {
-      const card = document.createElement('ds-card');
-      card.innerHTML = `
-        <div slot="header"><strong>이번 달 요약</strong></div>
-        <div>결제 12건, 구독 3건, 알림 2건이 있습니다. 지금 필요한 정보만 빠르게 확인하세요.</div>
-        <div slot="footer"><ds-button size="sm" variant="secondary">상세 보기</ds-button></div>
-      `;
-      container.append(card);
-    },
+    description: '헤더/본문/푸터가 있는 앱 카드입니다. 불필요한 장식보다 정보 밀도와 경계가 먼저 읽히게 했습니다.',
+    render: (container) => setHTML(container, `
+      <ds-card class="demo-card">
+        <div slot="header" style="display: flex; justify-content: space-between; gap: 12px; align-items: center;">
+          <span>월간 사용량</span>
+          <ds-badge variant="primary">Live</ds-badge>
+        </div>
+        <div class="metric-grid">
+          <div><strong>12.8k</strong><span>요청</span></div>
+          <div><strong>99.9%</strong><span>성공률</span></div>
+          <div><strong>42ms</strong><span>응답</span></div>
+        </div>
+        <div slot="footer" class="demo-row compact">
+          <ds-button size="sm">리포트 보기</ds-button>
+          <ds-button size="sm" variant="ghost">CSV</ds-button>
+        </div>
+      </ds-card>
+    `),
   },
   {
     id: 'input',
     label: 'Input',
-    description: '큰 입력 영역과 간결한 피드백으로 빠르게 작성할 수 있는 필드 스타일입니다.',
-    render: (container) => {
-      const stack = document.createElement('div');
-      stack.className = 'demo-stack';
-
-      const input = document.createElement('ds-input');
-      input.setAttribute('label', '이메일');
-      input.setAttribute('placeholder', 'name@example.com');
-      input.setAttribute('helper', '업무용 이메일을 입력하면 초대 링크를 보내드려요.');
-
-      const inputError = document.createElement('ds-input');
-      inputError.setAttribute('label', '휴대폰 번호');
-      inputError.setAttribute('error', '숫자만 입력해 주세요.');
-      inputError.setAttribute('placeholder', '01012345678');
-
-      stack.append(input, inputError);
-      container.append(stack);
-    },
+    description: '라벨, helper, error, prefix/suffix, counter가 한 컴포넌트 안에서 안정적으로 정렬됩니다.',
+    render: (container) => setHTML(container, `
+      <div class="demo-stack narrow">
+        <ds-input label="워크스페이스 URL" value="acme" helper="팀원이 접속할 고유 주소입니다." maxLength="24">
+          <span slot="prefix">https://</span>
+          <span slot="suffix">.app</span>
+        </ds-input>
+        <ds-input label="결제 이메일" type="email" error="유효한 이메일 주소를 입력해 주세요." value="billing@">
+        </ds-input>
+      </div>
+    `),
   },
   {
     id: 'textarea',
     label: 'Textarea',
-    description: '긴 문장을 적어도 답답하지 않도록 여백과 줄 간격을 넉넉하게 둔 텍스트 영역입니다.',
-    render: (container) => {
-      const textarea = document.createElement('ds-textarea');
-      textarea.setAttribute('label', '메모');
-      textarea.setAttribute('placeholder', '팀에 공유할 메모를 남겨 주세요.');
-      textarea.setAttribute('helper', '핵심만 짧고 명확하게 적는 것을 권장합니다.');
-      container.append(textarea);
-    },
+    description: '긴 설명을 적는 상태에서도 카운터와 footer 액션이 부딪히지 않는 작성 패턴입니다.',
+    render: (container) => setHTML(container, `
+      <div class="demo-stack narrow">
+        <ds-textarea label="릴리즈 노트" helper="고객에게 보일 한두 문장으로 정리하세요." value="대시보드의 로딩 속도와 알림 안정성을 개선했습니다." maxLength="140">
+          <ds-button slot="footer" size="sm" variant="ghost">미리보기</ds-button>
+        </ds-textarea>
+      </div>
+    `),
   },
   {
     id: 'checkbox',
     label: 'Checkbox',
-    description: '선택형 옵션은 명확한 체크 상태와 넉넉한 터치 영역을 우선합니다.',
-    render: (container) => {
-      const row = document.createElement('div');
-      row.className = 'demo-row';
-
-      const checkbox = document.createElement('ds-checkbox');
-      checkbox.textContent = '이용약관에 동의합니다';
-
-      const disabled = document.createElement('ds-checkbox');
-      disabled.setAttribute('disabled', 'true');
-      disabled.textContent = '선택 불가 항목';
-
-      row.append(checkbox, disabled);
-      container.append(row);
-    },
+    description: '설정/약관처럼 다중 선택이 가능한 항목에 맞춘 터치-safe 컨트롤입니다.',
+    render: (container) => setHTML(container, `
+      <div class="choice-panel">
+        <ds-checkbox checked name="reports" value="weekly">주간 리포트 받기</ds-checkbox>
+        <ds-checkbox name="marketing" value="yes">제품 업데이트 메일 받기</ds-checkbox>
+        <ds-checkbox disabled>관리자 전용 설정</ds-checkbox>
+      </div>
+    `),
   },
   {
     id: 'radio',
     label: 'Radio',
-    description: '한 번에 하나만 선택해야 하는 결정형 인터페이스에 어울리는 라디오 스타일입니다.',
-    render: (container) => {
-      const stack = document.createElement('div');
-      stack.className = 'demo-stack';
-
-      const optionA = document.createElement('ds-radio');
-      optionA.setAttribute('name', 'plan');
-      optionA.setAttribute('checked', 'true');
-      optionA.textContent = '기본 플랜';
-
-      const optionB = document.createElement('ds-radio');
-      optionB.setAttribute('name', 'plan');
-      optionB.textContent = '프리미엄 플랜';
-
-      stack.append(optionA, optionB);
-      container.append(stack);
-    },
+    description: '하나의 결정을 빠르게 비교할 수 있도록 라디오 그룹을 카드형 레이아웃에 배치할 수 있습니다.',
+    render: (container) => setHTML(container, `
+      <div class="choice-panel two-column">
+        <ds-radio name="plan" value="starter" checked>Starter · 개인/소규모 팀</ds-radio>
+        <ds-radio name="plan" value="pro">Pro · 성장 중인 팀</ds-radio>
+      </div>
+    `),
   },
   {
     id: 'switch',
     label: 'Switch',
-    description: '즉시 켜고 끄는 설정은 상태 변화가 빠르게 읽히도록 대비를 높였습니다.',
-    render: (container) => {
-      const row = document.createElement('div');
-      row.className = 'demo-row';
-
-      const active = document.createElement('ds-switch');
-      active.setAttribute('checked', 'true');
-      active.textContent = '알림 받기';
-
-      const inactive = document.createElement('ds-switch');
-      inactive.textContent = '자동 저장';
-
-      row.append(active, inactive);
-      container.append(row);
-    },
+    description: '즉시 반영되는 설정에는 switch를 사용합니다. 상태가 색과 thumb 위치로 동시에 읽힙니다.',
+    render: (container) => setHTML(container, `
+      <div class="choice-panel">
+        <ds-switch name="alerts" value="enabled" checked>장애 알림 즉시 받기</ds-switch>
+        <ds-switch name="autosave" value="enabled">초안 자동 저장</ds-switch>
+      </div>
+    `),
   },
   {
     id: 'badge',
     label: 'Badge',
-    description: '배지는 과한 색 사용 없이도 정보의 상태와 우선순위를 구분하도록 구성했습니다.',
-    render: (container) => {
-      const stack = document.createElement('div');
-      stack.className = 'badge-stack';
-
-      const info = document.createElement('ds-badge');
-      info.textContent = '기본';
-
-      const success = document.createElement('ds-badge');
-      success.setAttribute('variant', 'success');
-      success.textContent = '완료';
-
-      const warning = document.createElement('ds-badge');
-      warning.setAttribute('variant', 'warning');
-      warning.textContent = '검토 필요';
-
-      const danger = document.createElement('ds-badge');
-      danger.setAttribute('variant', 'danger');
-      danger.textContent = '중요';
-
-      stack.append(info, success, warning, danger);
-      container.append(stack);
-    },
+    description: '상태 색은 작게, 의미는 명확하게. 리스트/카드 안에서 과한 면적을 차지하지 않습니다.',
+    render: (container) => setHTML(container, `
+      <div class="badge-stack">
+        <ds-badge>Draft</ds-badge>
+        <ds-badge variant="primary">Beta</ds-badge>
+        <ds-badge variant="success">Healthy</ds-badge>
+        <ds-badge variant="warning">Review</ds-badge>
+        <ds-badge variant="danger">Blocked</ds-badge>
+      </div>
+    `),
   },
   {
     id: 'alert',
     label: 'Alert',
-    description: '알림은 색상보다 구조와 밀도로 정보를 먼저 읽을 수 있도록 정리했습니다.',
-    render: (container) => {
-      const stack = document.createElement('div');
-      stack.className = 'demo-stack';
+    description: '상태 메시지는 배경, border, indicator가 함께 작동해서 빠르게 구분됩니다.',
+    render: (container) => setHTML(container, `
+      <div class="demo-stack">
+        <ds-alert title="배포 준비 완료">모든 검증이 통과했습니다. 지금 프로덕션에 배포할 수 있습니다.</ds-alert>
+        <ds-alert variant="success" title="저장되었습니다">변경한 설정이 팀 워크스페이스에 반영되었습니다.</ds-alert>
+        <ds-alert variant="warning" title="확인이 필요합니다">청구 정보가 만료되기 전에 결제 수단을 업데이트하세요.</ds-alert>
+        <ds-alert variant="danger" title="요청 실패">잠시 후 다시 시도하거나 관리자에게 문의해 주세요.</ds-alert>
+      </div>
+    `),
+  },
+];
 
-      const info = document.createElement('ds-alert');
-      info.setAttribute('title', '업데이트 준비 완료');
-      info.textContent = '지금 새 버전으로 전환하면 최신 설정을 바로 사용할 수 있습니다.';
+const copyBlocks: CopyBlock[] = [
+  {
+    id: 'signup-panel',
+    title: 'Signup form card',
+    description: '랜딩/초대 플로우에서 바로 붙여 넣는 가입 카드입니다.',
+    code: `<section style="max-width: 460px;">
+  <ds-card>
+    <div slot="header" style="display: grid; gap: 8px;">
+      <ds-badge variant="primary">Private beta</ds-badge>
+      <h2 style="margin: 0;">팀 워크스페이스 만들기</h2>
+      <p style="margin: 0; color: var(--ds-color-muted);">이메일과 워크스페이스 URL만 입력하면 바로 시작할 수 있습니다.</p>
+    </div>
 
-      const success = document.createElement('ds-alert');
-      success.setAttribute('variant', 'success');
-      success.setAttribute('title', '저장되었습니다');
-      success.textContent = '변경한 내용이 안전하게 반영되었습니다.';
+    <form id="signup-form" style="display: grid; gap: 14px;">
+      <ds-input name="email" label="업무용 이메일" type="email" placeholder="name@company.com" required></ds-input>
+      <ds-input name="workspace" label="워크스페이스 URL" value="acme" maxLength="24" required>
+        <span slot="prefix">https://</span>
+        <span slot="suffix">.app</span>
+      </ds-input>
+      <ds-checkbox name="agree" value="yes" required>약관과 개인정보 처리방침에 동의합니다</ds-checkbox>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <ds-button>시작하기</ds-button>
+        <ds-button type="button" variant="ghost">데모 보기</ds-button>
+      </div>
+    </form>
+  </ds-card>
+</section>`,
+  },
+  {
+    id: 'settings-panel',
+    title: 'Settings panel',
+    description: '제품 설정/알림/권한 화면에 적합한 카드형 설정 블록입니다.',
+    code: `<ds-card style="max-width: 560px;">
+  <div slot="header" style="display: flex; justify-content: space-between; gap: 16px; align-items: start;">
+    <div>
+      <h2 style="margin: 0;">알림 설정</h2>
+      <p style="margin: 6px 0 0; color: var(--ds-color-muted);">팀에 필요한 이벤트만 선별해서 받아보세요.</p>
+    </div>
+    <ds-badge variant="success">Active</ds-badge>
+  </div>
 
-      const warning = document.createElement('ds-alert');
-      warning.setAttribute('variant', 'warning');
-      warning.setAttribute('title', '확인이 필요합니다');
-      warning.textContent = '입력한 정보 중 일부가 누락되어 있을 수 있습니다.';
+  <div style="display: grid; gap: 10px;">
+    <ds-switch name="incident" value="enabled" checked>장애 알림 즉시 받기</ds-switch>
+    <ds-switch name="weekly" value="enabled">주간 요약 리포트 받기</ds-switch>
+    <ds-checkbox name="mentions" value="yes" checked>내가 멘션된 이벤트만 강조</ds-checkbox>
+  </div>
 
-      const danger = document.createElement('ds-alert');
-      danger.setAttribute('variant', 'danger');
-      danger.setAttribute('title', '요청을 완료하지 못했습니다');
-      danger.textContent = '잠시 후 다시 시도하거나 관리자에게 문의해 주세요.';
+  <div slot="footer" style="display: flex; gap: 8px; flex-wrap: wrap;">
+    <ds-button size="sm">저장</ds-button>
+    <ds-button size="sm" variant="secondary" type="button">초기화</ds-button>
+  </div>
+</ds-card>`,
+  },
+  {
+    id: 'status-stack',
+    title: 'Status surface stack',
+    description: '대시보드 상단에서 상태와 다음 액션을 한 번에 보여주는 블록입니다.',
+    code: `<section style="display: grid; gap: 14px; max-width: 620px;">
+  <ds-alert variant="success" title="시스템 정상">
+    모든 API 리전이 정상 동작 중입니다. 평균 응답 시간은 42ms입니다.
+  </ds-alert>
 
-      stack.append(info, success, warning, danger);
-      container.append(stack);
-    },
+  <ds-card>
+    <div slot="header" style="display: flex; justify-content: space-between; gap: 12px; align-items: center;">
+      <span>이번 달 사용량</span>
+      <ds-badge variant="primary">12.8k requests</ds-badge>
+    </div>
+    <p>무료 한도까지 38% 남았습니다. 사용량이 빠르게 증가하면 Pro 플랜을 추천합니다.</p>
+    <div slot="footer" style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <ds-button size="sm">업그레이드</ds-button>
+      <ds-button size="sm" variant="ghost" type="button">사용량 보기</ds-button>
+    </div>
+  </ds-card>
+</section>`,
   },
 ];
 
 const colorGrid = document.querySelector<HTMLDivElement>('#color-grid');
-const componentSelect = document.querySelector<HTMLSelectElement>('#component-select');
+const componentGrid = document.querySelector<HTMLDivElement>('#component-grid');
 const componentDescription = document.querySelector<HTMLParagraphElement>('#component-description');
 const componentDemo = document.querySelector<HTMLDivElement>('#component-demo');
+const blockGrid = document.querySelector<HTMLDivElement>('#block-grid');
 const themeToggle = document.querySelector<HTMLElement>('#theme-toggle');
 
-if (!colorGrid || !componentSelect || !componentDescription || !componentDemo || !themeToggle) {
+if (!colorGrid || !componentGrid || !componentDescription || !componentDemo || !blockGrid || !themeToggle) {
   throw new Error('Preview containers are missing in docs/index.html');
 }
 
@@ -270,12 +280,78 @@ colorTokens.forEach((token) => {
 });
 colorGrid.append(tokenFragment);
 
-componentDefinitions.forEach((definition) => {
-  const option = document.createElement('option');
-  option.value = definition.id;
-  option.textContent = definition.label;
-  componentSelect.append(option);
+const renderComponent = (componentId: string) => {
+  const definition = componentDefinitions.find((item) => item.id === componentId);
+  if (!definition) return;
+
+  componentGrid.querySelectorAll('button').forEach((button) => {
+    button.setAttribute('aria-pressed', String(button.dataset.componentId === componentId));
+  });
+
+  componentDescription.textContent = definition.description;
+  componentDemo.replaceChildren();
+  const container = document.createElement('div');
+  container.className = 'demo-stack';
+  definition.render(container);
+  componentDemo.append(container);
+};
+
+const componentFragment = document.createDocumentFragment();
+componentDefinitions.forEach((definition, index) => {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'component-chip';
+  button.dataset.componentId = definition.id;
+  button.setAttribute('aria-pressed', String(index === 0));
+  button.textContent = definition.label;
+  button.addEventListener('click', () => renderComponent(definition.id));
+  componentFragment.append(button);
 });
+componentGrid.append(componentFragment);
+
+const copyToClipboard = async (text: string, trigger: HTMLButtonElement) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    trigger.textContent = 'Copied';
+    window.setTimeout(() => {
+      trigger.textContent = 'Copy';
+    }, 1200);
+  } catch {
+    trigger.textContent = 'Select code';
+  }
+};
+
+const blockFragment = document.createDocumentFragment();
+copyBlocks.forEach((block) => {
+  const article = document.createElement('article');
+  article.className = 'block-card';
+
+  const header = document.createElement('div');
+  header.className = 'block-header';
+
+  const titleWrap = document.createElement('div');
+  const title = document.createElement('h3');
+  title.textContent = block.title;
+  const description = document.createElement('p');
+  description.textContent = block.description;
+  titleWrap.append(title, description);
+
+  const copy = document.createElement('button');
+  copy.type = 'button';
+  copy.className = 'copy-button';
+  copy.textContent = 'Copy';
+  copy.addEventListener('click', () => copyToClipboard(block.code, copy));
+
+  const pre = document.createElement('pre');
+  const code = document.createElement('code');
+  code.textContent = block.code;
+  pre.append(code);
+
+  header.append(titleWrap, copy);
+  article.append(header, pre);
+  blockFragment.append(article);
+});
+blockGrid.append(blockFragment);
 
 const applyThemeToggleLabel = () => {
   const isDark = document.documentElement.getAttribute('data-ds-theme') === 'dark';
@@ -303,29 +379,6 @@ if (savedTheme === 'dark' || savedTheme === 'light') {
 themeToggle.addEventListener('click', () => {
   const isDark = document.documentElement.getAttribute('data-ds-theme') === 'dark';
   setTheme(isDark ? 'light' : 'dark');
-});
-
-const renderComponent = (componentId: string) => {
-  const definition = componentDefinitions.find((item) => item.id === componentId);
-  if (!definition) {
-    return;
-  }
-
-  componentDescription.textContent = definition.description;
-  componentDemo.replaceChildren();
-  requestAnimationFrame(() => {
-    const fragment = document.createDocumentFragment();
-    const container = document.createElement('div');
-    container.className = 'demo-stack';
-    definition.render(container);
-    fragment.append(container);
-    componentDemo.append(fragment);
-  });
-};
-
-componentSelect.addEventListener('change', (event) => {
-  const target = event.currentTarget as HTMLSelectElement;
-  renderComponent(target.value);
 });
 
 renderComponent(componentDefinitions[0].id);

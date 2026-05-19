@@ -36,6 +36,8 @@ export class DsCard extends LitElement {
       border: var(--ds-card-border, 1px solid var(--ds-color-border, #e4e4e7));
       background: var(--ds-card-bg, var(--ds-color-surface, #ffffff));
       box-shadow: var(--ds-card-shadow, 0 8px 24px rgba(17, 17, 17, 0.06));
+      color: var(--ds-color-text, #111111);
+      box-sizing: border-box;
     }
 
     :host([elevation="2"]) .card {
@@ -56,6 +58,7 @@ export class DsCard extends LitElement {
       font-size: 1.0625rem;
       font-weight: 700;
       letter-spacing: -0.02em;
+      line-height: 1.3;
     }
 
     .body {
@@ -65,6 +68,7 @@ export class DsCard extends LitElement {
 
     .footer {
       color: var(--ds-color-muted, #6b7280);
+      padding-top: 2px;
     }
 
     .header[hidden],

@@ -35,30 +35,33 @@ export class DsAlert extends LitElement {
       display: grid;
       gap: var(--ds-alert-gap, 6px);
       padding: var(--ds-alert-padding-y, 18px) var(--ds-alert-padding-x, 20px);
-      padding-left: calc(var(--ds-alert-padding-x, 20px) + var(--ds-alert-indicator-size, 10px) + 10px);
+      padding-left: calc(var(--ds-alert-padding-x, 20px) + var(--ds-alert-indicator-size, 10px) + 12px);
       border-radius: var(--ds-alert-radius, var(--ds-radius-lg, 20px));
       border: 1px solid var(--ds-alert-border-color, var(--ds-color-border, #e4e4e7));
       background: var(--ds-alert-bg, var(--ds-color-surface-raised, #fcfcfc));
       color: var(--ds-alert-text-color, var(--ds-color-text, #111111));
       box-shadow: var(--ds-alert-shadow, 0 1px 2px rgba(17, 17, 17, 0.04));
       overflow: hidden;
+      box-sizing: border-box;
     }
 
     .alert::before {
       content: '';
       position: absolute;
-      top: 20px;
-      left: 20px;
+      top: 21px;
+      left: var(--ds-alert-padding-x, 20px);
       width: var(--ds-alert-indicator-size, 10px);
       height: var(--ds-alert-indicator-size, 10px);
       border-radius: 999px;
       background: var(--ds-alert-info-accent, #111111);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-info-accent, #111111) 12%, transparent);
     }
 
     .title {
       font-size: 0.9375rem;
       font-weight: var(--ds-alert-title-weight, 700);
       letter-spacing: -0.01em;
+      line-height: 1.35;
     }
 
     .body {
@@ -78,6 +81,7 @@ export class DsAlert extends LitElement {
 
     :host([variant="info"]) .alert::before {
       background: var(--ds-alert-info-accent, #111111);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-info-accent, #111111) 12%, transparent);
     }
 
     :host([variant="success"]) .alert {
@@ -87,6 +91,7 @@ export class DsAlert extends LitElement {
 
     :host([variant="success"]) .alert::before {
       background: var(--ds-alert-success-accent, #2f2f33);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-success-accent, #2f2f33) 12%, transparent);
     }
 
     :host([variant="warning"]) .alert {
@@ -96,6 +101,7 @@ export class DsAlert extends LitElement {
 
     :host([variant="warning"]) .alert::before {
       background: var(--ds-alert-warning-accent, #52525b);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-warning-accent, #52525b) 14%, transparent);
     }
 
     :host([variant="danger"]) .alert {
@@ -105,6 +111,7 @@ export class DsAlert extends LitElement {
 
     :host([variant="danger"]) .alert::before {
       background: var(--ds-alert-danger-accent, #27272a);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-danger-accent, #27272a) 12%, transparent);
     }
   `;
 

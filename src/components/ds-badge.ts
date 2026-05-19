@@ -27,7 +27,7 @@ export class DsBadge extends LitElement {
       align-items: center;
       justify-content: center;
       gap: var(--ds-badge-gap, 6px);
-      min-height: 28px;
+      min-height: 24px;
       padding: var(--ds-badge-padding-y, 6px) var(--ds-badge-padding-x, 10px);
       border-radius: var(--ds-badge-radius, 999px);
       border: 1px solid var(--ds-badge-neutral-border, #e4e4e7);
@@ -37,6 +37,17 @@ export class DsBadge extends LitElement {
       font-weight: var(--ds-badge-font-weight, 700);
       letter-spacing: -0.01em;
       box-sizing: border-box;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: currentColor;
+      opacity: 0.72;
     }
 
     :host([variant="primary"]) .badge {

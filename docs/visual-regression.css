@@ -17,8 +17,9 @@ body {
 
 .visual-header h1 {
   margin: 0;
-  font-size: 2.5rem;
-  letter-spacing: -0.04em;
+  font-size: 2.7rem;
+  line-height: 1;
+  letter-spacing: -0.055em;
 }
 
 .visual-panel {
@@ -26,9 +27,10 @@ body {
   gap: 18px;
   padding: 24px;
   border-radius: 28px;
-  border: 1px solid var(--ds-color-border, #e4e4e7);
-  background: var(--ds-color-surface, #ffffff);
-  box-shadow: 0 12px 32px rgba(17, 17, 17, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: var(--ds-color-surface-overlay, rgba(255, 255, 255, 0.86));
+  box-shadow: var(--ds-shadow-sm, 0 10px 24px rgba(15, 23, 42, 0.08));
+  backdrop-filter: blur(18px);
 }
 
 .visual-panel-header {
@@ -41,8 +43,12 @@ body {
   margin: 0;
 }
 
+.visual-panel-header h2 {
+  letter-spacing: -0.04em;
+}
+
 .visual-panel-header p {
-  color: var(--ds-color-muted, #6b7280);
+  color: var(--ds-color-muted, #64748b);
   line-height: 1.5;
 }
 
@@ -51,8 +57,10 @@ body {
   gap: 16px;
   padding: 20px;
   border-radius: 22px;
-  border: 1px solid var(--ds-color-border, #e4e4e7);
-  background: linear-gradient(180deg, var(--ds-color-surface, #ffffff) 0%, var(--ds-color-surface-muted, #f7f7f8) 100%);
+  border: 1px solid var(--ds-color-border, #e2e8f0);
+  background:
+    radial-gradient(circle at top right, rgba(79, 70, 229, 0.12), transparent 18rem),
+    var(--ds-color-surface-muted, #f8fafc);
 }
 
 .visual-demo-grid {
