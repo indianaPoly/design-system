@@ -50,4 +50,27 @@ describe('DsInput', () => {
 
     expect(eventCount).toBe(1);
   });
+
+  it('renders prefix and suffix slots with a character counter', async () => {
+    document.body.innerHTML = '';
+    const element = new DsInput();
+    element.maxLength = 20;
+    element.value = 'search';
+    element.innerHTML = `
+      <span slot="prefix">@</span>
+      <button slot="suffix" type="button">확인</button>
+    `;
+    document.body.append(element);
+    await element.updateComplete;
+
+    const prefix = element.shadowRoot?.querySelector('[part="prefix"]');
+    const suffix = element.shadowRoot?.querySelector('[part="suffix"]');
+    const counter = element.shadowRoot?.querySelector('[part="counter"]');
+    const input = element.shadowRoot?.querySelector('input');
+
+    expect(prefix?.hasAttribute('hidden')).toBe(false);
+    expect(suffix?.hasAttribute('hidden')).toBe(false);
+    expect(counter?.textContent?.trim()).toBe('6/20');
+    expect(input?.getAttribute('aria-describedby')).toContain('counter');
+  });
 });

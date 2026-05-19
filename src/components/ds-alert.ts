@@ -1,5 +1,5 @@
 import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 
 export type AlertVariant = 'info' | 'success' | 'warning' | 'danger';
 
@@ -11,10 +11,14 @@ export class DsAlert extends LitElement {
   @property({ type: String })
   declare title: string;
 
+  @state()
+  declare private hasTitleSlot: boolean;
+
   constructor() {
     super();
     this.variant = 'info';
     this.title = '';
+    this.hasTitleSlot = false;
   }
 
   static styles = css`
@@ -63,6 +67,10 @@ export class DsAlert extends LitElement {
       font-size: 0.9375rem;
     }
 
+    .title[hidden] {
+      display: none;
+    }
+
     :host([variant="info"]) .alert {
       border-color: var(--ds-alert-info-border-color, #e4e4e7);
       background: var(--ds-alert-info-bg, #fafafa);
@@ -100,11 +108,18 @@ export class DsAlert extends LitElement {
     }
   `;
 
+  private handleTitleSlotChange(event: Event) {
+    const slot = event.target as HTMLSlotElement;
+    this.hasTitleSlot = slot.assignedNodes({ flatten: true }).length > 0;
+  }
+
   render() {
+    const shouldShowTitle = Boolean(this.title) || this.hasTitleSlot;
+
     return html`
       <section class="alert" part="alert" role="status">
-        <strong class="title" part="title">
-          <slot name="title">${this.title}</slot>
+        <strong class="title" part="title" ?hidden=${!shouldShowTitle}>
+          <slot name="title" @slotchange=${this.handleTitleSlotChange}>${this.title}</slot>
         </strong>
         <div class="body" part="body">
           <slot></slot>

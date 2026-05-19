@@ -1,14 +1,22 @@
 import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 
 @customElement('ds-card')
 export class DsCard extends LitElement {
   @property({ type: Number, reflect: true })
   declare elevation: number;
 
+  @state()
+  declare private hasHeader: boolean;
+
+  @state()
+  declare private hasFooter: boolean;
+
   constructor() {
     super();
     this.elevation = 1;
+    this.hasHeader = false;
+    this.hasFooter = false;
   }
 
   static styles = css`
@@ -59,6 +67,11 @@ export class DsCard extends LitElement {
       color: var(--ds-color-muted, #6b7280);
     }
 
+    .header[hidden],
+    .footer[hidden] {
+      display: none;
+    }
+
     slot[name='header']::slotted(*) {
       margin: 0;
     }
@@ -68,17 +81,29 @@ export class DsCard extends LitElement {
     }
   `;
 
+  private handleSlotChange(slotName: 'header' | 'footer', event: Event) {
+    const slot = event.target as HTMLSlotElement;
+    const hasContent = slot.assignedNodes({ flatten: true }).length > 0;
+
+    if (slotName === 'header') {
+      this.hasHeader = hasContent;
+      return;
+    }
+
+    this.hasFooter = hasContent;
+  }
+
   render() {
     return html`
       <article class="card" part="card">
-        <header class="header" part="header">
-          <slot name="header"></slot>
+        <header class="header" part="header" ?hidden=${!this.hasHeader}>
+          <slot name="header" @slotchange=${(event: Event) => this.handleSlotChange('header', event)}></slot>
         </header>
         <section class="body" part="body">
           <slot></slot>
         </section>
-        <footer class="footer" part="footer">
-          <slot name="footer"></slot>
+        <footer class="footer" part="footer" ?hidden=${!this.hasFooter}>
+          <slot name="footer" @slotchange=${(event: Event) => this.handleSlotChange('footer', event)}></slot>
         </footer>
       </article>
     `;

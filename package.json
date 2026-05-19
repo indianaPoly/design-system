@@ -26,18 +26,22 @@
     "test": "vitest run",
     "build": "vite build",
     "docs:dev": "vite --config vite.docs.config.ts -- --host: 0.0.0.0 --port 4173",
-    "docs:build": "vite build --config vite.docs.config.ts"
+    "docs:build": "vite build --config vite.docs.config.ts",
+    "docs:build:archive": "vite build --config vite.docs.archive.config.ts",
+    "test:visual": "playwright test",
+    "release:archive": "node ./scripts/create-local-archive.mjs"
   },
   "dependencies": {
     "lit": "^3.2.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@testing-library/dom": "^10.4.0",
     "@types/node": "^22.10.2",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
     "@webcomponents/custom-elements": "^1.6.0",
     "ajv": "^8.17.1",
-    "@typescript-eslint/parser": "^7.18.0",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^18.0.0",
