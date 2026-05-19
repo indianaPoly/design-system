@@ -45,12 +45,43 @@ import '@design-system/core';
 - 권장 패턴: `element.addEventListener('change', ...)`, `element.addEventListener('input', ...)`
 - `Shadow DOM` 밖에서도 잡히도록 `bubbles: true`, `composed: true`로 재전파됩니다.
 
-### 1-4. (주의) form submit은 자동이 아닙니다
+### 1-4. form submit / reset 연동
 
-Shadow DOM 내부의 `<input name="...">`는 기본 HTML form submit에 자동으로 포함되지 않습니다.
+입력형 컴포넌트(`ds-input`, `ds-textarea`, `ds-checkbox`, `ds-radio`, `ds-switch`)는 form 제출과 reset을 지원합니다.
 
-- 폼 제출이 필요하면 앱에서 값들을 수집해서 제출 로직을 구성하세요.
-- 장기적으로는 **Form-Associated Custom Elements**로 확장하는 접근이 필요합니다(현재 구현은 해당 기능을 사용하지 않습니다).
+- `name`이 있어야 `FormData`에 포함됩니다.
+- `disabled` 상태인 값은 제출에서 제외됩니다.
+- `ds-checkbox`, `ds-radio`, `ds-switch`는 `checked` 상태일 때만 제출됩니다.
+- `form.reset()`을 호출하면 초기 `value` / `checked` 상태로 돌아갑니다.
+- 최신 브라우저에서는 Form-Associated Custom Elements를 사용하고, 미지원 환경에서는 hidden input proxy로 보완합니다.
+
+```html
+<form id="signup-form">
+  <ds-input name="email" label="이메일" type="email" required></ds-input>
+  <ds-checkbox name="agree" value="yes" required>약관 동의</ds-checkbox>
+  <ds-button>가입</ds-button>
+</form>
+```
+
+```ts
+const form = document.querySelector('#signup-form') as HTMLFormElement | null;
+if (!form) throw new Error('form not found');
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const data = new FormData(form);
+  console.log(data.get('email'));
+  console.log(data.get('agree')); // checked이면 "yes", 아니면 null
+});
+```
+
+### 1-5. 값 제어의 기준
+
+- 초기 렌더링 값: HTML attribute로 충분합니다.
+- 사용자 입력 이후의 제어: DOM property를 기준으로 읽고 씁니다.
+- submit payload: `FormData(form)`으로 확인합니다.
+- 디버깅: `event.currentTarget`의 `value` / `checked`를 읽습니다.
 
 ---
 
@@ -180,8 +211,13 @@ ds-alert::part(alert) {
 
 **Props**
 - `label`, `helper`, `error`, `value`, `placeholder`, `name`, `autocomplete`, `min`, `max`, `step`
+- `maxLength`: 최대 글자 수
 - `type`: `"text" | "email" | "password" | "search" | "tel" | "url" | "number"`
 - `disabled`, `required`, `readonly`: boolean
+
+**Slots**
+- `slot="prefix"`: 입력 앞 장식
+- `slot="suffix"`: 입력 뒤 장식/액션
 
 **이벤트**
 - `input`: 값 입력 시
@@ -194,6 +230,13 @@ ds-alert::part(alert) {
   placeholder="name@example.com"
   helper="계정 복구에 사용됩니다."
 ></ds-input>
+```
+
+```html
+<ds-input label="아이디" maxLength="20">
+  <span slot="prefix">@</span>
+  <span slot="suffix">20자 이내</span>
+</ds-input>
 ```
 
 **JS에서 값 제어 + 이벤트 리스닝**
@@ -475,7 +518,253 @@ onMounted(() => {
 
 ---
 
-## 7) 디버깅 체크리스트
+## 7) Worst case / 잘못된 사용 케이스
+
+아래 케이스들은 “일단 화면에 보이지만, 실제 서비스에서 깨지기 쉬운” 패턴입니다.
+
+### 7-1. 컴포넌트 등록 import를 화면마다 중복/누락
+
+**Bad**
+
+```ts
+// 어떤 페이지에는 있고, 어떤 페이지에는 없음
+import '@design-system/core';
+```
+
+**Why bad**
+- 등록 import가 누락된 화면에서는 `<ds-*>`가 unknown element처럼 동작합니다.
+- 라우트 단위 lazy loading에서 특정 화면만 깨질 수 있습니다.
+
+**Good**
+
+```ts
+// 앱 엔트리에서 1회
+import '@design-system/core';
+import '@design-system/core/styles/tokens.css';
+```
+
+### 7-2. `name` 없이 form submit이 되길 기대
+
+**Bad**
+
+```html
+<form id="form">
+  <ds-input label="이메일" value="hello@example.com"></ds-input>
+  <ds-checkbox checked>동의</ds-checkbox>
+</form>
+```
+
+```ts
+const data = new FormData(document.querySelector('#form') as HTMLFormElement);
+console.log(data.get('email')); // null
+```
+
+**Good**
+
+```html
+<form id="form">
+  <ds-input name="email" label="이메일" value="hello@example.com"></ds-input>
+  <ds-checkbox name="agree" value="yes" checked>동의</ds-checkbox>
+</form>
+```
+
+### 7-3. checkbox/radio/switch의 unchecked 값을 제출된다고 가정
+
+**Bad**
+
+```html
+<ds-checkbox name="marketing" value="yes">마케팅 수신</ds-checkbox>
+```
+
+```ts
+const data = new FormData(form);
+Boolean(data.get('marketing')); // unchecked면 false가 아니라 null
+```
+
+**Good**
+
+```ts
+const marketing = data.get('marketing') === 'yes';
+```
+
+### 7-4. React에서 `onChange`만 믿기
+
+**Bad**
+
+```tsx
+export function BadField() {
+  return (
+    <ds-input
+      label="이메일"
+      onChange={(event) => {
+        console.log(event);
+      }}
+    />
+  );
+}
+```
+
+**Why bad**
+- Custom Element 이벤트는 React synthetic event와 기대대로 연결되지 않을 수 있습니다.
+- 특히 `input`, `change` 이벤트는 `ref + addEventListener`가 가장 안전합니다.
+
+**Good**
+
+```tsx
+import { useEffect, useRef } from 'react';
+
+export function GoodField() {
+  const ref = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const el = ref.current as (HTMLElement & { value: string }) | null;
+    if (!el) return;
+
+    const onInput = () => {
+      console.log(el.value);
+    };
+
+    el.addEventListener('input', onInput);
+    return () => el.removeEventListener('input', onInput);
+  }, []);
+
+  return <ds-input ref={ref} label="이메일" />;
+}
+```
+
+### 7-5. `event.target`을 내부 native input이라고 가정
+
+**Bad**
+
+```ts
+input.addEventListener('input', (event) => {
+  const target = event.target as HTMLInputElement;
+  console.log(target.value);
+});
+```
+
+**Why bad**
+- Shadow DOM 이벤트 재전파 과정에서 `target`은 기대와 다를 수 있습니다.
+
+**Good**
+
+```ts
+input.addEventListener('input', (event) => {
+  const target = event.currentTarget as HTMLElement & { value: string };
+  console.log(target.value);
+});
+```
+
+### 7-6. boolean attribute에 `"false"` 문자열 넣기
+
+**Bad**
+
+```html
+<!-- HTML boolean attribute는 값 문자열이 아니라 "존재 여부"가 true입니다. -->
+<ds-checkbox checked="false">동의하지 않음</ds-checkbox>
+```
+
+**Good**
+
+```html
+<!-- false가 기본값이면 attribute를 생략합니다. -->
+<ds-checkbox>동의하지 않음</ds-checkbox>
+```
+
+```ts
+const checkbox = document.querySelector('ds-checkbox') as (HTMLElement & { checked: boolean }) | null;
+if (checkbox) checkbox.checked = false;
+```
+
+또한 사용자 입력 이후 최신 값은 attribute가 아니라 property에서 읽는 것을 기준으로 삼습니다.
+
+```ts
+const value = input.value; // Good
+// const value = input.getAttribute('value'); // Bad: 사용자 입력 후 최신 값과 다를 수 있음
+```
+
+### 7-7. CSS class로 Shadow DOM 내부를 직접 찌르기
+
+**Bad**
+
+```css
+ds-alert .title {
+  font-weight: 900;
+}
+```
+
+**Good**
+
+```css
+ds-alert::part(title) {
+  font-weight: 900;
+}
+```
+
+### 7-8. 테마 attribute를 컴포넌트마다 붙이기
+
+**Bad**
+
+```html
+<ds-card data-ds-theme="dark">...</ds-card>
+<ds-alert data-ds-theme="dark">...</ds-alert>
+```
+
+**Good**
+
+```html
+<html data-ds-theme="dark">
+```
+
+### 7-9. reset 직전의 동적 값을 “새 기본값”으로 기대
+
+**Bad**
+
+```ts
+input.value = 'changed@example.com';
+form.reset(); // changed@example.com이 아니라 초기값으로 복귀
+```
+
+**Good**
+
+```ts
+// reset은 초기 렌더링/연결 시점의 기본값으로 돌리는 기능으로 사용합니다.
+// 서버에서 새 초기값을 받은 경우에는 reset 대신 property를 명시적으로 다시 세팅합니다.
+input.value = 'server-default@example.com';
+```
+
+### 7-10. visual regression baseline을 운영 스크린샷처럼 수정
+
+**Bad**
+
+```bash
+# 의도 확인 없이 baseline을 업데이트
+bun run test:visual -- --update-snapshots
+```
+
+**Good**
+
+```bash
+bun run test:visual
+# 실패 diff를 확인한 뒤, 의도한 UI 변경일 때만 baseline 갱신
+```
+
+---
+
+## 8) 실사용 전 최종 체크리스트
+
+- 앱 엔트리에서 `@design-system/core`와 tokens CSS를 각각 1회 import했는가?
+- form 제출이 필요한 컴포넌트에 `name`을 부여했는가?
+- `checked` 계열 값은 unchecked일 때 `FormData`에 없다는 점을 처리했는가?
+- React에서는 `ref + addEventListener`로 이벤트를 연결했는가?
+- 런타임 값 변경은 attribute가 아니라 property로 처리했는가?
+- 테마는 루트 요소의 `data-ds-theme` / `data-ds-platform`으로 제어했는가?
+- 내부 스타일 커스터마이징은 CSS variable 또는 `::part(...)`만 사용했는가?
+- UI 변경 후 `bun run test`, `bun run docs:build`, 필요 시 `bun run test:visual`을 돌렸는가?
+
+---
+
+## 9) 디버깅 체크리스트
 
 - 컴포넌트가 안 보인다
   - `import '@design-system/core'`가 실행되었는지 확인
@@ -486,3 +775,7 @@ onMounted(() => {
 - 이벤트가 안 잡힌다
   - `onChange` 같은 프레임워크 전용 핸들러 대신 `addEventListener`로 우회
   - `event.target` 대신 `event.currentTarget` 사용
+- form 값이 제출되지 않는다
+  - `name`이 있는지 확인
+  - `disabled`가 아닌지 확인
+  - checkbox/radio/switch가 `checked` 상태인지 확인
