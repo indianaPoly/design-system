@@ -1,0 +1,1764 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`component snapshots > matches button variants and sizes 1`] = `
+{
+  "ghost": "<!----><button part="button" type="submit" disabled="">
+<slot></slot>
+</button><style>
+:host {
+display: inline-flex;
+font-family: var(--ds-button-font-family, var(--ds-font-family, "Inter", system-ui, sans-serif));
+}
+button {
+appearance: none;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: var(--ds-space-2xs, 4px);
+min-height: var(--ds-button-md-min-height, 48px);
+padding: var(--ds-button-md-padding-y, 13px) var(--ds-button-md-padding-x, 18px);
+border-radius: var(--ds-button-radius, var(--ds-radius-md, 16px));
+border: 1px solid var(--ds-button-primary-border, transparent);
+background: var(--ds-button-primary-bg, var(--ds-color-primary, #111111));
+color: var(--ds-button-primary-fg, var(--ds-color-on-primary, #ffffff));
+box-shadow: var(--ds-button-shadow, 0 10px 24px rgba(17, 17, 17, 0.1));
+line-height: 1;
+font-size: var(--ds-button-md-font-size, 0.9375rem);
+font-weight: var(--ds-button-font-weight, 600);
+letter-spacing: var(--ds-button-letter-spacing, -0.01em);
+cursor: pointer;
+box-sizing: border-box;
+user-select: none;
+transition: var(
+--ds-button-transition,
+background 0.18s ease,
+border-color 0.18s ease,
+color 0.18s ease,
+box-shadow 0.18s ease,
+transform 0.18s ease
+);
+-webkit-tap-highlight-color: transparent;
+}
+button:hover:not(:disabled) {
+background: var(--ds-button-primary-bg-hover, var(--ds-button-primary-bg, var(--ds-color-primary, #111111)));
+transform: translateY(-1px);
+box-shadow: var(--ds-shadow-md, var(--ds-button-shadow, 0 10px 24px rgba(17, 17, 17, 0.1)));
+}
+button:active:not(:disabled) {
+background: var(
+--ds-button-primary-bg-active,
+var(--ds-button-primary-bg, var(--ds-color-primary, #111111))
+);
+transform: translateY(1px);
+box-shadow: var(--ds-shadow-xs, 0 1px 2px rgba(17, 17, 17, 0.04));
+}
+button:focus-visible {
+outline: none;
+box-shadow: var(--ds-button-focus-shadow, 0 0 0 4px var(--ds-button-focus-ring, rgba(17, 17, 17, 0.1)));
+}
+:host([variant="secondary"]) button {
+background: var(--ds-button-secondary-bg, var(--ds-color-secondary, #f4f4f5));
+color: var(--ds-button-secondary-fg, var(--ds-color-on-secondary, #18181b));
+border-color: var(--ds-button-secondary-border, var(--ds-color-border, #e4e4e7));
+box-shadow: none;
+}
+:host([variant="secondary"]) button:hover:not(:disabled) {
+background: var(--ds-button-secondary-bg-hover, var(--ds-button-secondary-bg, var(--ds-color-secondary, #f4f4f5)));
+box-shadow: var(--ds-shadow-xs, 0 1px 2px rgba(17, 17, 17, 0.04));
+}
+:host([variant="secondary"]) button:active:not(:disabled) {
+background: var(
+--ds-button-secondary-bg-active,
+var(--ds-button-secondary-bg, var(--ds-color-secondary, #f4f4f5))
+);
+}
+:host([variant="ghost"]) button {
+background: var(--ds-button-ghost-bg, transparent);
+color: var(--ds-button-ghost-fg, #52525b);
+border-color: var(--ds-button-ghost-border, transparent);
+box-shadow: none;
+}
+:host([variant="ghost"]) button:hover:not(:disabled) {
+background: var(--ds-button-ghost-bg-hover, #f4f4f5);
+box-shadow: none;
+}
+:host([variant="ghost"]) button:active:not(:disabled) {
+background: var(--ds-button-ghost-bg-active, #eaeaec);
+}
+:host([size="sm"]) button {
+min-height: var(--ds-button-sm-min-height, 40px);
+padding: var(--ds-button-sm-padding-y, 10px) var(--ds-button-sm-padding-x, 14px);
+font-size: var(--ds-button-sm-font-size, 0.875rem);
+}
+:host([size="lg"]) button {
+min-height: var(--ds-button-lg-min-height, 56px);
+padding: var(--ds-button-lg-padding-y, 16px) var(--ds-button-lg-padding-x, 22px);
+font-size: var(--ds-button-lg-font-size, 1rem);
+}
+:host([disabled]) button {
+opacity: var(--ds-button-disabled-opacity, 0.48);
+cursor: not-allowed;
+box-shadow: none;
+transform: none;
+}
+</style>",
+  "primary": "<!----><button part="button" type="submit">
+<slot></slot>
+</button><style>
+:host {
+display: inline-flex;
+font-family: var(--ds-button-font-family, var(--ds-font-family, "Inter", system-ui, sans-serif));
+}
+button {
+appearance: none;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: var(--ds-space-2xs, 4px);
+min-height: var(--ds-button-md-min-height, 48px);
+padding: var(--ds-button-md-padding-y, 13px) var(--ds-button-md-padding-x, 18px);
+border-radius: var(--ds-button-radius, var(--ds-radius-md, 16px));
+border: 1px solid var(--ds-button-primary-border, transparent);
+background: var(--ds-button-primary-bg, var(--ds-color-primary, #111111));
+color: var(--ds-button-primary-fg, var(--ds-color-on-primary, #ffffff));
+box-shadow: var(--ds-button-shadow, 0 10px 24px rgba(17, 17, 17, 0.1));
+line-height: 1;
+font-size: var(--ds-button-md-font-size, 0.9375rem);
+font-weight: var(--ds-button-font-weight, 600);
+letter-spacing: var(--ds-button-letter-spacing, -0.01em);
+cursor: pointer;
+box-sizing: border-box;
+user-select: none;
+transition: var(
+--ds-button-transition,
+background 0.18s ease,
+border-color 0.18s ease,
+color 0.18s ease,
+box-shadow 0.18s ease,
+transform 0.18s ease
+);
+-webkit-tap-highlight-color: transparent;
+}
+button:hover:not(:disabled) {
+background: var(--ds-button-primary-bg-hover, var(--ds-button-primary-bg, var(--ds-color-primary, #111111)));
+transform: translateY(-1px);
+box-shadow: var(--ds-shadow-md, var(--ds-button-shadow, 0 10px 24px rgba(17, 17, 17, 0.1)));
+}
+button:active:not(:disabled) {
+background: var(
+--ds-button-primary-bg-active,
+var(--ds-button-primary-bg, var(--ds-color-primary, #111111))
+);
+transform: translateY(1px);
+box-shadow: var(--ds-shadow-xs, 0 1px 2px rgba(17, 17, 17, 0.04));
+}
+button:focus-visible {
+outline: none;
+box-shadow: var(--ds-button-focus-shadow, 0 0 0 4px var(--ds-button-focus-ring, rgba(17, 17, 17, 0.1)));
+}
+:host([variant="secondary"]) button {
+background: var(--ds-button-secondary-bg, var(--ds-color-secondary, #f4f4f5));
+color: var(--ds-button-secondary-fg, var(--ds-color-on-secondary, #18181b));
+border-color: var(--ds-button-secondary-border, var(--ds-color-border, #e4e4e7));
+box-shadow: none;
+}
+:host([variant="secondary"]) button:hover:not(:disabled) {
+background: var(--ds-button-secondary-bg-hover, var(--ds-button-secondary-bg, var(--ds-color-secondary, #f4f4f5)));
+box-shadow: var(--ds-shadow-xs, 0 1px 2px rgba(17, 17, 17, 0.04));
+}
+:host([variant="secondary"]) button:active:not(:disabled) {
+background: var(
+--ds-button-secondary-bg-active,
+var(--ds-button-secondary-bg, var(--ds-color-secondary, #f4f4f5))
+);
+}
+:host([variant="ghost"]) button {
+background: var(--ds-button-ghost-bg, transparent);
+color: var(--ds-button-ghost-fg, #52525b);
+border-color: var(--ds-button-ghost-border, transparent);
+box-shadow: none;
+}
+:host([variant="ghost"]) button:hover:not(:disabled) {
+background: var(--ds-button-ghost-bg-hover, #f4f4f5);
+box-shadow: none;
+}
+:host([variant="ghost"]) button:active:not(:disabled) {
+background: var(--ds-button-ghost-bg-active, #eaeaec);
+}
+:host([size="sm"]) button {
+min-height: var(--ds-button-sm-min-height, 40px);
+padding: var(--ds-button-sm-padding-y, 10px) var(--ds-button-sm-padding-x, 14px);
+font-size: var(--ds-button-sm-font-size, 0.875rem);
+}
+:host([size="lg"]) button {
+min-height: var(--ds-button-lg-min-height, 56px);
+padding: var(--ds-button-lg-padding-y, 16px) var(--ds-button-lg-padding-x, 22px);
+font-size: var(--ds-button-lg-font-size, 1rem);
+}
+:host([disabled]) button {
+opacity: var(--ds-button-disabled-opacity, 0.48);
+cursor: not-allowed;
+box-shadow: none;
+transform: none;
+}
+</style>",
+  "secondary": "<!----><button part="button" type="submit">
+<slot></slot>
+</button><style>
+:host {
+display: inline-flex;
+font-family: var(--ds-button-font-family, var(--ds-font-family, "Inter", system-ui, sans-serif));
+}
+button {
+appearance: none;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: var(--ds-space-2xs, 4px);
+min-height: var(--ds-button-md-min-height, 48px);
+padding: var(--ds-button-md-padding-y, 13px) var(--ds-button-md-padding-x, 18px);
+border-radius: var(--ds-button-radius, var(--ds-radius-md, 16px));
+border: 1px solid var(--ds-button-primary-border, transparent);
+background: var(--ds-button-primary-bg, var(--ds-color-primary, #111111));
+color: var(--ds-button-primary-fg, var(--ds-color-on-primary, #ffffff));
+box-shadow: var(--ds-button-shadow, 0 10px 24px rgba(17, 17, 17, 0.1));
+line-height: 1;
+font-size: var(--ds-button-md-font-size, 0.9375rem);
+font-weight: var(--ds-button-font-weight, 600);
+letter-spacing: var(--ds-button-letter-spacing, -0.01em);
+cursor: pointer;
+box-sizing: border-box;
+user-select: none;
+transition: var(
+--ds-button-transition,
+background 0.18s ease,
+border-color 0.18s ease,
+color 0.18s ease,
+box-shadow 0.18s ease,
+transform 0.18s ease
+);
+-webkit-tap-highlight-color: transparent;
+}
+button:hover:not(:disabled) {
+background: var(--ds-button-primary-bg-hover, var(--ds-button-primary-bg, var(--ds-color-primary, #111111)));
+transform: translateY(-1px);
+box-shadow: var(--ds-shadow-md, var(--ds-button-shadow, 0 10px 24px rgba(17, 17, 17, 0.1)));
+}
+button:active:not(:disabled) {
+background: var(
+--ds-button-primary-bg-active,
+var(--ds-button-primary-bg, var(--ds-color-primary, #111111))
+);
+transform: translateY(1px);
+box-shadow: var(--ds-shadow-xs, 0 1px 2px rgba(17, 17, 17, 0.04));
+}
+button:focus-visible {
+outline: none;
+box-shadow: var(--ds-button-focus-shadow, 0 0 0 4px var(--ds-button-focus-ring, rgba(17, 17, 17, 0.1)));
+}
+:host([variant="secondary"]) button {
+background: var(--ds-button-secondary-bg, var(--ds-color-secondary, #f4f4f5));
+color: var(--ds-button-secondary-fg, var(--ds-color-on-secondary, #18181b));
+border-color: var(--ds-button-secondary-border, var(--ds-color-border, #e4e4e7));
+box-shadow: none;
+}
+:host([variant="secondary"]) button:hover:not(:disabled) {
+background: var(--ds-button-secondary-bg-hover, var(--ds-button-secondary-bg, var(--ds-color-secondary, #f4f4f5)));
+box-shadow: var(--ds-shadow-xs, 0 1px 2px rgba(17, 17, 17, 0.04));
+}
+:host([variant="secondary"]) button:active:not(:disabled) {
+background: var(
+--ds-button-secondary-bg-active,
+var(--ds-button-secondary-bg, var(--ds-color-secondary, #f4f4f5))
+);
+}
+:host([variant="ghost"]) button {
+background: var(--ds-button-ghost-bg, transparent);
+color: var(--ds-button-ghost-fg, #52525b);
+border-color: var(--ds-button-ghost-border, transparent);
+box-shadow: none;
+}
+:host([variant="ghost"]) button:hover:not(:disabled) {
+background: var(--ds-button-ghost-bg-hover, #f4f4f5);
+box-shadow: none;
+}
+:host([variant="ghost"]) button:active:not(:disabled) {
+background: var(--ds-button-ghost-bg-active, #eaeaec);
+}
+:host([size="sm"]) button {
+min-height: var(--ds-button-sm-min-height, 40px);
+padding: var(--ds-button-sm-padding-y, 10px) var(--ds-button-sm-padding-x, 14px);
+font-size: var(--ds-button-sm-font-size, 0.875rem);
+}
+:host([size="lg"]) button {
+min-height: var(--ds-button-lg-min-height, 56px);
+padding: var(--ds-button-lg-padding-y, 16px) var(--ds-button-lg-padding-x, 22px);
+font-size: var(--ds-button-lg-font-size, 1rem);
+}
+:host([disabled]) button {
+opacity: var(--ds-button-disabled-opacity, 0.48);
+cursor: not-allowed;
+box-shadow: none;
+transform: none;
+}
+</style>",
+}
+`;
+
+exports[`component snapshots > matches card with all slots 1`] = `
+"<!---->
+<article class="card" part="card">
+<header class="header" part="header" hidden="">
+<slot name="header"></slot>
+</header>
+<section class="body" part="body">
+<slot></slot>
+</section>
+<footer class="footer" part="footer" hidden="">
+<slot name="footer"></slot>
+</footer>
+</article>
+<style>
+:host {
+display: block;
+font-family: var(
+--ds-card-font-family,
+var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+);
+}
+.card {
+display: grid;
+gap: var(--ds-card-gap, 16px);
+padding: var(--ds-card-padding, 24px);
+border-radius: var(--ds-card-radius, var(--ds-radius-xl, 24px));
+border: var(--ds-card-border, 1px solid var(--ds-color-border, #e4e4e7));
+background: var(--ds-card-bg, var(--ds-color-surface, #ffffff));
+box-shadow: var(--ds-card-shadow, 0 8px 24px rgba(17, 17, 17, 0.06));
+color: var(--ds-color-text, #111111);
+box-sizing: border-box;
+}
+:host([elevation="2"]) .card {
+box-shadow: var(--ds-card-shadow-elevation-2, 0 18px 40px rgba(17, 17, 17, 0.08));
+}
+:host([elevation="0"]) .card {
+box-shadow: var(--ds-card-shadow-elevation-0, none);
+}
+.header,
+.footer {
+display: block;
+}
+.header {
+color: var(--ds-color-text, #111111);
+font-size: 1.0625rem;
+font-weight: 700;
+letter-spacing: -0.02em;
+line-height: 1.3;
+}
+.body {
+color: var(--ds-color-text, #111111);
+line-height: 1.6;
+}
+.footer {
+color: var(--ds-color-muted, #6b7280);
+padding-top: 2px;
+}
+.header[hidden],
+.footer[hidden] {
+display: none;
+}
+slot[name='header']::slotted(*) {
+margin: 0;
+}
+slot[name='footer']::slotted(*) {
+margin: 0;
+}
+</style>"
+`;
+
+exports[`component snapshots > matches input and textarea states 1`] = `
+{
+  "input": "<!---->
+<label part="field" class="field">
+<span class="label" part="label">Email<span class="required">*</span></span>
+<div class="control" part="control">
+<span class="adornment adornment-prefix" part="prefix">
+<slot name="prefix"></slot>
+</span>
+<input part="input" id="ds-input-<id>" type="text" placeholder="name@example.com" name="" autocomplete="" maxlength="50" required="" aria-invalid="false" aria-describedby="ds-input-<id>-helper ds-input-<id>-counter">
+<span class="adornment adornment-suffix" part="suffix">
+<slot name="suffix"></slot>
+</span>
+</div>
+<div class="meta" part="meta">
+<span part="message" id="ds-input-<id>-helper" class="message helper">We will send an invite link.</span>
+<span class="counter" part="counter" id="ds-input-<id>-counter">
+0/50
+</span>
+</div>
+</label>
+<style>
+:host {
+display: block;
+font-family: var(
+--ds-input-font-family,
+var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+);
+color: var(--ds-color-text, #111111);
+}
+.field {
+display: grid;
+gap: 10px;
+}
+.label {
+display: inline-flex;
+align-items: center;
+gap: 4px;
+font-size: 0.9375rem;
+font-weight: 600;
+letter-spacing: -0.01em;
+}
+.required {
+color: var(--ds-color-danger, #27272a);
+}
+.control {
+display: flex;
+align-items: center;
+gap: 4px;
+min-height: var(--ds-input-min-height, 52px);
+padding-inline: 4px;
+border: var(--ds-input-border, 1px solid var(--ds-color-input-border, #e4e4e7));
+border-radius: var(--ds-input-radius, var(--ds-radius-md, 16px));
+background: var(--ds-input-bg, #ffffff);
+box-shadow: var(--ds-input-shadow, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+box-sizing: border-box;
+}
+.field:focus-within .control {
+border: var(--ds-input-border-focus, 1px solid var(--ds-color-primary, #111111));
+box-shadow: var(--ds-input-focus-shadow, 0 0 0 4px rgba(17, 17, 17, 0.1));
+}
+.field.field-error .control {
+border: var(--ds-input-border-error, 1px solid var(--ds-color-danger, #27272a));
+box-shadow: var(--ds-input-error-shadow, 0 0 0 4px rgba(39, 39, 42, 0.08));
+}
+input {
+appearance: none;
+width: 100%;
+flex: 1;
+min-width: 0;
+border: 0;
+padding: var(--ds-input-padding-y, 14px) 12px;
+background: transparent;
+color: var(--ds-input-text-color, var(--ds-color-text, #111111));
+font: inherit;
+line-height: 1.4;
+}
+input:focus {
+outline: none;
+}
+input::placeholder {
+color: var(--ds-input-placeholder-color, var(--ds-color-input-placeholder, #9ca3af));
+}
+:host([disabled]) .control,
+:host([data-form-disabled]) .control {
+background: var(--ds-input-disabled-bg, #f3f4f6);
+box-shadow: none;
+}
+:host([disabled]) input,
+:host([data-form-disabled]) input {
+opacity: var(--ds-input-disabled-opacity, 0.56);
+cursor: not-allowed;
+}
+:host([readonly]) .control {
+background: var(--ds-input-readonly-bg, #fafafa);
+}
+.adornment {
+display: inline-flex;
+align-items: center;
+color: var(--ds-color-muted, #6b7280);
+font-size: 0.875rem;
+line-height: 1;
+white-space: nowrap;
+flex-shrink: 0;
+}
+.adornment-prefix {
+padding-left: 12px;
+}
+.adornment-suffix {
+padding-right: 12px;
+}
+.adornment[hidden] {
+display: none;
+}
+.meta {
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+gap: 12px;
+}
+.message {
+flex: 1;
+min-width: 0;
+font-size: 0.8125rem;
+color: var(--ds-color-muted, #6b7280);
+line-height: 1.4;
+}
+.message.error {
+color: var(--ds-color-danger, #27272a);
+font-weight: 600;
+}
+.counter {
+font-size: 0.75rem;
+color: var(--ds-color-muted, #6b7280);
+line-height: 1.4;
+font-variant-numeric: tabular-nums;
+white-space: nowrap;
+flex-shrink: 0;
+}
+.meta-spacer {
+flex: 1;
+min-width: 0;
+}
+.counter[hidden],
+.meta[hidden] {
+display: none;
+}
+</style>",
+  "inputError": "<!---->
+<label part="field" class="field field-error">
+<span class="label" part="label">Phone</span>
+<div class="control" part="control">
+<span class="adornment adornment-prefix" part="prefix" hidden="">
+<slot name="prefix"></slot>
+</span>
+<input part="input" id="ds-input-<id>" type="text" placeholder="" name="" autocomplete="" aria-invalid="true" aria-describedby="ds-input-<id>-error">
+<span class="adornment adornment-suffix" part="suffix" hidden="">
+<slot name="suffix"></slot>
+</span>
+</div>
+<div class="meta" part="meta">
+<span part="message" id="ds-input-<id>-error" class="message error">Digits only</span>
+</div>
+</label>
+<style>
+:host {
+display: block;
+font-family: var(
+--ds-input-font-family,
+var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+);
+color: var(--ds-color-text, #111111);
+}
+.field {
+display: grid;
+gap: 10px;
+}
+.label {
+display: inline-flex;
+align-items: center;
+gap: 4px;
+font-size: 0.9375rem;
+font-weight: 600;
+letter-spacing: -0.01em;
+}
+.required {
+color: var(--ds-color-danger, #27272a);
+}
+.control {
+display: flex;
+align-items: center;
+gap: 4px;
+min-height: var(--ds-input-min-height, 52px);
+padding-inline: 4px;
+border: var(--ds-input-border, 1px solid var(--ds-color-input-border, #e4e4e7));
+border-radius: var(--ds-input-radius, var(--ds-radius-md, 16px));
+background: var(--ds-input-bg, #ffffff);
+box-shadow: var(--ds-input-shadow, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+box-sizing: border-box;
+}
+.field:focus-within .control {
+border: var(--ds-input-border-focus, 1px solid var(--ds-color-primary, #111111));
+box-shadow: var(--ds-input-focus-shadow, 0 0 0 4px rgba(17, 17, 17, 0.1));
+}
+.field.field-error .control {
+border: var(--ds-input-border-error, 1px solid var(--ds-color-danger, #27272a));
+box-shadow: var(--ds-input-error-shadow, 0 0 0 4px rgba(39, 39, 42, 0.08));
+}
+input {
+appearance: none;
+width: 100%;
+flex: 1;
+min-width: 0;
+border: 0;
+padding: var(--ds-input-padding-y, 14px) 12px;
+background: transparent;
+color: var(--ds-input-text-color, var(--ds-color-text, #111111));
+font: inherit;
+line-height: 1.4;
+}
+input:focus {
+outline: none;
+}
+input::placeholder {
+color: var(--ds-input-placeholder-color, var(--ds-color-input-placeholder, #9ca3af));
+}
+:host([disabled]) .control,
+:host([data-form-disabled]) .control {
+background: var(--ds-input-disabled-bg, #f3f4f6);
+box-shadow: none;
+}
+:host([disabled]) input,
+:host([data-form-disabled]) input {
+opacity: var(--ds-input-disabled-opacity, 0.56);
+cursor: not-allowed;
+}
+:host([readonly]) .control {
+background: var(--ds-input-readonly-bg, #fafafa);
+}
+.adornment {
+display: inline-flex;
+align-items: center;
+color: var(--ds-color-muted, #6b7280);
+font-size: 0.875rem;
+line-height: 1;
+white-space: nowrap;
+flex-shrink: 0;
+}
+.adornment-prefix {
+padding-left: 12px;
+}
+.adornment-suffix {
+padding-right: 12px;
+}
+.adornment[hidden] {
+display: none;
+}
+.meta {
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+gap: 12px;
+}
+.message {
+flex: 1;
+min-width: 0;
+font-size: 0.8125rem;
+color: var(--ds-color-muted, #6b7280);
+line-height: 1.4;
+}
+.message.error {
+color: var(--ds-color-danger, #27272a);
+font-weight: 600;
+}
+.counter {
+font-size: 0.75rem;
+color: var(--ds-color-muted, #6b7280);
+line-height: 1.4;
+font-variant-numeric: tabular-nums;
+white-space: nowrap;
+flex-shrink: 0;
+}
+.meta-spacer {
+flex: 1;
+min-width: 0;
+}
+.counter[hidden],
+.meta[hidden] {
+display: none;
+}
+</style>",
+  "textarea": "<!---->
+<label part="field" class="field">
+<span class="label" part="label">Memo</span>
+<div class="control" part="control">
+<textarea part="textarea" id="ds-textarea-<id>" placeholder="Write a short note" name="" rows="4" maxlength="120" aria-invalid="false" aria-describedby="ds-textarea-<id>-helper ds-textarea-<id>-counter ds-textarea-<id>-footer"></textarea>
+</div>
+<div class="meta" part="meta">
+<span part="message" id="ds-textarea-<id>-helper" class="message helper">Keep it concise.</span>
+<span class="counter" part="counter" id="ds-textarea-<id>-counter">
+0/120
+</span>
+</div>
+<div class="footer" part="footer">
+<slot name="footer" id="ds-textarea-<id>-footer"></slot>
+</div>
+</label>
+<style>
+:host {
+display: block;
+font-family: var(
+--ds-textarea-font-family,
+var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+);
+color: var(--ds-color-text, #111111);
+}
+.field {
+display: grid;
+gap: 10px;
+}
+.label {
+display: inline-flex;
+align-items: center;
+gap: 4px;
+font-size: 0.9375rem;
+font-weight: 600;
+letter-spacing: -0.01em;
+}
+.required {
+color: var(--ds-color-danger, #27272a);
+}
+.control {
+display: flex;
+border: var(--ds-textarea-border, 1px solid var(--ds-color-input-border, #e4e4e7));
+border-radius: var(--ds-textarea-radius, var(--ds-radius-md, 16px));
+background: var(--ds-textarea-bg, #ffffff);
+box-shadow: var(--ds-textarea-shadow, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+box-sizing: border-box;
+}
+.field:focus-within .control {
+border: var(--ds-textarea-border-focus, 1px solid var(--ds-color-primary, #111111));
+box-shadow: var(--ds-textarea-focus-shadow, 0 0 0 4px rgba(17, 17, 17, 0.1));
+}
+.field.field-error .control {
+border: var(--ds-textarea-border-error, 1px solid var(--ds-color-danger, #27272a));
+box-shadow: var(--ds-textarea-error-shadow, 0 0 0 4px rgba(39, 39, 42, 0.08));
+}
+textarea {
+width: 100%;
+min-width: 0;
+border: 0;
+padding: var(--ds-textarea-padding-y, 14px) var(--ds-textarea-padding-x, 16px);
+border-radius: inherit;
+background: transparent;
+color: var(--ds-textarea-text-color, var(--ds-color-text, #111111));
+font: inherit;
+line-height: 1.6;
+resize: vertical;
+box-sizing: border-box;
+}
+textarea:focus {
+outline: none;
+}
+textarea::placeholder {
+color: var(--ds-textarea-placeholder-color, var(--ds-color-input-placeholder, #9ca3af));
+}
+:host([disabled]) .control,
+:host([data-form-disabled]) .control {
+background: var(--ds-textarea-disabled-bg, #f3f4f6);
+box-shadow: none;
+}
+:host([disabled]) textarea,
+:host([data-form-disabled]) textarea {
+opacity: var(--ds-textarea-disabled-opacity, 0.56);
+cursor: not-allowed;
+}
+:host([readonly]) .control {
+background: var(--ds-textarea-readonly-bg, #fafafa);
+}
+.meta {
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+gap: 12px;
+}
+.message {
+flex: 1;
+min-width: 0;
+font-size: 0.8125rem;
+color: var(--ds-color-muted, #6b7280);
+line-height: 1.4;
+}
+.message.error {
+color: var(--ds-color-danger, #27272a);
+font-weight: 600;
+}
+.counter {
+font-size: 0.75rem;
+color: var(--ds-color-muted, #6b7280);
+line-height: 1.4;
+font-variant-numeric: tabular-nums;
+white-space: nowrap;
+flex-shrink: 0;
+}
+.meta-spacer {
+flex: 1;
+min-width: 0;
+}
+.footer {
+display: flex;
+justify-content: flex-end;
+color: var(--ds-color-muted, #6b7280);
+font-size: 0.8125rem;
+line-height: 1.4;
+}
+.footer[hidden],
+.counter[hidden],
+.meta[hidden] {
+display: none;
+}
+</style>",
+  "textareaError": "<!---->
+<label part="field" class="field field-error">
+<span class="label" part="label">Reason</span>
+<div class="control" part="control">
+<textarea part="textarea" id="ds-textarea-<id>" placeholder="" name="" rows="4" aria-invalid="true" aria-describedby="ds-textarea-<id>-error"></textarea>
+</div>
+<div class="meta" part="meta">
+<span part="message" id="ds-textarea-<id>-error" class="message error">Please provide more detail</span>
+</div>
+<div class="footer" part="footer" hidden="">
+<slot name="footer" id="ds-textarea-<id>-footer"></slot>
+</div>
+</label>
+<style>
+:host {
+display: block;
+font-family: var(
+--ds-textarea-font-family,
+var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+);
+color: var(--ds-color-text, #111111);
+}
+.field {
+display: grid;
+gap: 10px;
+}
+.label {
+display: inline-flex;
+align-items: center;
+gap: 4px;
+font-size: 0.9375rem;
+font-weight: 600;
+letter-spacing: -0.01em;
+}
+.required {
+color: var(--ds-color-danger, #27272a);
+}
+.control {
+display: flex;
+border: var(--ds-textarea-border, 1px solid var(--ds-color-input-border, #e4e4e7));
+border-radius: var(--ds-textarea-radius, var(--ds-radius-md, 16px));
+background: var(--ds-textarea-bg, #ffffff);
+box-shadow: var(--ds-textarea-shadow, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+box-sizing: border-box;
+}
+.field:focus-within .control {
+border: var(--ds-textarea-border-focus, 1px solid var(--ds-color-primary, #111111));
+box-shadow: var(--ds-textarea-focus-shadow, 0 0 0 4px rgba(17, 17, 17, 0.1));
+}
+.field.field-error .control {
+border: var(--ds-textarea-border-error, 1px solid var(--ds-color-danger, #27272a));
+box-shadow: var(--ds-textarea-error-shadow, 0 0 0 4px rgba(39, 39, 42, 0.08));
+}
+textarea {
+width: 100%;
+min-width: 0;
+border: 0;
+padding: var(--ds-textarea-padding-y, 14px) var(--ds-textarea-padding-x, 16px);
+border-radius: inherit;
+background: transparent;
+color: var(--ds-textarea-text-color, var(--ds-color-text, #111111));
+font: inherit;
+line-height: 1.6;
+resize: vertical;
+box-sizing: border-box;
+}
+textarea:focus {
+outline: none;
+}
+textarea::placeholder {
+color: var(--ds-textarea-placeholder-color, var(--ds-color-input-placeholder, #9ca3af));
+}
+:host([disabled]) .control,
+:host([data-form-disabled]) .control {
+background: var(--ds-textarea-disabled-bg, #f3f4f6);
+box-shadow: none;
+}
+:host([disabled]) textarea,
+:host([data-form-disabled]) textarea {
+opacity: var(--ds-textarea-disabled-opacity, 0.56);
+cursor: not-allowed;
+}
+:host([readonly]) .control {
+background: var(--ds-textarea-readonly-bg, #fafafa);
+}
+.meta {
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+gap: 12px;
+}
+.message {
+flex: 1;
+min-width: 0;
+font-size: 0.8125rem;
+color: var(--ds-color-muted, #6b7280);
+line-height: 1.4;
+}
+.message.error {
+color: var(--ds-color-danger, #27272a);
+font-weight: 600;
+}
+.counter {
+font-size: 0.75rem;
+color: var(--ds-color-muted, #6b7280);
+line-height: 1.4;
+font-variant-numeric: tabular-nums;
+white-space: nowrap;
+flex-shrink: 0;
+}
+.meta-spacer {
+flex: 1;
+min-width: 0;
+}
+.footer {
+display: flex;
+justify-content: flex-end;
+color: var(--ds-color-muted, #6b7280);
+font-size: 0.8125rem;
+line-height: 1.4;
+}
+.footer[hidden],
+.counter[hidden],
+.meta[hidden] {
+display: none;
+}
+</style>",
+}
+`;
+
+exports[`component snapshots > matches selection controls 1`] = `
+{
+  "checkbox": "<!---->
+<label part="label" for="ds-checkbox-<id>">
+<input part="checkbox" type="checkbox" id="ds-checkbox-<id>" checked="" value="on">
+<span class="text" part="text"><slot></slot></span>
+</label>
+<style>
+:host {
+display: inline-flex;
+font-family: var(
+--ds-checkbox-font-family,
+var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+);
+color: var(--ds-color-text, #111111);
+}
+label {
+display: inline-flex;
+align-items: center;
+gap: var(--ds-checkbox-gap, 12px);
+min-height: 44px;
+cursor: pointer;
+font-size: 0.9375rem;
+font-weight: 500;
+letter-spacing: -0.01em;
+}
+input {
+appearance: none;
+margin: 0;
+width: var(--ds-checkbox-size, 20px);
+height: var(--ds-checkbox-size, 20px);
+border-radius: var(--ds-checkbox-radius, 6px);
+border: var(--ds-checkbox-border, 1.5px solid var(--ds-color-border-strong, #d4d4d8));
+background: var(--ds-checkbox-bg, #ffffff);
+box-shadow: var(--ds-shadow-inset, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+display: inline-grid;
+place-items: center;
+transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+flex-shrink: 0;
+box-sizing: border-box;
+}
+input::after {
+content: '';
+width: calc(var(--ds-checkbox-size, 20px) * 0.42);
+height: calc(var(--ds-checkbox-size, 20px) * 0.22);
+border: 2px solid var(--ds-checkbox-check-color, var(--ds-color-on-primary, #ffffff));
+border-top: 0;
+border-left: 0;
+transform: rotate(45deg) translateY(-1px);
+opacity: 0;
+}
+label:hover input:not(:disabled) {
+border-color: var(--ds-color-accent, var(--ds-color-text, #111111));
+}
+input:checked {
+border: var(--ds-checkbox-border-checked, 1.5px solid var(--ds-color-primary, #111111));
+background: var(--ds-checkbox-bg-checked, var(--ds-color-primary, #111111));
+box-shadow: none;
+}
+input:checked::after {
+opacity: 1;
+}
+input:focus-visible {
+outline: none;
+box-shadow: var(--ds-checkbox-focus-shadow, 0 0 0 4px var(--ds-checkbox-focus-ring, rgba(17, 17, 17, 0.1)));
+}
+.text {
+line-height: 1.45;
+}
+:host([disabled]) label,
+:host([data-form-disabled]) label {
+cursor: not-allowed;
+opacity: var(--ds-checkbox-disabled-opacity, 0.56);
+}
+:host([disabled]) input,
+:host([data-form-disabled]) input {
+box-shadow: none;
+}
+</style>",
+  "checkboxDisabled": "<!---->
+<label part="label" for="ds-checkbox-<id>">
+<input part="checkbox" type="checkbox" id="ds-checkbox-<id>" disabled="" value="on">
+<span class="text" part="text"><slot></slot></span>
+</label>
+<style>
+:host {
+display: inline-flex;
+font-family: var(
+--ds-checkbox-font-family,
+var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+);
+color: var(--ds-color-text, #111111);
+}
+label {
+display: inline-flex;
+align-items: center;
+gap: var(--ds-checkbox-gap, 12px);
+min-height: 44px;
+cursor: pointer;
+font-size: 0.9375rem;
+font-weight: 500;
+letter-spacing: -0.01em;
+}
+input {
+appearance: none;
+margin: 0;
+width: var(--ds-checkbox-size, 20px);
+height: var(--ds-checkbox-size, 20px);
+border-radius: var(--ds-checkbox-radius, 6px);
+border: var(--ds-checkbox-border, 1.5px solid var(--ds-color-border-strong, #d4d4d8));
+background: var(--ds-checkbox-bg, #ffffff);
+box-shadow: var(--ds-shadow-inset, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+display: inline-grid;
+place-items: center;
+transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+flex-shrink: 0;
+box-sizing: border-box;
+}
+input::after {
+content: '';
+width: calc(var(--ds-checkbox-size, 20px) * 0.42);
+height: calc(var(--ds-checkbox-size, 20px) * 0.22);
+border: 2px solid var(--ds-checkbox-check-color, var(--ds-color-on-primary, #ffffff));
+border-top: 0;
+border-left: 0;
+transform: rotate(45deg) translateY(-1px);
+opacity: 0;
+}
+label:hover input:not(:disabled) {
+border-color: var(--ds-color-accent, var(--ds-color-text, #111111));
+}
+input:checked {
+border: var(--ds-checkbox-border-checked, 1.5px solid var(--ds-color-primary, #111111));
+background: var(--ds-checkbox-bg-checked, var(--ds-color-primary, #111111));
+box-shadow: none;
+}
+input:checked::after {
+opacity: 1;
+}
+input:focus-visible {
+outline: none;
+box-shadow: var(--ds-checkbox-focus-shadow, 0 0 0 4px var(--ds-checkbox-focus-ring, rgba(17, 17, 17, 0.1)));
+}
+.text {
+line-height: 1.45;
+}
+:host([disabled]) label,
+:host([data-form-disabled]) label {
+cursor: not-allowed;
+opacity: var(--ds-checkbox-disabled-opacity, 0.56);
+}
+:host([disabled]) input,
+:host([data-form-disabled]) input {
+box-shadow: none;
+}
+</style>",
+  "radio": "<!---->
+<label part="label" for="ds-radio-<id>">
+<input part="radio" type="radio" id="ds-radio-<id>" checked="" name="plan" value="">
+<span class="text" part="text"><slot></slot></span>
+</label>
+<style>
+:host {
+display: inline-flex;
+font-family: var(
+--ds-radio-font-family,
+var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+);
+color: var(--ds-color-text, #111111);
+}
+label {
+display: inline-flex;
+align-items: center;
+gap: var(--ds-radio-gap, 12px);
+min-height: 44px;
+cursor: pointer;
+font-size: 0.9375rem;
+font-weight: 500;
+letter-spacing: -0.01em;
+}
+input {
+appearance: none;
+margin: 0;
+width: var(--ds-radio-size, 20px);
+height: var(--ds-radio-size, 20px);
+border-radius: 999px;
+border: var(--ds-radio-border, 1.5px solid var(--ds-color-border-strong, #d4d4d8));
+background: var(--ds-radio-bg, #ffffff);
+box-shadow: var(--ds-shadow-inset, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+display: inline-grid;
+place-items: center;
+transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+flex-shrink: 0;
+box-sizing: border-box;
+}
+input::after {
+content: '';
+width: calc(var(--ds-radio-size, 20px) * 0.38);
+height: calc(var(--ds-radio-size, 20px) * 0.38);
+border-radius: 999px;
+background: var(--ds-radio-dot-color, var(--ds-color-on-primary, #ffffff));
+transform: scale(0);
+transition: transform 0.18s ease;
+}
+label:hover input:not(:disabled) {
+border-color: var(--ds-color-accent, var(--ds-color-text, #111111));
+}
+input:checked {
+border: var(--ds-radio-border-checked, 1.5px solid var(--ds-color-primary, #111111));
+background: var(--ds-radio-bg-checked, var(--ds-color-primary, #111111));
+box-shadow: none;
+}
+input:checked::after {
+transform: scale(1);
+}
+input:focus-visible {
+outline: none;
+box-shadow: var(--ds-radio-focus-shadow, 0 0 0 4px var(--ds-radio-focus-ring, rgba(17, 17, 17, 0.1)));
+}
+.text {
+line-height: 1.45;
+}
+:host([disabled]) label,
+:host([data-form-disabled]) label {
+cursor: not-allowed;
+opacity: var(--ds-radio-disabled-opacity, 0.56);
+}
+:host([disabled]) input,
+:host([data-form-disabled]) input {
+box-shadow: none;
+}
+</style>",
+  "radioDisabled": "<!---->
+<label part="label" for="ds-radio-<id>">
+<input part="radio" type="radio" id="ds-radio-<id>" disabled="" name="plan" value="">
+<span class="text" part="text"><slot></slot></span>
+</label>
+<style>
+:host {
+display: inline-flex;
+font-family: var(
+--ds-radio-font-family,
+var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+);
+color: var(--ds-color-text, #111111);
+}
+label {
+display: inline-flex;
+align-items: center;
+gap: var(--ds-radio-gap, 12px);
+min-height: 44px;
+cursor: pointer;
+font-size: 0.9375rem;
+font-weight: 500;
+letter-spacing: -0.01em;
+}
+input {
+appearance: none;
+margin: 0;
+width: var(--ds-radio-size, 20px);
+height: var(--ds-radio-size, 20px);
+border-radius: 999px;
+border: var(--ds-radio-border, 1.5px solid var(--ds-color-border-strong, #d4d4d8));
+background: var(--ds-radio-bg, #ffffff);
+box-shadow: var(--ds-shadow-inset, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+display: inline-grid;
+place-items: center;
+transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+flex-shrink: 0;
+box-sizing: border-box;
+}
+input::after {
+content: '';
+width: calc(var(--ds-radio-size, 20px) * 0.38);
+height: calc(var(--ds-radio-size, 20px) * 0.38);
+border-radius: 999px;
+background: var(--ds-radio-dot-color, var(--ds-color-on-primary, #ffffff));
+transform: scale(0);
+transition: transform 0.18s ease;
+}
+label:hover input:not(:disabled) {
+border-color: var(--ds-color-accent, var(--ds-color-text, #111111));
+}
+input:checked {
+border: var(--ds-radio-border-checked, 1.5px solid var(--ds-color-primary, #111111));
+background: var(--ds-radio-bg-checked, var(--ds-color-primary, #111111));
+box-shadow: none;
+}
+input:checked::after {
+transform: scale(1);
+}
+input:focus-visible {
+outline: none;
+box-shadow: var(--ds-radio-focus-shadow, 0 0 0 4px var(--ds-radio-focus-ring, rgba(17, 17, 17, 0.1)));
+}
+.text {
+line-height: 1.45;
+}
+:host([disabled]) label,
+:host([data-form-disabled]) label {
+cursor: not-allowed;
+opacity: var(--ds-radio-disabled-opacity, 0.56);
+}
+:host([disabled]) input,
+:host([data-form-disabled]) input {
+box-shadow: none;
+}
+</style>",
+  "switchOff": "<!---->
+<label part="label" for="ds-switch-<id>">
+<span class="track" part="track">
+<span class="thumb" part="thumb"></span>
+</span>
+<input part="switch" type="checkbox" role="switch" id="ds-switch-<id>" disabled="" value="on">
+<span class="text" part="text"><slot></slot></span>
+</label>
+<style>
+:host {
+display: inline-flex;
+font-family: var(
+--ds-switch-font-family,
+var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+);
+color: var(--ds-color-text, #111111);
+}
+label {
+display: inline-flex;
+align-items: center;
+gap: var(--ds-switch-gap, 12px);
+min-height: 44px;
+cursor: pointer;
+font-size: 0.9375rem;
+font-weight: 500;
+letter-spacing: -0.01em;
+}
+.track {
+position: relative;
+width: var(--ds-switch-track-width, 46px);
+height: var(--ds-switch-track-height, 28px);
+border-radius: var(--ds-switch-track-radius, 999px);
+background: var(--ds-switch-track-bg, #d4d4d8);
+transition: background 0.18s ease, box-shadow 0.18s ease;
+flex-shrink: 0;
+box-sizing: border-box;
+}
+.thumb {
+position: absolute;
+top: var(--ds-switch-thumb-inset, 2px);
+left: var(--ds-switch-thumb-inset, 2px);
+width: var(--ds-switch-thumb-size, 24px);
+height: var(--ds-switch-thumb-size, 24px);
+border-radius: 50%;
+background: var(--ds-switch-thumb-bg, #ffffff);
+box-shadow: var(--ds-switch-thumb-shadow, 0 4px 10px rgba(17, 17, 17, 0.16));
+transition: transform 0.18s ease;
+}
+label:hover .track {
+box-shadow: inset 0 0 0 1px var(--ds-color-border-strong, #d4d4d8);
+}
+label:focus-within .track {
+box-shadow: var(--ds-switch-focus-shadow, 0 0 0 4px var(--ds-switch-focus-ring, rgba(17, 17, 17, 0.1)));
+}
+input {
+position: absolute;
+opacity: 0;
+width: 1px;
+height: 1px;
+margin: -1px;
+border: 0;
+padding: 0;
+}
+:host([checked]) .track {
+background: var(--ds-switch-track-bg-checked, var(--ds-color-primary, #111111));
+}
+:host([checked]) .thumb {
+transform: translateX(
+calc(
+var(--ds-switch-track-width, 46px) - var(--ds-switch-thumb-size, 24px) -
+(var(--ds-switch-thumb-inset, 2px) * 2)
+)
+);
+}
+.text {
+line-height: 1.45;
+}
+:host([disabled]) label,
+:host([data-form-disabled]) label {
+cursor: not-allowed;
+opacity: var(--ds-switch-disabled-opacity, 0.56);
+}
+:host([disabled]) .track,
+:host([data-form-disabled]) .track {
+box-shadow: none;
+}
+</style>",
+  "switchOn": "<!---->
+<label part="label" for="ds-switch-<id>">
+<span class="track" part="track">
+<span class="thumb" part="thumb"></span>
+</span>
+<input part="switch" type="checkbox" role="switch" id="ds-switch-<id>" checked="" value="on">
+<span class="text" part="text"><slot></slot></span>
+</label>
+<style>
+:host {
+display: inline-flex;
+font-family: var(
+--ds-switch-font-family,
+var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+);
+color: var(--ds-color-text, #111111);
+}
+label {
+display: inline-flex;
+align-items: center;
+gap: var(--ds-switch-gap, 12px);
+min-height: 44px;
+cursor: pointer;
+font-size: 0.9375rem;
+font-weight: 500;
+letter-spacing: -0.01em;
+}
+.track {
+position: relative;
+width: var(--ds-switch-track-width, 46px);
+height: var(--ds-switch-track-height, 28px);
+border-radius: var(--ds-switch-track-radius, 999px);
+background: var(--ds-switch-track-bg, #d4d4d8);
+transition: background 0.18s ease, box-shadow 0.18s ease;
+flex-shrink: 0;
+box-sizing: border-box;
+}
+.thumb {
+position: absolute;
+top: var(--ds-switch-thumb-inset, 2px);
+left: var(--ds-switch-thumb-inset, 2px);
+width: var(--ds-switch-thumb-size, 24px);
+height: var(--ds-switch-thumb-size, 24px);
+border-radius: 50%;
+background: var(--ds-switch-thumb-bg, #ffffff);
+box-shadow: var(--ds-switch-thumb-shadow, 0 4px 10px rgba(17, 17, 17, 0.16));
+transition: transform 0.18s ease;
+}
+label:hover .track {
+box-shadow: inset 0 0 0 1px var(--ds-color-border-strong, #d4d4d8);
+}
+label:focus-within .track {
+box-shadow: var(--ds-switch-focus-shadow, 0 0 0 4px var(--ds-switch-focus-ring, rgba(17, 17, 17, 0.1)));
+}
+input {
+position: absolute;
+opacity: 0;
+width: 1px;
+height: 1px;
+margin: -1px;
+border: 0;
+padding: 0;
+}
+:host([checked]) .track {
+background: var(--ds-switch-track-bg-checked, var(--ds-color-primary, #111111));
+}
+:host([checked]) .thumb {
+transform: translateX(
+calc(
+var(--ds-switch-track-width, 46px) - var(--ds-switch-thumb-size, 24px) -
+(var(--ds-switch-thumb-inset, 2px) * 2)
+)
+);
+}
+.text {
+line-height: 1.45;
+}
+:host([disabled]) label,
+:host([data-form-disabled]) label {
+cursor: not-allowed;
+opacity: var(--ds-switch-disabled-opacity, 0.56);
+}
+:host([disabled]) .track,
+:host([data-form-disabled]) .track {
+box-shadow: none;
+}
+</style>",
+}
+`;
+
+exports[`component snapshots > matches status surfaces 1`] = `
+{
+  "alert": "<!---->
+<section class="alert" part="alert" role="status">
+<strong class="title" part="title">
+<slot name="title">Update ready</slot>
+</strong>
+<div class="body" part="body">
+<slot></slot>
+</div>
+</section>
+<style>
+:host {
+display: block;
+font-family: var(
+--ds-alert-font-family,
+var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+);
+}
+.alert {
+position: relative;
+display: grid;
+gap: var(--ds-alert-gap, 6px);
+padding: var(--ds-alert-padding-y, 18px) var(--ds-alert-padding-x, 20px);
+padding-left: calc(var(--ds-alert-padding-x, 20px) + var(--ds-alert-indicator-size, 10px) + 12px);
+border-radius: var(--ds-alert-radius, var(--ds-radius-lg, 20px));
+border: 1px solid var(--ds-alert-border-color, var(--ds-color-border, #e4e4e7));
+background: var(--ds-alert-bg, var(--ds-color-surface-raised, #fcfcfc));
+color: var(--ds-alert-text-color, var(--ds-color-text, #111111));
+box-shadow: var(--ds-alert-shadow, 0 1px 2px rgba(17, 17, 17, 0.04));
+overflow: hidden;
+box-sizing: border-box;
+}
+.alert::before {
+content: '';
+position: absolute;
+top: 21px;
+left: var(--ds-alert-padding-x, 20px);
+width: var(--ds-alert-indicator-size, 10px);
+height: var(--ds-alert-indicator-size, 10px);
+border-radius: 999px;
+background: var(--ds-alert-info-accent, #111111);
+box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-info-accent, #111111) 12%, transparent);
+}
+.title {
+font-size: 0.9375rem;
+font-weight: var(--ds-alert-title-weight, 700);
+letter-spacing: -0.01em;
+line-height: 1.35;
+}
+.body {
+color: var(--ds-color-muted, #6b7280);
+line-height: 1.55;
+font-size: 0.9375rem;
+}
+.title[hidden] {
+display: none;
+}
+:host([variant="info"]) .alert {
+border-color: var(--ds-alert-info-border-color, #e4e4e7);
+background: var(--ds-alert-info-bg, #fafafa);
+}
+:host([variant="info"]) .alert::before {
+background: var(--ds-alert-info-accent, #111111);
+box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-info-accent, #111111) 12%, transparent);
+}
+:host([variant="success"]) .alert {
+border-color: var(--ds-alert-success-border-color, #d4d4d8);
+background: var(--ds-alert-success-bg, #f7f7f8);
+}
+:host([variant="success"]) .alert::before {
+background: var(--ds-alert-success-accent, #2f2f33);
+box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-success-accent, #2f2f33) 12%, transparent);
+}
+:host([variant="warning"]) .alert {
+border-color: var(--ds-alert-warning-border-color, #d4d4d8);
+background: var(--ds-alert-warning-bg, #f4f4f5);
+}
+:host([variant="warning"]) .alert::before {
+background: var(--ds-alert-warning-accent, #52525b);
+box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-warning-accent, #52525b) 14%, transparent);
+}
+:host([variant="danger"]) .alert {
+border-color: var(--ds-alert-danger-border-color, #c7c7cc);
+background: var(--ds-alert-danger-bg, #ededf0);
+}
+:host([variant="danger"]) .alert::before {
+background: var(--ds-alert-danger-accent, #27272a);
+box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-danger-accent, #27272a) 12%, transparent);
+}
+</style>",
+  "alertDanger": "<!---->
+<section class="alert" part="alert" role="status">
+<strong class="title" part="title">
+<slot name="title">Request failed</slot>
+</strong>
+<div class="body" part="body">
+<slot></slot>
+</div>
+</section>
+<style>
+:host {
+display: block;
+font-family: var(
+--ds-alert-font-family,
+var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+);
+}
+.alert {
+position: relative;
+display: grid;
+gap: var(--ds-alert-gap, 6px);
+padding: var(--ds-alert-padding-y, 18px) var(--ds-alert-padding-x, 20px);
+padding-left: calc(var(--ds-alert-padding-x, 20px) + var(--ds-alert-indicator-size, 10px) + 12px);
+border-radius: var(--ds-alert-radius, var(--ds-radius-lg, 20px));
+border: 1px solid var(--ds-alert-border-color, var(--ds-color-border, #e4e4e7));
+background: var(--ds-alert-bg, var(--ds-color-surface-raised, #fcfcfc));
+color: var(--ds-alert-text-color, var(--ds-color-text, #111111));
+box-shadow: var(--ds-alert-shadow, 0 1px 2px rgba(17, 17, 17, 0.04));
+overflow: hidden;
+box-sizing: border-box;
+}
+.alert::before {
+content: '';
+position: absolute;
+top: 21px;
+left: var(--ds-alert-padding-x, 20px);
+width: var(--ds-alert-indicator-size, 10px);
+height: var(--ds-alert-indicator-size, 10px);
+border-radius: 999px;
+background: var(--ds-alert-info-accent, #111111);
+box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-info-accent, #111111) 12%, transparent);
+}
+.title {
+font-size: 0.9375rem;
+font-weight: var(--ds-alert-title-weight, 700);
+letter-spacing: -0.01em;
+line-height: 1.35;
+}
+.body {
+color: var(--ds-color-muted, #6b7280);
+line-height: 1.55;
+font-size: 0.9375rem;
+}
+.title[hidden] {
+display: none;
+}
+:host([variant="info"]) .alert {
+border-color: var(--ds-alert-info-border-color, #e4e4e7);
+background: var(--ds-alert-info-bg, #fafafa);
+}
+:host([variant="info"]) .alert::before {
+background: var(--ds-alert-info-accent, #111111);
+box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-info-accent, #111111) 12%, transparent);
+}
+:host([variant="success"]) .alert {
+border-color: var(--ds-alert-success-border-color, #d4d4d8);
+background: var(--ds-alert-success-bg, #f7f7f8);
+}
+:host([variant="success"]) .alert::before {
+background: var(--ds-alert-success-accent, #2f2f33);
+box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-success-accent, #2f2f33) 12%, transparent);
+}
+:host([variant="warning"]) .alert {
+border-color: var(--ds-alert-warning-border-color, #d4d4d8);
+background: var(--ds-alert-warning-bg, #f4f4f5);
+}
+:host([variant="warning"]) .alert::before {
+background: var(--ds-alert-warning-accent, #52525b);
+box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-warning-accent, #52525b) 14%, transparent);
+}
+:host([variant="danger"]) .alert {
+border-color: var(--ds-alert-danger-border-color, #c7c7cc);
+background: var(--ds-alert-danger-bg, #ededf0);
+}
+:host([variant="danger"]) .alert::before {
+background: var(--ds-alert-danger-accent, #27272a);
+box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-danger-accent, #27272a) 12%, transparent);
+}
+</style>",
+  "neutralBadge": "<!----><span class="badge" part="badge"><slot></slot></span><style>
+:host {
+display: inline-flex;
+font-family: var(
+--ds-badge-font-family,
+var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+);
+}
+.badge {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: var(--ds-badge-gap, 6px);
+min-height: 24px;
+padding: var(--ds-badge-padding-y, 6px) var(--ds-badge-padding-x, 10px);
+border-radius: var(--ds-badge-radius, 999px);
+border: 1px solid var(--ds-badge-neutral-border, #e4e4e7);
+background: var(--ds-badge-neutral-bg, #f4f4f5);
+color: var(--ds-badge-neutral-fg, #3f3f46);
+font-size: var(--ds-badge-font-size, 0.75rem);
+font-weight: var(--ds-badge-font-weight, 700);
+letter-spacing: -0.01em;
+box-sizing: border-box;
+line-height: 1;
+white-space: nowrap;
+}
+.badge::before {
+content: '';
+width: 6px;
+height: 6px;
+border-radius: 999px;
+background: currentColor;
+opacity: 0.72;
+}
+:host([variant="primary"]) .badge {
+border-color: var(--ds-badge-primary-border, transparent);
+background: var(--ds-badge-primary-bg, var(--ds-color-primary, #111111));
+color: var(--ds-badge-primary-fg, var(--ds-color-on-primary, #ffffff));
+}
+:host([variant="success"]) .badge {
+border-color: var(--ds-badge-success-border, #d4d4d8);
+background: var(--ds-badge-success-bg, #f5f5f5);
+color: var(--ds-badge-success-fg, #27272a);
+}
+:host([variant="warning"]) .badge {
+border-color: var(--ds-badge-warning-border, #d4d4d8);
+background: var(--ds-badge-warning-bg, #fafafa);
+color: var(--ds-badge-warning-fg, #52525b);
+}
+:host([variant="danger"]) .badge {
+border-color: var(--ds-badge-danger-border, #c7c7cc);
+background: var(--ds-badge-danger-bg, #ededf0);
+color: var(--ds-badge-danger-fg, #18181b);
+}
+</style>",
+  "primaryBadge": "<!----><span class="badge" part="badge"><slot></slot></span><style>
+:host {
+display: inline-flex;
+font-family: var(
+--ds-badge-font-family,
+var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+);
+}
+.badge {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: var(--ds-badge-gap, 6px);
+min-height: 24px;
+padding: var(--ds-badge-padding-y, 6px) var(--ds-badge-padding-x, 10px);
+border-radius: var(--ds-badge-radius, 999px);
+border: 1px solid var(--ds-badge-neutral-border, #e4e4e7);
+background: var(--ds-badge-neutral-bg, #f4f4f5);
+color: var(--ds-badge-neutral-fg, #3f3f46);
+font-size: var(--ds-badge-font-size, 0.75rem);
+font-weight: var(--ds-badge-font-weight, 700);
+letter-spacing: -0.01em;
+box-sizing: border-box;
+line-height: 1;
+white-space: nowrap;
+}
+.badge::before {
+content: '';
+width: 6px;
+height: 6px;
+border-radius: 999px;
+background: currentColor;
+opacity: 0.72;
+}
+:host([variant="primary"]) .badge {
+border-color: var(--ds-badge-primary-border, transparent);
+background: var(--ds-badge-primary-bg, var(--ds-color-primary, #111111));
+color: var(--ds-badge-primary-fg, var(--ds-color-on-primary, #ffffff));
+}
+:host([variant="success"]) .badge {
+border-color: var(--ds-badge-success-border, #d4d4d8);
+background: var(--ds-badge-success-bg, #f5f5f5);
+color: var(--ds-badge-success-fg, #27272a);
+}
+:host([variant="warning"]) .badge {
+border-color: var(--ds-badge-warning-border, #d4d4d8);
+background: var(--ds-badge-warning-bg, #fafafa);
+color: var(--ds-badge-warning-fg, #52525b);
+}
+:host([variant="danger"]) .badge {
+border-color: var(--ds-badge-danger-border, #c7c7cc);
+background: var(--ds-badge-danger-bg, #ededf0);
+color: var(--ds-badge-danger-fg, #18181b);
+}
+</style>",
+  "warningBadge": "<!----><span class="badge" part="badge"><slot></slot></span><style>
+:host {
+display: inline-flex;
+font-family: var(
+--ds-badge-font-family,
+var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
+);
+}
+.badge {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: var(--ds-badge-gap, 6px);
+min-height: 24px;
+padding: var(--ds-badge-padding-y, 6px) var(--ds-badge-padding-x, 10px);
+border-radius: var(--ds-badge-radius, 999px);
+border: 1px solid var(--ds-badge-neutral-border, #e4e4e7);
+background: var(--ds-badge-neutral-bg, #f4f4f5);
+color: var(--ds-badge-neutral-fg, #3f3f46);
+font-size: var(--ds-badge-font-size, 0.75rem);
+font-weight: var(--ds-badge-font-weight, 700);
+letter-spacing: -0.01em;
+box-sizing: border-box;
+line-height: 1;
+white-space: nowrap;
+}
+.badge::before {
+content: '';
+width: 6px;
+height: 6px;
+border-radius: 999px;
+background: currentColor;
+opacity: 0.72;
+}
+:host([variant="primary"]) .badge {
+border-color: var(--ds-badge-primary-border, transparent);
+background: var(--ds-badge-primary-bg, var(--ds-color-primary, #111111));
+color: var(--ds-badge-primary-fg, var(--ds-color-on-primary, #ffffff));
+}
+:host([variant="success"]) .badge {
+border-color: var(--ds-badge-success-border, #d4d4d8);
+background: var(--ds-badge-success-bg, #f5f5f5);
+color: var(--ds-badge-success-fg, #27272a);
+}
+:host([variant="warning"]) .badge {
+border-color: var(--ds-badge-warning-border, #d4d4d8);
+background: var(--ds-badge-warning-bg, #fafafa);
+color: var(--ds-badge-warning-fg, #52525b);
+}
+:host([variant="danger"]) .badge {
+border-color: var(--ds-badge-danger-border, #c7c7cc);
+background: var(--ds-badge-danger-bg, #ededf0);
+color: var(--ds-badge-danger-fg, #18181b);
+}
+</style>",
+}
+`;

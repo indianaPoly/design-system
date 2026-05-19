@@ -38,4 +38,23 @@ describe('DsTextarea', () => {
 
     expect(eventCount).toBe(1);
   });
+
+  it('renders character count and footer slot content', async () => {
+    document.body.innerHTML = '';
+    const element = new DsTextarea();
+    element.maxLength = 120;
+    element.value = '메모';
+    element.innerHTML = '<span slot="footer">자동 저장됨</span>';
+    document.body.append(element);
+    await element.updateComplete;
+
+    const counter = element.shadowRoot?.querySelector('[part="counter"]');
+    const footer = element.shadowRoot?.querySelector('[part="footer"]');
+    const textarea = element.shadowRoot?.querySelector('textarea');
+
+    expect(counter?.textContent?.trim()).toBe('2/120');
+    expect(footer?.hasAttribute('hidden')).toBe(false);
+    expect(textarea?.getAttribute('aria-describedby')).toContain('counter');
+    expect(textarea?.getAttribute('aria-describedby')).toContain('footer');
+  });
 });

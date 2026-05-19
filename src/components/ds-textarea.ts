@@ -1,9 +1,17 @@
-import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import {
+  css,
+  html,
+  LitElement,
+  type PropertyValues,
+} from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { bindFormReset, supportsFormValue, syncHiddenFormProxy } from './internal/form-proxy';
 
 @customElement('ds-textarea')
 export class DsTextarea extends LitElement {
+  static readonly formAssociated = true;
+
   @property({ type: String })
   declare label: string;
 
@@ -19,7 +27,7 @@ export class DsTextarea extends LitElement {
   @property({ type: String })
   declare placeholder: string;
 
-  @property({ type: String })
+  @property({ type: String, reflect: true })
   declare name: string;
 
   @property({ type: Number })
@@ -37,10 +45,24 @@ export class DsTextarea extends LitElement {
   @property({ type: Boolean, reflect: true })
   declare readonly: boolean;
 
-  private textareaId = `ds-textarea-${globalThis.crypto?.randomUUID?.() ?? Math.random().toString(16).slice(2)}`;
+  private readonly internals: ElementInternals | null;
+
+  private proxyInput: HTMLInputElement | null = null;
+
+  private removeFormResetListener: (() => void) | null = null;
+
+  private readonly textareaId = `ds-textarea-${globalThis.crypto?.randomUUID?.() ?? Math.random().toString(16).slice(2)}`;
+
+  private defaultValue = '';
+
+  private hasCapturedDefault = false;
+
+  @state()
+  declare private hasFooterSlot: boolean;
 
   constructor() {
     super();
+    this.internals = this.attachInternals?.() ?? null;
     this.label = '';
     this.helper = '';
     this.error = '';
@@ -52,6 +74,82 @@ export class DsTextarea extends LitElement {
     this.disabled = false;
     this.required = false;
     this.readonly = false;
+    this.hasFooterSlot = false;
+  }
+
+  get form() {
+    return this.internals?.form ?? this.closest('form');
+  }
+
+  get validity() {
+    return this.textareaElement?.validity ?? this.internals?.validity;
+  }
+
+  get validationMessage() {
+    return this.textareaElement?.validationMessage ?? this.internals?.validationMessage ?? '';
+  }
+
+  willUpdate(changedProperties: PropertyValues<this>) {
+    if (!this.hasCapturedDefault && (changedProperties.has('value') || changedProperties.has('name'))) {
+      this.defaultValue = this.value;
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.hasFooterSlot = this.querySelector('[slot="footer"]') !== null;
+    if (!this.hasCapturedDefault) {
+      this.defaultValue = this.value;
+      this.hasCapturedDefault = true;
+    }
+    if (!supportsFormValue(this.internals)) {
+      this.removeFormResetListener = bindFormReset(
+        this.form,
+        () => this.formResetCallback(),
+        this.removeFormResetListener,
+      );
+    }
+    this.syncFormValue();
+  }
+
+  disconnectedCallback() {
+    this.removeFormResetListener?.();
+    this.removeFormResetListener = null;
+    super.disconnectedCallback();
+  }
+
+  protected updated(changedProperties: PropertyValues<this>) {
+    if (
+      changedProperties.has('value')
+      || changedProperties.has('name')
+      || changedProperties.has('disabled')
+    ) {
+      this.syncFormValue();
+    }
+  }
+
+  formResetCallback() {
+    this.value = this.defaultValue;
+  }
+
+  formDisabledCallback(disabled: boolean) {
+    this.toggleAttribute('data-form-disabled', disabled);
+  }
+
+  focus(options?: FocusOptions) {
+    this.textareaElement?.focus(options);
+  }
+
+  checkValidity() {
+    return this.textareaElement?.checkValidity() ?? true;
+  }
+
+  reportValidity() {
+    return this.textareaElement?.reportValidity() ?? true;
+  }
+
+  private get textareaElement() {
+    return this.shadowRoot?.querySelector('textarea') ?? null;
   }
 
   private get helperId() {
@@ -62,6 +160,40 @@ export class DsTextarea extends LitElement {
     return `${this.textareaId}-error`;
   }
 
+  private get counterId() {
+    return `${this.textareaId}-counter`;
+  }
+
+  private get footerId() {
+    return `${this.textareaId}-footer`;
+  }
+
+  private get characterCount() {
+    return this.value.length;
+  }
+
+  private get shouldShowCounter() {
+    return typeof this.maxLength === 'number' && this.maxLength >= 0;
+  }
+
+  private syncFormValue() {
+    const shouldOmitValue = this.disabled
+      || !this.name;
+
+    if (supportsFormValue(this.internals)) {
+      this.internals.setFormValue(shouldOmitValue ? null : this.value);
+      return;
+    }
+
+    this.proxyInput = syncHiddenFormProxy({
+      host: this,
+      proxyInput: this.proxyInput,
+      name: this.name,
+      value: this.value,
+      shouldSubmit: !shouldOmitValue,
+    });
+  }
+
   static styles = css`
     :host {
       display: block;
@@ -69,69 +201,142 @@ export class DsTextarea extends LitElement {
         --ds-textarea-font-family,
         var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
       );
-      color: var(--ds-color-text, #111827);
+      color: var(--ds-color-text, #111111);
     }
 
     .field {
       display: grid;
-      gap: var(--ds-space-xs, 6px);
+      gap: 10px;
     }
 
     .label {
-      font-size: 0.875rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.9375rem;
       font-weight: 600;
+      letter-spacing: -0.01em;
     }
 
     .required {
-      color: var(--ds-color-danger, #dc2626);
-      margin-left: 4px;
+      color: var(--ds-color-danger, #27272a);
+    }
+
+    .control {
+      display: flex;
+      border: var(--ds-textarea-border, 1px solid var(--ds-color-input-border, #e4e4e7));
+      border-radius: var(--ds-textarea-radius, var(--ds-radius-md, 16px));
+      background: var(--ds-textarea-bg, #ffffff);
+      box-shadow: var(--ds-textarea-shadow, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+      transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      box-sizing: border-box;
+    }
+
+    .field:focus-within .control {
+      border: var(--ds-textarea-border-focus, 1px solid var(--ds-color-primary, #111111));
+      box-shadow: var(--ds-textarea-focus-shadow, 0 0 0 4px rgba(17, 17, 17, 0.1));
+    }
+
+    .field.field-error .control {
+      border: var(--ds-textarea-border-error, 1px solid var(--ds-color-danger, #27272a));
+      box-shadow: var(--ds-textarea-error-shadow, 0 0 0 4px rgba(39, 39, 42, 0.08));
     }
 
     textarea {
-      appearance: none;
-      border: var(--ds-textarea-border, 1px solid var(--ds-color-input-border, #d1d5db));
-      border-radius: var(--ds-textarea-radius, var(--ds-radius-md, 8px));
-      padding: var(--ds-textarea-padding-y, var(--ds-space-sm, 8px))
-        var(--ds-textarea-padding-x, var(--ds-space-md, 12px));
-      font-size: var(--ds-textarea-font-size, 1rem);
-      background: var(--ds-textarea-bg, var(--ds-color-input-bg, #ffffff));
-      color: var(--ds-textarea-text-color, var(--ds-color-text, #111827));
-      box-shadow: var(--ds-textarea-shadow, none);
-      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      width: 100%;
+      min-width: 0;
+      border: 0;
+      padding: var(--ds-textarea-padding-y, 14px) var(--ds-textarea-padding-x, 16px);
+      border-radius: inherit;
+      background: transparent;
+      color: var(--ds-textarea-text-color, var(--ds-color-text, #111111));
+      font: inherit;
+      line-height: 1.6;
       resize: vertical;
+      box-sizing: border-box;
+    }
+
+    textarea:focus {
+      outline: none;
     }
 
     textarea::placeholder {
       color: var(--ds-textarea-placeholder-color, var(--ds-color-input-placeholder, #9ca3af));
     }
 
-    textarea:focus-visible {
-      outline: none;
-      border: var(--ds-textarea-border-focus, 1px solid var(--ds-color-primary, #2563eb));
-      box-shadow: var(--ds-textarea-focus-shadow, 0 0 0 3px var(--ds-textarea-focus-ring, var(--ds-color-focus)));
-    }
-
-    :host([disabled]) textarea {
-      opacity: var(--ds-textarea-disabled-opacity, 0.6);
-      cursor: not-allowed;
-      background: var(--ds-textarea-disabled-bg, var(--ds-color-surface-muted, #f9fafb));
+    :host([disabled]) .control,
+    :host([data-form-disabled]) .control {
+      background: var(--ds-textarea-disabled-bg, #f3f4f6);
       box-shadow: none;
     }
 
-    :host([readonly]) textarea {
-      background: var(--ds-textarea-readonly-bg, var(--ds-color-surface-muted, #f9fafb));
+    :host([disabled]) textarea,
+    :host([data-form-disabled]) textarea {
+      opacity: var(--ds-textarea-disabled-opacity, 0.56);
+      cursor: not-allowed;
+    }
+
+    :host([readonly]) .control {
+      background: var(--ds-textarea-readonly-bg, #fafafa);
+    }
+
+    .meta {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
     }
 
     .message {
+      flex: 1;
+      min-width: 0;
       font-size: 0.8125rem;
       color: var(--ds-color-muted, #6b7280);
+      line-height: 1.4;
     }
 
     .message.error {
-      color: var(--ds-color-danger, #dc2626);
+      color: var(--ds-color-danger, #27272a);
       font-weight: 600;
     }
+
+    .counter {
+      font-size: 0.75rem;
+      color: var(--ds-color-muted, #6b7280);
+      line-height: 1.4;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .meta-spacer {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: flex-end;
+      color: var(--ds-color-muted, #6b7280);
+      font-size: 0.8125rem;
+      line-height: 1.4;
+    }
+
+    .footer[hidden],
+    .counter[hidden],
+    .meta[hidden] {
+      display: none;
+    }
   `;
+
+  private handleFooterSlotChange(event: Event) {
+    const slot = event.target as HTMLSlotElement;
+    this.updateFooterSlotState(slot);
+  }
+
+  private updateFooterSlotState(slot: HTMLSlotElement) {
+    this.hasFooterSlot = slot.assignedNodes({ flatten: true }).length > 0;
+  }
 
   private handleInput(event: Event) {
     event.stopPropagation();
@@ -146,13 +351,6 @@ export class DsTextarea extends LitElement {
   }
 
   render() {
-    let describedBy: string | undefined;
-    if (this.error) {
-      describedBy = this.errorId;
-    } else if (this.helper) {
-      describedBy = this.helperId;
-    }
-
     const requiredTemplate = this.required ? html`<span class="required">*</span>` : null;
     const labelTemplate = this.label
       ? html`<span class="label" part="label">${this.label}${requiredTemplate}</span>`
@@ -164,27 +362,50 @@ export class DsTextarea extends LitElement {
     const messageTemplate = messageText
       ? html`<span id=${messageId} class="message ${messageVariant}" part="message">${messageText}</span>`
       : null;
+    const describedBy = [
+      messageText ? messageId : null,
+      this.shouldShowCounter ? this.counterId : null,
+      this.hasFooterSlot ? this.footerId : null,
+    ].filter(Boolean).join(' ') || undefined;
+    const counterTemplate = this.shouldShowCounter
+      ? html`
+          <span id=${this.counterId} class="counter" part="counter">
+            ${this.characterCount}/${this.maxLength}
+          </span>
+        `
+      : null;
+
+    const fieldClass = this.error ? 'field field-error' : 'field';
+    const isDisabled = this.disabled || this.hasAttribute('data-form-disabled');
 
     return html`
-      <label class="field" part="field">
+      <label class=${fieldClass} part="field">
         ${labelTemplate}
-        <textarea
-          id=${this.textareaId}
-          part="textarea"
-          .value=${this.value}
-          placeholder=${this.placeholder}
-          name=${this.name}
-          rows=${this.rows}
-          maxlength=${ifDefined(this.maxLength)}
-          ?disabled=${this.disabled}
-          ?required=${this.required}
-          ?readonly=${this.readonly}
-          aria-invalid=${this.error ? 'true' : 'false'}
-          aria-describedby=${ifDefined(describedBy)}
-          @input=${this.handleInput}
-          @change=${this.handleChange}
-        ></textarea>
-        ${messageTemplate}
+        <div class="control" part="control">
+          <textarea
+            id=${this.textareaId}
+            part="textarea"
+            .value=${this.value}
+            placeholder=${this.placeholder}
+            name=${this.name}
+            rows=${this.rows}
+            maxlength=${ifDefined(this.maxLength)}
+            ?disabled=${isDisabled}
+            ?required=${this.required}
+            ?readonly=${this.readonly}
+            aria-invalid=${this.error ? 'true' : 'false'}
+            aria-describedby=${ifDefined(describedBy)}
+            @input=${this.handleInput}
+            @change=${this.handleChange}
+          ></textarea>
+        </div>
+        <div class="meta" part="meta" ?hidden=${!messageTemplate && !counterTemplate}>
+          ${messageTemplate ?? html`<span class="meta-spacer" aria-hidden="true"></span>`}
+          ${counterTemplate}
+        </div>
+        <div class="footer" part="footer" ?hidden=${!this.hasFooterSlot}>
+          <slot id=${this.footerId} name="footer" @slotchange=${this.handleFooterSlotChange}></slot>
+        </div>
       </label>
     `;
   }

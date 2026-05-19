@@ -30,4 +30,18 @@ describe('DsCard', () => {
 
     expect(element.getAttribute('elevation')).toBe('2');
   });
+
+  it('hides empty header and footer regions', async () => {
+    document.body.innerHTML = '';
+    const element = new DsCard();
+    element.textContent = 'Body only';
+    document.body.append(element);
+    await element.updateComplete;
+
+    const header = element.shadowRoot?.querySelector('[part="header"]');
+    const footer = element.shadowRoot?.querySelector('[part="footer"]');
+
+    expect(header?.hasAttribute('hidden')).toBe(true);
+    expect(footer?.hasAttribute('hidden')).toBe(true);
+  });
 });

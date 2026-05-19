@@ -7,40 +7,120 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="page">
-      <header class="page-header">
-        <p class="eyebrow">Design System Preview</p>
-        <h1>토큰과 컴포넌트 갤러리</h1>
-        <p class="lead">
-          색상 토큰과 각 컴포넌트를 로컬에서 바로 확인할 수 있도록 구성한
-          미니 프리뷰입니다. 컴포넌트는 선택된 항목만 렌더링해서 DOM 부하를
-          줄입니다.
-        </p>
+    <div class="page-shell">
+      <header class="hero">
+        <nav class="topbar" aria-label="Preview navigation">
+          <a class="brand" href="#top" aria-label="Design System home">
+            <span class="brand-mark">ds</span>
+            <span>Design System Core</span>
+          </a>
+          <div class="topbar-actions">
+            <a href="#components">Components</a>
+            <a href="#copy-paste">Copy blocks</a>
+            <ds-button id="theme-toggle" variant="secondary" size="sm" type="button">Dark</ds-button>
+          </div>
+        </nav>
+
+        <div class="hero-grid" id="top">
+          <section class="hero-copy">
+            <p class="eyebrow">Open Web Components · Copy-ready UI</p>
+            <h1>구린 프리뷰를 넘어, 바로 붙여 넣는 제품 UI로.</h1>
+            <p class="lead">
+              Lit 기반 디자인 시스템을 shadcn/ui처럼 “좋은 기본값 + 복붙 가능한 블록” 중심으로 정리했습니다.
+              토큰, 컴포넌트, 예제 코드가 한 화면에서 같이 검증됩니다.
+            </p>
+            <div class="hero-actions">
+              <a class="hero-link primary" href="#copy-paste">복붙 블록 보기</a>
+              <a class="hero-link" href="#components">컴포넌트 확인</a>
+            </div>
+          </section>
+
+          <aside class="hero-preview" aria-label="Product UI preview">
+            <div class="preview-window">
+              <div class="window-bar"><span></span><span></span><span></span></div>
+              <ds-card>
+                <div slot="header" class="card-title-row">
+                  <span>Launch readiness</span>
+                  <ds-badge variant="success">Ready</ds-badge>
+                </div>
+                <div class="preview-metrics">
+                  <div><strong>32</strong><span>Checks</span></div>
+                  <div><strong>0</strong><span>Errors</span></div>
+                  <div><strong>98%</strong><span>Coverage</span></div>
+                </div>
+                <ds-alert variant="success" title="검증 완료">이 UI는 light/dark와 form flow를 함께 고려합니다.</ds-alert>
+                <div slot="footer" class="demo-row compact">
+                  <ds-button size="sm">Publish</ds-button>
+                  <ds-button size="sm" variant="secondary" type="button">Preview</ds-button>
+                </div>
+              </ds-card>
+            </div>
+          </aside>
+        </div>
       </header>
 
       <main class="page-content">
-        <section class="panel" id="tokens">
+        <section class="panel principles" aria-labelledby="principles-title">
           <div class="panel-header">
-            <h2>색상 토큰</h2>
-            <p>기본 테마 색상 토큰을 한 눈에 확인할 수 있습니다.</p>
+            <p class="eyebrow">Design contract</p>
+            <h2 id="principles-title">좋은 기본값을 먼저 제공합니다</h2>
+            <p>이 프리뷰의 기준은 예쁘기만 한 화면이 아니라, 실제 서비스에 바로 가져가도 무너지지 않는 기본 UI입니다.</p>
+          </div>
+          <div class="principle-grid">
+            <article>
+              <span>01</span>
+              <h3>Beautiful defaults</h3>
+              <p>토큰만 import해도 버튼, 카드, 폼이 같은 제품에서 나온 것처럼 보입니다.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Copy ownership</h3>
+              <p>예제는 Web Component markup 그대로 복사해서 앱 코드에 붙일 수 있게 구성합니다.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>State clarity</h3>
+              <p>focus, error, disabled, success/warning/danger가 색과 구조로 동시에 읽힙니다.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel" id="tokens">
+          <div class="panel-header split-header">
+            <div>
+              <p class="eyebrow">Foundation</p>
+              <h2>핵심 토큰</h2>
+              <p>중립 배경 위에 accent와 semantic color를 얹어 계층과 상태를 구분합니다.</p>
+            </div>
+            <ds-badge variant="primary">Light / Dark</ds-badge>
           </div>
           <div class="token-grid" id="color-grid"></div>
         </section>
 
         <section class="panel" id="components">
-          <div class="panel-header">
-            <h2>컴포넌트 프리뷰</h2>
-            <p>선택한 컴포넌트만 렌더링해서 성능을 최적화합니다.</p>
-          </div>
-          <div class="component-controls">
-            <label for="component-select">컴포넌트 선택</label>
-            <select id="component-select" aria-label="컴포넌트 선택"></select>
-            <div class="component-toolbar">
-              <ds-button id="theme-toggle" variant="secondary" size="sm">Dark</ds-button>
+          <div class="panel-header split-header">
+            <div>
+              <p class="eyebrow">Components</p>
+              <h2>컴포넌트 프리뷰</h2>
+              <p id="component-description"></p>
             </div>
-            <p class="helper" id="component-description"></p>
           </div>
-          <div class="component-demo" id="component-demo"></div>
+          <div class="component-layout">
+            <div class="component-grid" id="component-grid" aria-label="Component selector"></div>
+            <div class="component-demo" id="component-demo"></div>
+          </div>
+        </section>
+
+        <section class="panel" id="copy-paste">
+          <div class="panel-header split-header">
+            <div>
+              <p class="eyebrow">Copy, paste, own</p>
+              <h2>복붙 가능한 실전 블록</h2>
+              <p>컴포넌트 단품이 아니라 실제 화면 조각 단위로 가져갈 수 있는 Web Component markup입니다.</p>
+            </div>
+            <ds-badge variant="success">No lock-in</ds-badge>
+          </div>
+          <div class="block-grid" id="block-grid"></div>
         </section>
       </main>
     </div>

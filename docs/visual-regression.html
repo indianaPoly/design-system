@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visual Regression</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./visual-regression.css" />
+  </head>
+  <body>
+    <main class="visual-page">
+      <header class="visual-header">
+        <p class="eyebrow">Visual Regression</p>
+        <h1>Design System Visual Snapshots</h1>
+        <p class="lead">핵심 컴포넌트 조합을 light / dark 환경에서 시각 회귀 테스트합니다.</p>
+      </header>
+
+      <section class="visual-panel" data-visual="actions">
+        <div class="visual-panel-header">
+          <h2>Actions & Status</h2>
+          <p>버튼과 배지의 기본 위계가 흔들리지 않는지 확인합니다.</p>
+        </div>
+        <div class="visual-demo visual-demo-grid" id="actions-demo"></div>
+      </section>
+
+      <section class="visual-panel" data-visual="form-fields">
+        <div class="visual-panel-header">
+          <h2>Form Fields</h2>
+          <p>입력 컴포넌트의 간격, 상태, 정보 구조를 검증합니다.</p>
+        </div>
+        <div class="visual-demo" id="form-demo"></div>
+      </section>
+
+      <section class="visual-panel" data-visual="selection-controls">
+        <div class="visual-panel-header">
+          <h2>Selection Controls</h2>
+          <p>선택형 입력의 명도 대비와 터치 타겟을 검증합니다.</p>
+        </div>
+        <div class="visual-demo" id="selection-demo"></div>
+      </section>
+
+      <section class="visual-panel" data-visual="surfaces">
+        <div class="visual-panel-header">
+          <h2>Surfaces</h2>
+          <p>카드와 알럿이 정보 블록으로 자연스럽게 묶이는지 확인합니다.</p>
+        </div>
+        <div class="visual-demo" id="surfaces-demo"></div>
+      </section>
+
+      <section class="visual-panel" data-visual="edge-cases">
+        <div class="visual-panel-header">
+          <h2>Edge Cases</h2>
+          <p>긴 텍스트, 좁은 폭, 보조 정보 조합에서도 구조가 무너지지 않는지 확인합니다.</p>
+        </div>
+        <div class="visual-demo" id="edge-cases-demo"></div>
+      </section>
+    </main>
+
+    <script type="module" src="/visual-regression.ts"></script>
+  </body>
+</html>

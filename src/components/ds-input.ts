@@ -1,11 +1,19 @@
-import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import {
+  css,
+  html,
+  LitElement,
+  type PropertyValues,
+} from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { bindFormReset, supportsFormValue, syncHiddenFormProxy } from './internal/form-proxy';
 
 export type InputType = 'text' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'number';
 
 @customElement('ds-input')
 export class DsInput extends LitElement {
+  static readonly formAssociated = true;
+
   @property({ type: String })
   declare label: string;
 
@@ -21,8 +29,11 @@ export class DsInput extends LitElement {
   @property({ type: String })
   declare placeholder: string;
 
-  @property({ type: String })
+  @property({ type: String, reflect: true })
   declare name: string;
+
+  @property({ type: Number })
+  declare maxLength: number | undefined;
 
   @property({ type: String })
   declare autocomplete: string;
@@ -48,16 +59,34 @@ export class DsInput extends LitElement {
   @property({ type: Boolean, reflect: true })
   declare readonly: boolean;
 
-  private inputId = `ds-input-${globalThis.crypto?.randomUUID?.() ?? Math.random().toString(16).slice(2)}`;
+  private readonly internals: ElementInternals | null;
+
+  private proxyInput: HTMLInputElement | null = null;
+
+  private removeFormResetListener: (() => void) | null = null;
+
+  private readonly inputId = `ds-input-${globalThis.crypto?.randomUUID?.() ?? Math.random().toString(16).slice(2)}`;
+
+  private defaultValue = '';
+
+  private hasCapturedDefault = false;
+
+  @state()
+  declare private hasPrefixSlot: boolean;
+
+  @state()
+  declare private hasSuffixSlot: boolean;
 
   constructor() {
     super();
+    this.internals = this.attachInternals?.() ?? null;
     this.label = '';
     this.helper = '';
     this.error = '';
     this.value = '';
     this.placeholder = '';
     this.name = '';
+    this.maxLength = undefined;
     this.autocomplete = '';
     this.min = '';
     this.max = '';
@@ -66,6 +95,84 @@ export class DsInput extends LitElement {
     this.disabled = false;
     this.required = false;
     this.readonly = false;
+    this.hasPrefixSlot = false;
+    this.hasSuffixSlot = false;
+  }
+
+  get form() {
+    return this.internals?.form ?? this.closest('form');
+  }
+
+  get validity() {
+    return this.inputElement?.validity ?? this.internals?.validity;
+  }
+
+  get validationMessage() {
+    return this.inputElement?.validationMessage ?? this.internals?.validationMessage ?? '';
+  }
+
+  willUpdate(changedProperties: PropertyValues<this>) {
+    if (!this.hasCapturedDefault && (changedProperties.has('value') || changedProperties.has('name'))) {
+      this.defaultValue = this.value;
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.hasPrefixSlot = this.querySelector('[slot="prefix"]') !== null;
+    this.hasSuffixSlot = this.querySelector('[slot="suffix"]') !== null;
+    if (!this.hasCapturedDefault) {
+      this.defaultValue = this.value;
+      this.hasCapturedDefault = true;
+    }
+    if (!supportsFormValue(this.internals)) {
+      this.removeFormResetListener = bindFormReset(
+        this.form,
+        () => this.formResetCallback(),
+        this.removeFormResetListener,
+      );
+    }
+    this.syncFormValue();
+  }
+
+  disconnectedCallback() {
+    this.removeFormResetListener?.();
+    this.removeFormResetListener = null;
+    super.disconnectedCallback();
+  }
+
+  protected updated(changedProperties: PropertyValues<this>) {
+    if (
+      changedProperties.has('value')
+      || changedProperties.has('name')
+      || changedProperties.has('disabled')
+    ) {
+      this.syncFormValue();
+    }
+  }
+
+  formResetCallback() {
+    this.value = this.defaultValue;
+  }
+
+  formDisabledCallback(disabled: boolean) {
+    this.toggleAttribute('data-form-disabled', disabled);
+  }
+
+  focus(options?: FocusOptions) {
+    this.inputElement?.focus(options);
+  }
+
+  checkValidity() {
+    return this.inputElement?.checkValidity() ?? true;
+  }
+
+  reportValidity() {
+    return this.inputElement?.reportValidity() ?? true;
+  }
+
+  private get inputElement() {
+    return this.shadowRoot?.querySelector('input') ?? null;
   }
 
   private get helperId() {
@@ -76,6 +183,36 @@ export class DsInput extends LitElement {
     return `${this.inputId}-error`;
   }
 
+  private get counterId() {
+    return `${this.inputId}-counter`;
+  }
+
+  private get characterCount() {
+    return this.value.length;
+  }
+
+  private get shouldShowCounter() {
+    return typeof this.maxLength === 'number' && this.maxLength >= 0;
+  }
+
+  private syncFormValue() {
+    const shouldOmitValue = this.disabled
+      || !this.name;
+
+    if (supportsFormValue(this.internals)) {
+      this.internals.setFormValue(shouldOmitValue ? null : this.value);
+      return;
+    }
+
+    this.proxyInput = syncHiddenFormProxy({
+      host: this,
+      proxyInput: this.proxyInput,
+      name: this.name,
+      value: this.value,
+      shouldSubmit: !shouldOmitValue,
+    });
+  }
+
   static styles = css`
     :host {
       display: block;
@@ -83,69 +220,165 @@ export class DsInput extends LitElement {
         --ds-input-font-family,
         var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
       );
-      color: var(--ds-color-text, #111827);
+      color: var(--ds-color-text, #111111);
     }
 
     .field {
       display: grid;
-      gap: var(--ds-space-xs, 6px);
+      gap: 10px;
     }
 
     .label {
-      font-size: 0.875rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.9375rem;
       font-weight: 600;
+      letter-spacing: -0.01em;
     }
 
     .required {
-      color: var(--ds-color-danger, #dc2626);
-      margin-left: 4px;
+      color: var(--ds-color-danger, #27272a);
+    }
+
+    .control {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      min-height: var(--ds-input-min-height, 52px);
+      padding-inline: 4px;
+      border: var(--ds-input-border, 1px solid var(--ds-color-input-border, #e4e4e7));
+      border-radius: var(--ds-input-radius, var(--ds-radius-md, 16px));
+      background: var(--ds-input-bg, #ffffff);
+      box-shadow: var(--ds-input-shadow, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+      transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      box-sizing: border-box;
+    }
+
+    .field:focus-within .control {
+      border: var(--ds-input-border-focus, 1px solid var(--ds-color-primary, #111111));
+      box-shadow: var(--ds-input-focus-shadow, 0 0 0 4px rgba(17, 17, 17, 0.1));
+    }
+
+    .field.field-error .control {
+      border: var(--ds-input-border-error, 1px solid var(--ds-color-danger, #27272a));
+      box-shadow: var(--ds-input-error-shadow, 0 0 0 4px rgba(39, 39, 42, 0.08));
     }
 
     input {
       appearance: none;
-      border: var(--ds-input-border, 1px solid var(--ds-color-input-border, #d1d5db));
-      border-radius: var(--ds-input-radius, var(--ds-radius-md, 8px));
-      padding: var(--ds-input-padding-y, var(--ds-space-sm, 8px))
-        var(--ds-input-padding-x, var(--ds-space-md, 12px));
-      min-height: var(--ds-input-min-height, auto);
-      font-size: var(--ds-input-font-size, 1rem);
-      background: var(--ds-input-bg, var(--ds-color-input-bg, #ffffff));
-      color: var(--ds-input-text-color, var(--ds-color-text, #111827));
-      box-shadow: var(--ds-input-shadow, none);
-      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      width: 100%;
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      padding: var(--ds-input-padding-y, 14px) 12px;
+      background: transparent;
+      color: var(--ds-input-text-color, var(--ds-color-text, #111111));
+      font: inherit;
+      line-height: 1.4;
+    }
+
+    input:focus {
+      outline: none;
     }
 
     input::placeholder {
       color: var(--ds-input-placeholder-color, var(--ds-color-input-placeholder, #9ca3af));
     }
 
-    input:focus-visible {
-      outline: none;
-      border: var(--ds-input-border-focus, 1px solid var(--ds-color-primary, #2563eb));
-      box-shadow: var(--ds-input-focus-shadow, 0 0 0 3px var(--ds-input-focus-ring, var(--ds-color-focus)));
-    }
-
-    :host([disabled]) input {
-      opacity: var(--ds-input-disabled-opacity, 0.6);
-      cursor: not-allowed;
-      background: var(--ds-input-disabled-bg, var(--ds-color-surface-muted, #f9fafb));
+    :host([disabled]) .control,
+    :host([data-form-disabled]) .control {
+      background: var(--ds-input-disabled-bg, #f3f4f6);
       box-shadow: none;
     }
 
-    :host([readonly]) input {
-      background: var(--ds-input-readonly-bg, var(--ds-color-surface-muted, #f9fafb));
+    :host([disabled]) input,
+    :host([data-form-disabled]) input {
+      opacity: var(--ds-input-disabled-opacity, 0.56);
+      cursor: not-allowed;
+    }
+
+    :host([readonly]) .control {
+      background: var(--ds-input-readonly-bg, #fafafa);
+    }
+
+    .adornment {
+      display: inline-flex;
+      align-items: center;
+      color: var(--ds-color-muted, #6b7280);
+      font-size: 0.875rem;
+      line-height: 1;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .adornment-prefix {
+      padding-left: 12px;
+    }
+
+    .adornment-suffix {
+      padding-right: 12px;
+    }
+
+    .adornment[hidden] {
+      display: none;
+    }
+
+    .meta {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
     }
 
     .message {
+      flex: 1;
+      min-width: 0;
       font-size: 0.8125rem;
       color: var(--ds-color-muted, #6b7280);
+      line-height: 1.4;
     }
 
     .message.error {
-      color: var(--ds-color-danger, #dc2626);
+      color: var(--ds-color-danger, #27272a);
       font-weight: 600;
     }
+
+    .counter {
+      font-size: 0.75rem;
+      color: var(--ds-color-muted, #6b7280);
+      line-height: 1.4;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .meta-spacer {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .counter[hidden],
+    .meta[hidden] {
+      display: none;
+    }
   `;
+
+  private handleSlotChange(slotName: 'prefix' | 'suffix', event: Event) {
+    const slot = event.target as HTMLSlotElement;
+    this.updateSlotState(slotName, slot);
+  }
+
+  private updateSlotState(slotName: 'prefix' | 'suffix', slot: HTMLSlotElement) {
+    const hasContent = slot.assignedNodes({ flatten: true }).length > 0;
+
+    if (slotName === 'prefix') {
+      this.hasPrefixSlot = hasContent;
+      return;
+    }
+
+    this.hasSuffixSlot = hasContent;
+  }
 
   private handleInput(event: Event) {
     event.stopPropagation();
@@ -160,13 +393,6 @@ export class DsInput extends LitElement {
   }
 
   render() {
-    let describedBy: string | undefined;
-    if (this.error) {
-      describedBy = this.errorId;
-    } else if (this.helper) {
-      describedBy = this.helperId;
-    }
-
     const requiredTemplate = this.required ? html`<span class="required">*</span>` : null;
     const labelTemplate = this.label
       ? html`<span class="label" part="label">${this.label}${requiredTemplate}</span>`
@@ -178,30 +404,58 @@ export class DsInput extends LitElement {
     const messageTemplate = messageText
       ? html`<span id=${messageId} class="message ${messageVariant}" part="message">${messageText}</span>`
       : null;
+    const describedBy = [
+      messageText ? messageId : null,
+      this.shouldShowCounter ? this.counterId : null,
+    ]
+      .filter(Boolean)
+      .join(' ') || undefined;
+    const counterTemplate = this.shouldShowCounter
+      ? html`
+          <span id=${this.counterId} class="counter" part="counter">
+            ${this.characterCount}/${this.maxLength}
+          </span>
+        `
+      : null;
+
+    const fieldClass = this.error ? 'field field-error' : 'field';
+    const isDisabled = this.disabled || this.hasAttribute('data-form-disabled');
 
     return html`
-      <label class="field" part="field">
+      <label class=${fieldClass} part="field">
         ${labelTemplate}
-        <input
-          id=${this.inputId}
-          part="input"
-          .value=${this.value}
-          type=${this.type}
-          placeholder=${this.placeholder}
-          name=${this.name}
-          autocomplete=${this.autocomplete}
-          min=${ifDefined(this.min || undefined)}
-          max=${ifDefined(this.max || undefined)}
-          step=${ifDefined(this.step || undefined)}
-          ?disabled=${this.disabled}
-          ?required=${this.required}
-          ?readonly=${this.readonly}
-          aria-invalid=${this.error ? 'true' : 'false'}
-          aria-describedby=${ifDefined(describedBy)}
-          @input=${this.handleInput}
-          @change=${this.handleChange}
-        />
-        ${messageTemplate}
+        <div class="control" part="control">
+          <span class="adornment adornment-prefix" part="prefix" ?hidden=${!this.hasPrefixSlot}>
+            <slot name="prefix" @slotchange=${(event: Event) => this.handleSlotChange('prefix', event)}></slot>
+          </span>
+          <input
+            id=${this.inputId}
+            part="input"
+            .value=${this.value}
+            type=${this.type}
+            placeholder=${this.placeholder}
+            name=${this.name}
+            autocomplete=${this.autocomplete}
+            maxlength=${ifDefined(this.maxLength)}
+            min=${ifDefined(this.min || undefined)}
+            max=${ifDefined(this.max || undefined)}
+            step=${ifDefined(this.step || undefined)}
+            ?disabled=${isDisabled}
+            ?required=${this.required}
+            ?readonly=${this.readonly}
+            aria-invalid=${this.error ? 'true' : 'false'}
+            aria-describedby=${ifDefined(describedBy)}
+            @input=${this.handleInput}
+            @change=${this.handleChange}
+          />
+          <span class="adornment adornment-suffix" part="suffix" ?hidden=${!this.hasSuffixSlot}>
+            <slot name="suffix" @slotchange=${(event: Event) => this.handleSlotChange('suffix', event)}></slot>
+          </span>
+        </div>
+        <div class="meta" part="meta" ?hidden=${!messageTemplate && !counterTemplate}>
+          ${messageTemplate ?? html`<span class="meta-spacer" aria-hidden="true"></span>`}
+          ${counterTemplate}
+        </div>
       </label>
     `;
   }

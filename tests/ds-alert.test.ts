@@ -17,4 +17,15 @@ describe('DsAlert', () => {
     expect(body?.querySelector('slot')).toBeTruthy();
     expect(element.textContent).toContain('내용');
   });
+
+  it('hides the title region when no title is provided', async () => {
+    document.body.innerHTML = '';
+    const element = new DsAlert();
+    element.textContent = '내용';
+    document.body.append(element);
+    await element.updateComplete;
+
+    const title = element.shadowRoot?.querySelector('.title');
+    expect(title?.hasAttribute('hidden')).toBe(true);
+  });
 });

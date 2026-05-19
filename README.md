@@ -1,3 +1,71 @@
+# 디자인 시스템 코어
+
+## 프로젝트 소개
+이 저장소는 Lit 기반 Web Components로 구성된 프레임워크 독립형 디자인 시스템입니다. 기본적인 UI 컴포넌트와 토큰을 제공하여 다양한 프론트엔드 환경에서 재사용할 수 있도록 설계했습니다. 각 컴포넌트는 CSS 커스텀 프로퍼티를 통해 테마를 쉽게 확장할 수 있습니다.
+
+## 포함 컴포넌트
+- `ds-button`: 주요/보조/고스트 버튼
+- `ds-card`: 섹션 구성을 위한 카드
+- `ds-input`: 라벨/헬퍼/에러를 포함한 입력 필드
+- `ds-textarea`: 다중 행 입력 필드
+- `ds-checkbox`: 체크박스
+- `ds-radio`: 라디오 버튼
+- `ds-switch`: 토글 스위치
+- `ds-badge`: 상태 표시 배지
+- `ds-alert`: 정보/성공/경고/오류 알림
+
+## 토큰 사용
+`src/styles/tokens.css`를 통해 색상, 공간, 타이포그래피 토큰을 제공합니다. 프로젝트에서 다음과 같이 가져와 테마의 기본값을 적용할 수 있습니다.
+
+```css
+@import "@design-system/core/styles/tokens.css";
+```
+
+## 로컬 프리뷰 (Storybook 대체)
+토큰과 컴포넌트를 빠르게 확인할 수 있는 로컬 프리뷰 페이지를 제공합니다.
+
+```bash
+bun install
+bun run docs:dev
+```
+
+브라우저에서 `http://localhost:4173`로 접속하면 색상 토큰과 컴포넌트 데모를 확인할 수 있습니다.
+
+## 성능 지표
+디자인 시스템은 다양한 서비스에서 재사용되므로, 다음과 같은 지표를 기준으로 성능을 점검합니다.
+
+- 번들 크기: 배포되는 `dist` 산출물 크기를 확인하여 추가되는 컴포넌트가 용량을 과도하게 늘리지 않는지 점검합니다.
+- 초기 렌더링 시간: 프리뷰 페이지에서 주요 컴포넌트가 보이기까지의 시간을 측정하여 렌더링 비용을 관리합니다.
+- 상호작용 응답성: 버튼/입력 등 인터랙션 요소의 반응 시간을 체크해 UX 저하가 없는지 확인합니다.
+
+## 파일 구조
+```
+.
+├── src
+│   ├── components
+│   │   ├── ds-alert.ts
+│   │   ├── ds-badge.ts
+│   │   ├── ds-button.ts
+│   │   ├── ds-card.ts
+│   │   ├── ds-checkbox.ts
+│   │   ├── ds-input.ts
+│   │   ├── ds-radio.ts
+│   │   ├── ds-switch.ts
+│   │   └── ds-textarea.ts
+│   ├── index.ts
+│   └── styles
+│       └── tokens.css
+└── tests
+    ├── ds-alert.test.ts
+    ├── ds-badge.test.ts
+    ├── ds-button.test.ts
+    ├── ds-checkbox.test.ts
+    ├── ds-input.test.ts
+    ├── ds-radio.test.ts
+    ├── ds-switch.test.ts
+    └── ds-textarea.test.ts
+```
+
 ## 바이브코딩으로 날먹하기
 
 slack + codex를 조합하여 말로만으로 더 좋은 코드를 만들기 위해서 시작한 template입니다.
@@ -47,7 +115,7 @@ slack + codex를 조합하여 말로만으로 더 좋은 코드를 만들기 위
 ```txt
 [검증 요청]
 
-목표: 
+목표:
 - 특정 repo의 특정 브랜치가 PR 가능한 상태인지 검증
 - pr-preflight 기준으로 base 최신화 여부 확인
 - lint -> test -> build 순으로 검증
@@ -65,7 +133,3 @@ slack + codex를 조합하여 말로만으로 더 좋은 코드를 만들기 위
 - 빌드 성공시 PR 초안 작성
 
 3. scope-guard: 작업 범위를 벗어나는 것을 방지하는 안전장치
-
-4. quality-guard: 안티패턴을 배제하고 코드 퀄리티를 올리기 위한 안전장치
-
-5. frontend-quality: 프론트엔드(React/Next.js) 코드 퀄리티 패턴 + 예시 모음
