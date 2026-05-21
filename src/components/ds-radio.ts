@@ -231,29 +231,52 @@ export class DsRadio extends LitElement {
         --ds-radio-font-family,
         var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
       );
-      color: var(--ds-color-text, #111111);
+      color: var(--ds-radio-color, var(--ds-color-text, #111111));
+
+      /* Local variable bridging */
+      --_gap: var(--ds-radio-gap, 12px);
+      --_min-height: var(--ds-radio-min-height, 44px);
+      --_font-size: var(--ds-radio-font-size, 0.9375rem);
+      --_font-weight: var(--ds-radio-font-weight, 500);
+      --_letter-spacing: var(--ds-radio-letter-spacing, -0.01em);
+      --_size: var(--ds-radio-size, 20px);
+      --_dot-size: var(--ds-radio-dot-size, calc(var(--_size) * 0.38));
+      --_dot-color: var(--ds-radio-dot-color, var(--ds-color-on-primary, #ffffff));
+      --_border-color: var(--ds-radio-border-color, var(--ds-color-border-strong, #d4d4d8));
+      --_border-width: var(--ds-radio-border-width, 1.5px);
+      --_border: var(--ds-radio-border, var(--_border-width) solid var(--_border-color));
+      --_bg: var(--ds-radio-bg, #ffffff);
+      --_shadow: var(--ds-radio-shadow, var(--ds-shadow-inset, inset 0 1px 0 rgba(255, 255, 255, 0.72)));
+      --_hover-border-color: var(--ds-radio-hover-border-color, var(--ds-color-accent, var(--ds-color-text, #111111)));
+      --_checked-border: var(--ds-radio-border-checked, var(--_border-width) solid var(--ds-color-primary, #111111));
+      --_checked-bg: var(--ds-radio-bg-checked, var(--ds-color-primary, #111111));
+      --_focus-shadow: var(
+        --ds-radio-focus-shadow,
+        0 0 0 4px var(--ds-radio-focus-ring, rgba(17, 17, 17, 0.1))
+      );
+      --_disabled-opacity: var(--ds-radio-disabled-opacity, 0.56);
     }
 
     label {
       display: inline-flex;
       align-items: center;
-      gap: var(--ds-radio-gap, 12px);
-      min-height: 44px;
+      gap: var(--_gap);
+      min-height: var(--_min-height);
       cursor: pointer;
-      font-size: 0.9375rem;
-      font-weight: 500;
-      letter-spacing: -0.01em;
+      font-size: var(--_font-size);
+      font-weight: var(--_font-weight);
+      letter-spacing: var(--_letter-spacing);
     }
 
     input {
       appearance: none;
       margin: 0;
-      width: var(--ds-radio-size, 20px);
-      height: var(--ds-radio-size, 20px);
+      width: var(--_size);
+      height: var(--_size);
       border-radius: 999px;
-      border: var(--ds-radio-border, 1.5px solid var(--ds-color-border-strong, #d4d4d8));
-      background: var(--ds-radio-bg, #ffffff);
-      box-shadow: var(--ds-shadow-inset, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+      border: var(--_border);
+      background: var(--_bg);
+      box-shadow: var(--_shadow);
       display: inline-grid;
       place-items: center;
       transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
@@ -263,21 +286,21 @@ export class DsRadio extends LitElement {
 
     input::after {
       content: '';
-      width: calc(var(--ds-radio-size, 20px) * 0.38);
-      height: calc(var(--ds-radio-size, 20px) * 0.38);
+      width: var(--_dot-size);
+      height: var(--_dot-size);
       border-radius: 999px;
-      background: var(--ds-radio-dot-color, var(--ds-color-on-primary, #ffffff));
+      background: var(--_dot-color);
       transform: scale(0);
       transition: transform 0.18s ease;
     }
 
     label:hover input:not(:disabled) {
-      border-color: var(--ds-color-accent, var(--ds-color-text, #111111));
+      border-color: var(--_hover-border-color);
     }
 
     input:checked {
-      border: var(--ds-radio-border-checked, 1.5px solid var(--ds-color-primary, #111111));
-      background: var(--ds-radio-bg-checked, var(--ds-color-primary, #111111));
+      border: var(--_checked-border);
+      background: var(--_checked-bg);
       box-shadow: none;
     }
 
@@ -287,7 +310,7 @@ export class DsRadio extends LitElement {
 
     input:focus-visible {
       outline: none;
-      box-shadow: var(--ds-radio-focus-shadow, 0 0 0 4px var(--ds-radio-focus-ring, rgba(17, 17, 17, 0.1)));
+      box-shadow: var(--_focus-shadow);
     }
 
     .text {
@@ -297,7 +320,7 @@ export class DsRadio extends LitElement {
     :host([disabled]) label,
     :host([data-form-disabled]) label {
       cursor: not-allowed;
-      opacity: var(--ds-radio-disabled-opacity, 0.56);
+      opacity: var(--_disabled-opacity);
     }
 
     :host([disabled]) input,

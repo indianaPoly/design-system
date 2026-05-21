@@ -169,29 +169,51 @@ export class DsCheckbox extends LitElement {
         --ds-checkbox-font-family,
         var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
       );
-      color: var(--ds-color-text, #111111);
+      color: var(--ds-checkbox-color, var(--ds-color-text, #111111));
+
+      /* Local variable bridging */
+      --_gap: var(--ds-checkbox-gap, 12px);
+      --_min-height: var(--ds-checkbox-min-height, 44px);
+      --_font-size: var(--ds-checkbox-font-size, 0.9375rem);
+      --_font-weight: var(--ds-checkbox-font-weight, 500);
+      --_letter-spacing: var(--ds-checkbox-letter-spacing, -0.01em);
+      --_size: var(--ds-checkbox-size, 20px);
+      --_radius: var(--ds-checkbox-radius, 6px);
+      --_border-color: var(--ds-checkbox-border-color, var(--ds-color-border-strong, #d4d4d8));
+      --_border-width: var(--ds-checkbox-border-width, 1.5px);
+      --_border: var(--ds-checkbox-border, var(--_border-width) solid var(--_border-color));
+      --_bg: var(--ds-checkbox-bg, #ffffff);
+      --_shadow: var(--ds-checkbox-shadow, var(--ds-shadow-inset, inset 0 1px 0 rgba(255, 255, 255, 0.72)));
+      --_hover-border-color: var(--ds-checkbox-hover-border-color, var(--ds-color-accent, var(--ds-color-text, #111111)));
+      --_checked-border-color: var(--ds-checkbox-border-checked, var(--ds-color-primary, #111111));
+      --_checked-bg: var(--ds-checkbox-bg-checked, var(--ds-color-primary, #111111));
+      --_focus-shadow: var(
+        --ds-checkbox-focus-shadow,
+        0 0 0 4px var(--ds-checkbox-focus-ring, rgba(17, 17, 17, 0.1))
+      );
+      --_disabled-opacity: var(--ds-checkbox-disabled-opacity, 0.56);
     }
 
     label {
       display: inline-flex;
       align-items: center;
-      gap: var(--ds-checkbox-gap, 12px);
-      min-height: 44px;
+      gap: var(--_gap);
+      min-height: var(--_min-height);
       cursor: pointer;
-      font-size: 0.9375rem;
-      font-weight: 500;
-      letter-spacing: -0.01em;
+      font-size: var(--_font-size);
+      font-weight: var(--_font-weight);
+      letter-spacing: var(--_letter-spacing);
     }
 
     input {
       appearance: none;
       margin: 0;
-      width: var(--ds-checkbox-size, 20px);
-      height: var(--ds-checkbox-size, 20px);
-      border-radius: var(--ds-checkbox-radius, 6px);
-      border: var(--ds-checkbox-border, 1.5px solid var(--ds-color-border-strong, #d4d4d8));
-      background: var(--ds-checkbox-bg, #ffffff);
-      box-shadow: var(--ds-shadow-inset, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+      width: var(--_size);
+      height: var(--_size);
+      border-radius: var(--_radius);
+      border: var(--_border);
+      background: var(--_bg);
+      box-shadow: var(--_shadow);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -204,19 +226,19 @@ export class DsCheckbox extends LitElement {
     }
 
     label:hover input:not(:disabled) {
-      border-color: var(--ds-color-accent, var(--ds-color-text, #111111));
+      border-color: var(--_hover-border-color);
     }
 
     input:checked {
-      border-color: var(--ds-checkbox-border-checked, var(--ds-color-primary, #111111));
-      background-color: var(--ds-checkbox-bg-checked, var(--ds-color-primary, #111111));
+      border-color: var(--_checked-border-color);
+      background-color: var(--_checked-bg);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'%3E%3C/path%3E%3C/svg%3E");
       box-shadow: none;
     }
 
     input:focus-visible {
       outline: none;
-      box-shadow: var(--ds-checkbox-focus-shadow, 0 0 0 4px var(--ds-checkbox-focus-ring, rgba(17, 17, 17, 0.1)));
+      box-shadow: var(--_focus-shadow);
     }
 
     .text {
@@ -226,7 +248,7 @@ export class DsCheckbox extends LitElement {
     :host([disabled]) label,
     :host([data-form-disabled]) label {
       cursor: not-allowed;
-      opacity: var(--ds-checkbox-disabled-opacity, 0.56);
+      opacity: var(--_disabled-opacity);
     }
 
     :host([disabled]) input,

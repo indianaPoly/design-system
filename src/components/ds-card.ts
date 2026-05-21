@@ -26,26 +26,35 @@ export class DsCard extends LitElement {
         --ds-card-font-family,
         var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
       );
+
+      /* Local variable bridging */
+      --_gap: var(--ds-card-gap, 16px);
+      --_padding: var(--ds-card-padding, 24px);
+      --_radius: var(--ds-card-radius, var(--ds-radius-xl, 24px));
+      --_border: var(--ds-card-border, 1px solid var(--ds-color-border, #e4e4e7));
+      --_bg: var(--ds-card-bg, var(--ds-color-surface, #ffffff));
+      --_shadow: var(--ds-card-shadow, 0 8px 24px rgba(17, 17, 17, 0.06));
+      --_color: var(--ds-card-color, var(--ds-color-text, #111111));
     }
 
     .card {
       display: grid;
-      gap: var(--ds-card-gap, 16px);
-      padding: var(--ds-card-padding, 24px);
-      border-radius: var(--ds-card-radius, var(--ds-radius-xl, 24px));
-      border: var(--ds-card-border, 1px solid var(--ds-color-border, #e4e4e7));
-      background: var(--ds-card-bg, var(--ds-color-surface, #ffffff));
-      box-shadow: var(--ds-card-shadow, 0 8px 24px rgba(17, 17, 17, 0.06));
-      color: var(--ds-color-text, #111111);
+      gap: var(--_gap);
+      padding: var(--_padding);
+      border-radius: var(--_radius);
+      border: var(--_border);
+      background: var(--_bg);
+      box-shadow: var(--_shadow);
+      color: var(--_color);
       box-sizing: border-box;
     }
 
-    :host([elevation="2"]) .card {
-      box-shadow: var(--ds-card-shadow-elevation-2, 0 18px 40px rgba(17, 17, 17, 0.08));
+    :host([elevation="2"]) {
+      --_shadow: var(--ds-card-shadow-elevation-2, 0 18px 40px rgba(17, 17, 17, 0.08));
     }
 
-    :host([elevation="0"]) .card {
-      box-shadow: var(--ds-card-shadow-elevation-0, none);
+    :host([elevation="0"]) {
+      --_shadow: var(--ds-card-shadow-elevation-0, none);
     }
 
     .header,
@@ -54,7 +63,7 @@ export class DsCard extends LitElement {
     }
 
     .header {
-      color: var(--ds-color-text, #111111);
+      color: var(--ds-card-header-color, var(--_color));
       font-size: 1.0625rem;
       font-weight: 700;
       letter-spacing: -0.02em;
@@ -62,12 +71,12 @@ export class DsCard extends LitElement {
     }
 
     .body {
-      color: var(--ds-color-text, #111111);
+      color: var(--ds-card-body-color, var(--_color));
       line-height: 1.6;
     }
 
     .footer {
-      color: var(--ds-color-muted, #6b7280);
+      color: var(--ds-card-footer-color, var(--ds-color-muted, #6b7280));
       padding-top: 2px;
     }
 

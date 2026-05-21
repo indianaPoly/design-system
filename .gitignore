@@ -5,3 +5,5 @@ dist-docs/
 dist-docs-archive/
 artifacts/
 test-results/
+
+.omg/

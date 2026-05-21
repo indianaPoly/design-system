@@ -201,21 +201,45 @@ export class DsTextarea extends LitElement {
         --ds-textarea-font-family,
         var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
       );
-      color: var(--ds-color-text, #111111);
+      color: var(--ds-textarea-color, var(--ds-color-text, #111111));
+
+      /* Local variable bridging */
+      --_gap: var(--ds-textarea-gap, 10px);
+      --_label-gap: var(--ds-textarea-label-gap, 4px);
+      --_label-font-size: var(--ds-textarea-label-font-size, 0.9375rem);
+      --_label-font-weight: var(--ds-textarea-label-font-weight, 600);
+      --_label-letter-spacing: var(--ds-textarea-label-letter-spacing, -0.01em);
+      --_border-color: var(--ds-textarea-border-color, var(--ds-color-input-border, #e4e4e7));
+      --_border-width: var(--ds-textarea-border-width, 1px);
+      --_border: var(--ds-textarea-border, var(--_border-width) solid var(--_border-color));
+      --_radius: var(--ds-textarea-radius, var(--ds-radius-md, 16px));
+      --_bg: var(--ds-textarea-bg, #ffffff);
+      --_shadow: var(--ds-textarea-shadow, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+      --_padding: var(--ds-textarea-padding, var(--ds-textarea-padding-y, 14px) var(--ds-textarea-padding-x, 16px));
+      --_focus-border-color: var(--ds-textarea-border-focus-color, var(--ds-color-primary, #111111));
+      --_focus-border: var(--ds-textarea-border-focus, var(--_border-width) solid var(--_focus-border-color));
+      --_focus-shadow: var(--ds-textarea-focus-shadow, 0 0 0 4px rgba(17, 17, 17, 0.1));
+      --_error-border: var(--ds-textarea-border-error, var(--_border-width) solid var(--ds-color-danger, #27272a));
+      --_disabled-bg: var(--ds-textarea-disabled-bg, #f3f4f6);
+      --_readonly-bg: var(--ds-textarea-readonly-bg, #fafafa);
+      --_disabled-opacity: var(--ds-textarea-disabled-opacity, 0.56);
+      --_message-color: var(--ds-textarea-message-color, var(--ds-color-muted, #6b7280));
+      --_counter-color: var(--ds-textarea-counter-color, var(--ds-color-muted, #6b7280));
+      --_footer-color: var(--ds-textarea-footer-color, var(--ds-color-muted, #6b7280));
     }
 
     .field {
       display: grid;
-      gap: 10px;
+      gap: var(--_gap);
     }
 
     .label {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      font-size: 0.9375rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
+      gap: var(--_label-gap);
+      font-size: var(--_label-font-size);
+      font-weight: var(--_label-font-weight);
+      letter-spacing: var(--_label-letter-spacing);
     }
 
     .required {
@@ -224,21 +248,21 @@ export class DsTextarea extends LitElement {
 
     .control {
       display: flex;
-      border: var(--ds-textarea-border, 1px solid var(--ds-color-input-border, #e4e4e7));
-      border-radius: var(--ds-textarea-radius, var(--ds-radius-md, 16px));
-      background: var(--ds-textarea-bg, #ffffff);
-      box-shadow: var(--ds-textarea-shadow, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+      border: var(--_border);
+      border-radius: var(--_radius);
+      background: var(--_bg);
+      box-shadow: var(--_shadow);
       transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
       box-sizing: border-box;
     }
 
     .field:focus-within .control {
-      border: var(--ds-textarea-border-focus, 1px solid var(--ds-color-primary, #111111));
-      box-shadow: var(--ds-textarea-focus-shadow, 0 0 0 4px rgba(17, 17, 17, 0.1));
+      border: var(--_focus-border);
+      box-shadow: var(--_focus-shadow);
     }
 
     .field.field-error .control {
-      border: var(--ds-textarea-border-error, 1px solid var(--ds-color-danger, #27272a));
+      border: var(--_error-border);
       box-shadow: var(--ds-textarea-error-shadow, 0 0 0 4px rgba(39, 39, 42, 0.08));
     }
 
@@ -246,7 +270,7 @@ export class DsTextarea extends LitElement {
       width: 100%;
       min-width: 0;
       border: 0;
-      padding: var(--ds-textarea-padding-y, 14px) var(--ds-textarea-padding-x, 16px);
+      padding: var(--_padding);
       border-radius: inherit;
       background: transparent;
       color: var(--ds-textarea-text-color, var(--ds-color-text, #111111));
@@ -266,18 +290,18 @@ export class DsTextarea extends LitElement {
 
     :host([disabled]) .control,
     :host([data-form-disabled]) .control {
-      background: var(--ds-textarea-disabled-bg, #f3f4f6);
+      background: var(--_disabled-bg);
       box-shadow: none;
     }
 
     :host([disabled]) textarea,
     :host([data-form-disabled]) textarea {
-      opacity: var(--ds-textarea-disabled-opacity, 0.56);
+      opacity: var(--_disabled-opacity);
       cursor: not-allowed;
     }
 
     :host([readonly]) .control {
-      background: var(--ds-textarea-readonly-bg, #fafafa);
+      background: var(--_readonly-bg);
     }
 
     .meta {
@@ -291,7 +315,7 @@ export class DsTextarea extends LitElement {
       flex: 1;
       min-width: 0;
       font-size: 0.8125rem;
-      color: var(--ds-color-muted, #6b7280);
+      color: var(--_message-color);
       line-height: 1.4;
     }
 
@@ -302,7 +326,7 @@ export class DsTextarea extends LitElement {
 
     .counter {
       font-size: 0.75rem;
-      color: var(--ds-color-muted, #6b7280);
+      color: var(--_counter-color);
       line-height: 1.4;
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
@@ -317,7 +341,7 @@ export class DsTextarea extends LitElement {
     .footer {
       display: flex;
       justify-content: flex-end;
-      color: var(--ds-color-muted, #6b7280);
+      color: var(--_footer-color);
       font-size: 0.8125rem;
       line-height: 1.4;
     }

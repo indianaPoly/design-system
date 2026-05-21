@@ -28,19 +28,33 @@ export class DsAlert extends LitElement {
         --ds-alert-font-family,
         var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
       );
+
+      /* Local variable bridging */
+      --_padding-y: var(--ds-alert-padding-y, 18px);
+      --_padding-x: var(--ds-alert-padding-x, 20px);
+      --_gap: var(--ds-alert-gap, 6px);
+      --_radius: var(--ds-alert-radius, var(--ds-radius-lg, 20px));
+      --_indicator-size: var(--ds-alert-indicator-size, 10px);
+      --_indicator-offset: var(--ds-alert-indicator-offset, 21px);
+      --_border-color: var(--ds-alert-border-color, var(--ds-color-border, #e4e4e7));
+      --_border: var(--ds-alert-border, 1px solid var(--_border-color));
+      --_bg: var(--ds-alert-bg, var(--ds-color-surface-raised, #fcfcfc));
+      --_color: var(--ds-alert-text-color, var(--ds-color-text, #111111));
+      --_shadow: var(--ds-alert-shadow, 0 1px 2px rgba(17, 17, 17, 0.04));
+      --_accent: var(--ds-alert-accent, #111111);
     }
 
     .alert {
       position: relative;
       display: grid;
-      gap: var(--ds-alert-gap, 6px);
-      padding: var(--ds-alert-padding-y, 18px) var(--ds-alert-padding-x, 20px);
-      padding-left: calc(var(--ds-alert-padding-x, 20px) + var(--ds-alert-indicator-size, 10px) + 12px);
-      border-radius: var(--ds-alert-radius, var(--ds-radius-lg, 20px));
-      border: 1px solid var(--ds-alert-border-color, var(--ds-color-border, #e4e4e7));
-      background: var(--ds-alert-bg, var(--ds-color-surface-raised, #fcfcfc));
-      color: var(--ds-alert-text-color, var(--ds-color-text, #111111));
-      box-shadow: var(--ds-alert-shadow, 0 1px 2px rgba(17, 17, 17, 0.04));
+      gap: var(--_gap);
+      padding: var(--_padding-y) var(--_padding-x);
+      padding-left: calc(var(--_padding-x) + var(--_indicator-size) + 12px);
+      border-radius: var(--_radius);
+      border: var(--_border);
+      background: var(--_bg);
+      color: var(--_color);
+      box-shadow: var(--_shadow);
       overflow: hidden;
       box-sizing: border-box;
     }
@@ -48,13 +62,13 @@ export class DsAlert extends LitElement {
     .alert::before {
       content: '';
       position: absolute;
-      top: 21px;
-      left: var(--ds-alert-padding-x, 20px);
-      width: var(--ds-alert-indicator-size, 10px);
-      height: var(--ds-alert-indicator-size, 10px);
+      top: var(--_indicator-offset);
+      left: var(--_padding-x);
+      width: var(--_indicator-size);
+      height: var(--_indicator-size);
       border-radius: 999px;
-      background: var(--ds-alert-info-accent, #111111);
-      box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-info-accent, #111111) 12%, transparent);
+      background: var(--_accent);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--_accent) 12%, transparent);
     }
 
     .title {
@@ -65,7 +79,7 @@ export class DsAlert extends LitElement {
     }
 
     .body {
-      color: var(--ds-color-muted, #6b7280);
+      color: var(--ds-alert-body-color, var(--ds-color-muted, #6b7280));
       line-height: 1.55;
       font-size: 0.9375rem;
     }
@@ -74,44 +88,28 @@ export class DsAlert extends LitElement {
       display: none;
     }
 
-    :host([variant="info"]) .alert {
-      border-color: var(--ds-alert-info-border-color, #e4e4e7);
-      background: var(--ds-alert-info-bg, #fafafa);
+    :host([variant="info"]) {
+      --_accent: var(--ds-alert-info-accent, #111111);
+      --_bg: var(--ds-alert-info-bg, #fafafa);
+      --_border-color: var(--ds-alert-info-border-color, var(--ds-alert-border-color, #e4e4e7));
     }
 
-    :host([variant="info"]) .alert::before {
-      background: var(--ds-alert-info-accent, #111111);
-      box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-info-accent, #111111) 12%, transparent);
+    :host([variant="success"]) {
+      --_accent: var(--ds-alert-success-accent, #2f2f33);
+      --_bg: var(--ds-alert-success-bg, #f7f7f8);
+      --_border-color: var(--ds-alert-success-border-color, var(--ds-alert-border-color, #d4d4d8));
     }
 
-    :host([variant="success"]) .alert {
-      border-color: var(--ds-alert-success-border-color, #d4d4d8);
-      background: var(--ds-alert-success-bg, #f7f7f8);
+    :host([variant="warning"]) {
+      --_accent: var(--ds-alert-warning-accent, #52525b);
+      --_bg: var(--ds-alert-warning-bg, #f4f4f5);
+      --_border-color: var(--ds-alert-warning-border-color, var(--ds-alert-border-color, #d4d4d8));
     }
 
-    :host([variant="success"]) .alert::before {
-      background: var(--ds-alert-success-accent, #2f2f33);
-      box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-success-accent, #2f2f33) 12%, transparent);
-    }
-
-    :host([variant="warning"]) .alert {
-      border-color: var(--ds-alert-warning-border-color, #d4d4d8);
-      background: var(--ds-alert-warning-bg, #f4f4f5);
-    }
-
-    :host([variant="warning"]) .alert::before {
-      background: var(--ds-alert-warning-accent, #52525b);
-      box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-warning-accent, #52525b) 14%, transparent);
-    }
-
-    :host([variant="danger"]) .alert {
-      border-color: var(--ds-alert-danger-border-color, #c7c7cc);
-      background: var(--ds-alert-danger-bg, #ededf0);
-    }
-
-    :host([variant="danger"]) .alert::before {
-      background: var(--ds-alert-danger-accent, #27272a);
-      box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-alert-danger-accent, #27272a) 12%, transparent);
+    :host([variant="danger"]) {
+      --_accent: var(--ds-alert-danger-accent, #27272a);
+      --_bg: var(--ds-alert-danger-bg, #ededf0);
+      --_border-color: var(--ds-alert-danger-border-color, var(--ds-alert-border-color, #c7c7cc));
     }
   `;
 

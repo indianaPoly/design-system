@@ -169,26 +169,49 @@ export class DsSwitch extends LitElement {
         --ds-switch-font-family,
         var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
       );
-      color: var(--ds-color-text, #111111);
+      color: var(--ds-switch-color, var(--ds-color-text, #111111));
+
+      /* Local variable bridging */
+      --_gap: var(--ds-switch-gap, 12px);
+      --_min-height: var(--ds-switch-min-height, 44px);
+      --_font-size: var(--ds-switch-font-size, 0.9375rem);
+      --_font-weight: var(--ds-switch-font-weight, 500);
+      --_letter-spacing: var(--ds-switch-letter-spacing, -0.01em);
+      --_track-width: var(--ds-switch-track-width, 46px);
+      --_track-height: var(--ds-switch-track-height, 28px);
+      --_track-radius: var(--ds-switch-track-radius, 999px);
+      --_track-bg: var(--ds-switch-track-bg, #d4d4d8);
+      --_track-bg-checked: var(--ds-switch-track-bg-checked, var(--ds-color-primary, #111111));
+      --_track-hover-shadow: var(--ds-switch-track-hover-shadow, inset 0 0 0 1px var(--ds-color-border-strong, #d4d4d8));
+      --_focus-shadow: var(
+        --ds-switch-focus-shadow,
+        0 0 0 4px var(--ds-switch-focus-ring, rgba(17, 17, 17, 0.1))
+      );
+      --_thumb-inset: var(--ds-switch-thumb-inset, 2px);
+      --_thumb-size: var(--ds-switch-thumb-size, 24px);
+      --_thumb-bg: var(--ds-switch-thumb-bg, #ffffff);
+      --_thumb-shadow: var(--ds-switch-thumb-shadow, 0 4px 10px rgba(17, 17, 17, 0.16));
+      --_thumb-translate: calc(var(--_track-width) - var(--_thumb-size) - (var(--_thumb-inset) * 2));
+      --_disabled-opacity: var(--ds-switch-disabled-opacity, 0.56);
     }
 
     label {
       display: inline-flex;
       align-items: center;
-      gap: var(--ds-switch-gap, 12px);
-      min-height: 44px;
+      gap: var(--_gap);
+      min-height: var(--_min-height);
       cursor: pointer;
-      font-size: 0.9375rem;
-      font-weight: 500;
-      letter-spacing: -0.01em;
+      font-size: var(--_font-size);
+      font-weight: var(--_font-weight);
+      letter-spacing: var(--_letter-spacing);
     }
 
     .track {
       position: relative;
-      width: var(--ds-switch-track-width, 46px);
-      height: var(--ds-switch-track-height, 28px);
-      border-radius: var(--ds-switch-track-radius, 999px);
-      background: var(--ds-switch-track-bg, #d4d4d8);
+      width: var(--_track-width);
+      height: var(--_track-height);
+      border-radius: var(--_track-radius);
+      background: var(--_track-bg);
       transition: background 0.18s ease, box-shadow 0.18s ease;
       flex-shrink: 0;
       box-sizing: border-box;
@@ -196,22 +219,22 @@ export class DsSwitch extends LitElement {
 
     .thumb {
       position: absolute;
-      top: var(--ds-switch-thumb-inset, 2px);
-      left: var(--ds-switch-thumb-inset, 2px);
-      width: var(--ds-switch-thumb-size, 24px);
-      height: var(--ds-switch-thumb-size, 24px);
+      top: var(--_thumb-inset);
+      left: var(--_thumb-inset);
+      width: var(--_thumb-size);
+      height: var(--_thumb-size);
       border-radius: 50%;
-      background: var(--ds-switch-thumb-bg, #ffffff);
-      box-shadow: var(--ds-switch-thumb-shadow, 0 4px 10px rgba(17, 17, 17, 0.16));
+      background: var(--_thumb-bg);
+      box-shadow: var(--_thumb-shadow);
       transition: transform 0.18s ease;
     }
 
     label:hover .track {
-      box-shadow: inset 0 0 0 1px var(--ds-color-border-strong, #d4d4d8);
+      box-shadow: var(--_track-hover-shadow);
     }
 
     label:focus-within .track {
-      box-shadow: var(--ds-switch-focus-shadow, 0 0 0 4px var(--ds-switch-focus-ring, rgba(17, 17, 17, 0.1)));
+      box-shadow: var(--_focus-shadow);
     }
 
     input {
@@ -225,16 +248,11 @@ export class DsSwitch extends LitElement {
     }
 
     :host([checked]) .track {
-      background: var(--ds-switch-track-bg-checked, var(--ds-color-primary, #111111));
+      background: var(--_track-bg-checked);
     }
 
     :host([checked]) .thumb {
-      transform: translateX(
-        calc(
-          var(--ds-switch-track-width, 46px) - var(--ds-switch-thumb-size, 24px) -
-            (var(--ds-switch-thumb-inset, 2px) * 2)
-        )
-      );
+      transform: translateX(var(--_thumb-translate));
     }
 
     .text {
@@ -244,7 +262,7 @@ export class DsSwitch extends LitElement {
     :host([disabled]) label,
     :host([data-form-disabled]) label {
       cursor: not-allowed;
-      opacity: var(--ds-switch-disabled-opacity, 0.56);
+      opacity: var(--_disabled-opacity);
     }
 
     :host([disabled]) .track,

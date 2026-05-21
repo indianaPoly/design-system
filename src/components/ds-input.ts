@@ -221,6 +221,21 @@ export class DsInput extends LitElement {
         var(--ds-font-family, "Inter", system-ui, -apple-system, sans-serif)
       );
       color: var(--ds-color-text, #111111);
+
+      /* Local variable bridging for easier customization */
+      --_border-color: var(--ds-input-border-color, var(--ds-color-input-border, #e4e4e7));
+      --_border-width: var(--ds-input-border-width, 1px);
+      --_border: var(--ds-input-border, var(--_border-width) solid var(--_border-color));
+      --_radius: var(--ds-input-radius, var(--ds-radius-md, 16px));
+      --_bg: var(--ds-input-bg, #ffffff);
+      --_shadow: var(--ds-input-shadow, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+      --_min-height: var(--ds-input-min-height, 52px);
+      --_padding-inline: var(--ds-input-padding-inline, 4px);
+      --_input-padding: var(--ds-input-padding, var(--ds-input-padding-y, 14px) 12px);
+      --_focus-border-color: var(--ds-input-border-focus-color, var(--ds-color-primary, #111111));
+      --_focus-border: var(--ds-input-border-focus, var(--_border-width) solid var(--_focus-border-color));
+      --_focus-shadow: var(--ds-input-focus-shadow, var(--ds-input-focus-ring, 0 0 0 4px rgba(17, 17, 17, 0.1)));
+      --_error-border: var(--ds-input-border-error, var(--_border-width) solid var(--ds-color-danger, #27272a));
     }
 
     .field {
@@ -245,23 +260,23 @@ export class DsInput extends LitElement {
       display: flex;
       align-items: center;
       gap: 4px;
-      min-height: var(--ds-input-min-height, 52px);
-      padding-inline: 4px;
-      border: var(--ds-input-border, 1px solid var(--ds-color-input-border, #e4e4e7));
-      border-radius: var(--ds-input-radius, var(--ds-radius-md, 16px));
-      background: var(--ds-input-bg, #ffffff);
-      box-shadow: var(--ds-input-shadow, inset 0 1px 0 rgba(255, 255, 255, 0.72));
+      min-height: var(--_min-height);
+      padding-inline: var(--_padding-inline);
+      border: var(--_border);
+      border-radius: var(--_radius);
+      background: var(--_bg);
+      box-shadow: var(--_shadow);
       transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
       box-sizing: border-box;
     }
 
     .field:focus-within .control {
-      border: var(--ds-input-border-focus, 1px solid var(--ds-color-primary, #111111));
-      box-shadow: var(--ds-input-focus-shadow, 0 0 0 4px rgba(17, 17, 17, 0.1));
+      border: var(--_focus-border);
+      box-shadow: var(--_focus-shadow);
     }
 
     .field.field-error .control {
-      border: var(--ds-input-border-error, 1px solid var(--ds-color-danger, #27272a));
+      border: var(--_error-border);
       box-shadow: var(--ds-input-error-shadow, 0 0 0 4px rgba(39, 39, 42, 0.08));
     }
 
@@ -271,7 +286,7 @@ export class DsInput extends LitElement {
       flex: 1;
       min-width: 0;
       border: 0;
-      padding: var(--ds-input-padding-y, 14px) 12px;
+      padding: var(--_input-padding);
       background: transparent;
       color: var(--ds-input-text-color, var(--ds-color-text, #111111));
       font: inherit;
